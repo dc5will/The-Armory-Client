@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
+
 export default function LoginForm(props) {
 
-  const {email, setEmail} = useState('');
-  const {password, setPassword} = useState('')
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("")
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -22,17 +23,17 @@ export default function LoginForm(props) {
       name='email-input' 
       id='email-input'
       placeholder='username@example.com'
-      onChange={e => setEmail({ email: e.target.value })}/>
+      onChange={e => setEmail(e.target.value)}/>
       <label htmlFor='password-input'>Password:</label>
       <input 
       required 
       type='password' 
       name='password-input' 
       id='password-input'
-      onChange={e => setPassword({ password: e.target.value })}/>
+      onChange={e => setPassword(e.target.value)}/>
       <input type='submit' />
       </form>
-      <Link to= '/(registration route name)'>Not a member? Sign up here.</Link>
+      <Link to='/RegistrationRoute'>Not a member? Sign up here.</Link>
     </div>
   )
 
