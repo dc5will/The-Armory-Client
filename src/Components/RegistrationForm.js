@@ -20,7 +20,7 @@ export default function RegisterForm(props) {
         <h2>Register</h2>
         <form className='registration-form' onSubmit={e => e.preventDefault()}>
           <div className="input-field">
-            <label htmlFor='registration-name-input'>Username{" "}</label>
+            <label htmlFor='registration-name-input'>Username: </label>
             <input
               id='registration-name-input'
               type="text"
@@ -31,7 +31,7 @@ export default function RegisterForm(props) {
             />
           </div>
           <div className="input-field">
-            <label htmlFor='registration-email-input'>Email{" "}</label>
+            <label htmlFor='registration-email-input'>Email: </label>
             <input
               id='registration-email-input'
               type="email"
@@ -42,7 +42,7 @@ export default function RegisterForm(props) {
             />
           </div>
           <div className="input-field">
-            <label htmlFor='registration-password-input'>Password{" "}</label>
+            <label htmlFor='registration-password-input'>Password: </label>
             <input
               id="registration-password-input"
               type="password"
