@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import SplashPage from './Components/SplashPage';
-import Dashboard from './Components/Dashboard';
+import SplashPage from './components/SplashPage';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (

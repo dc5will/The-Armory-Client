@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AuthApiService from "../services/auth-api-service";
 
 export default function RegisterForm(props) {
   const [username, setUsername] = useState("");
@@ -7,7 +8,16 @@ export default function RegisterForm(props) {
 
   async function onRegister() {
     try {
-      // insert API services for registration
+      // add in AuthApiService
+      AuthApiService.postUser({
+        username: username.value,
+        email: email.value,
+        password: password.value
+      }).then(user => {
+        username.value = "";
+        email.value = "";
+        password.value = "";
+      });
       props.history.replace("/login");
     } catch (error) {
       console.log(error.message);
@@ -18,11 +28,11 @@ export default function RegisterForm(props) {
     <main>
       <div className="registrationForm">
         <h2>Register</h2>
-        <form className='registration-form' onSubmit={e => e.preventDefault()}>
+        <form className="registration-form" onSubmit={e => e.preventDefault()}>
           <div className="input-field">
-            <label htmlFor='registration-name-input'>Username: </label>
+            <label htmlFor="registration-name-input">Username: </label>
             <input
-              id='registration-name-input'
+              id="registration-name-input"
               type="text"
               placeholder="username"
               value={username}
@@ -31,9 +41,9 @@ export default function RegisterForm(props) {
             />
           </div>
           <div className="input-field">
-            <label htmlFor='registration-email-input'>Email: </label>
+            <label htmlFor="registration-email-input">Email: </label>
             <input
-              id='registration-email-input'
+              id="registration-email-input"
               type="email"
               placeholder="example@email.com"
               value={email}
@@ -42,7 +52,7 @@ export default function RegisterForm(props) {
             />
           </div>
           <div className="input-field">
-            <label htmlFor='registration-password-input'>Password: </label>
+            <label htmlFor="registration-password-input">Password: </label>
             <input
               id="registration-password-input"
               type="password"
