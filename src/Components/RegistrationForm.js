@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AuthApiService from "../services/auth-api-service";
 
 export default function RegisterForm(props) {
   const [username, setUsername] = useState("");
@@ -7,8 +8,7 @@ export default function RegisterForm(props) {
 
   async function onRegister() {
     try {
-      // insert API services for registration
-      props.history.replace("/login");
+      AuthApiService.postUser({ email, username, password })
     } catch (error) {
       console.log(error.message);
     }

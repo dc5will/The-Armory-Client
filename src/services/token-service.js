@@ -13,14 +13,17 @@ const TokenService = {
   hasAuthToken() {
     return !!TokenService.getAuthToken();
   },
-  parseJwt(jwt) {
-    return jwtDecode(jwt);
-  },
-  parseAuthToken() {
-    const authToken = TokenService.getAuthToken();
-    if (authToken) return TokenService.parseJwt(authToken);
-    else return undefined;
+  makeBasicAuthToken(userName, password) {
+    return window.btoa(`${userName}:${password}`);
   }
+  // parseJwt(jwt) {
+  //   return jwtDecode(jwt);
+  // },
+  // parseAuthToken() {
+  //   const authToken = TokenService.getAuthToken();
+  //   if (authToken) return TokenService.parseJwt(authToken);
+  //   else return undefined;
+  // }
 };
 
 export default TokenService;

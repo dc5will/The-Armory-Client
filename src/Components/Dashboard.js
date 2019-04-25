@@ -1,6 +1,24 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import TokenService from '../services/token-service';
+import config from '../config';
 
 export default function Dashboard() {
+
+  function getGames(){
+    return fetch(`${config.API_ENDPOINT}/games`, {
+      headers: {
+        'authorization': `Bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res =>
+      (!res.ok)
+        ? TokenService.clearAuthToken()
+        : res.json()
+    )}
+
+  useEffect(() => {
+    getGames().then(data => {console.log(data)})
+  })
 
   const staticData = [
     {title:'Overwatch', tags:['FPS', 'Team-based', 'Hero-shooter'], AvailParties:31, img: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png'},
@@ -12,6 +30,10 @@ export default function Dashboard() {
     {title:'Fortnite', tags:['Third-person shooter', 'Team-based', 'Battle Royale'], AvailParties:3, img: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png'},
     {title:'Rainbow Six Siege', tags:['FPS', 'Team-based', 'Hero-shooter'], AvailParties:67, img: 'https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png'}
   ];
+
+
+
+  const [filter, setFilter] = useState({filter: 'all'})
 
   function handleData(staticData) {
     return staticData.map((data, index) => {
@@ -27,10 +49,15 @@ export default function Dashboard() {
     });
   }
 
+
+
   return <div className='dashboard-container'>
   <ul>
     {handleData(staticData)}
   </ul>
+  {/* <p>{filter}</p>
+  <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
+  <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
   
   </div>
 
