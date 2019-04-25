@@ -1,16 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import SplashPage from './components/SplashPage';
-import Dashboard from './components/Dashboard';
+import SplashPage from './Components/SplashPage';
+import Dashboard from './Components/Dashboard';
+import PublicOnlyRoute from './Routes/PublicOnlyRoute'
+import PrivateRoute from './Routes/PrivateRoute';
 
 function App() {
   return (
   <Switch>
-    {/* Public Routes */}
-    {/* <Route exact path={'/'} component={**LandingPage**}/> */}
-    <Route exact path={'/'} component={SplashPage}/>
-    <Route path={'/dashboard'} component={Dashboard}/>
-    {/* Private Routes */}
+    <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
+    <PrivateRoute path={'/dashboard'} component={Dashboard}/>
   </Switch>
   
   )

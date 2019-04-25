@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AuthApiService from "../services/auth-api-service";
+import TokenService from "../services/token-service";
 
 export default function RegisterForm(props) {
   const [username, setUsername] = useState("");
@@ -8,17 +9,15 @@ export default function RegisterForm(props) {
 
   async function onRegister() {
     try {
-      // add in AuthApiService
-      AuthApiService.postUser({
-        username: username.value,
-        email: email.value,
-        password: password.value
-      }).then(user => {
-        username.value = "";
-        email.value = "";
-        password.value = "";
-      });
-      props.history.replace("/login");
+      AuthApiService.postUser({ email, username, password })
+      .then(res => {
+        console.log(res.email)
+        AuthApiService.postLogin({email, password})
+        .then(res => {
+          TokenService.saveAuthToken(res.saveToken);
+        })
+        props.onLoginSuccess();
+      })
     } catch (error) {
       console.log(error.message);
     }
