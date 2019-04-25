@@ -17,7 +17,10 @@ export class GamesProvider extends Component {
     this.state = state;
   }
   setGamesList = gamesList => {
-    this.setState({gamesList})
+    console.log(gamesList)
+    this.setState({gamesList}, ()=>{
+      console.log(this.state.gamesList)
+    })
   }
 
   render(){
