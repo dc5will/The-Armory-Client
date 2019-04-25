@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import PartyApiService from '../services/parties-api-service';
-import CreatePartyForm from '../components/CreatePartyForm';
-import config from '../config';
+import CreatePartyForm from './CreatePartyForm';
 
 export default function PartiesPage(props) {
   const [parties, setParties] = useState([]);
+  // const [games, setGames] = useState('');
 
   useEffect(
     () => {
@@ -19,30 +19,13 @@ export default function PartiesPage(props) {
     }
   );
 
-
-
-  // fetch request for party listing
-  // getPartyList = () => {
-  //   fetch(`${config.API_ENDPOINT}/parties/fb1d3c63-6a72-4013-be82-5b523c1dd1cd/`, {
-  //     headers: {
-  //       'content-type': 'application/json'
-  //     }
-  //   }).then(res => {
-  //     return (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json();
-  //   })
-  // }
-
-  // createParty = () => {
-
-  // }
-
-
   return (
     <main>
       <div className="container">
+        {/* grab games specific game by ID */}
         <h2>Overwatch</h2>
         <h3>Active Parties</h3>
-        <div className="row">
+        <div className="parties-list">
           {parties.map((party, index) => (
             <div key={index}>
               <div className="party-container">
@@ -50,10 +33,12 @@ export default function PartiesPage(props) {
                   <strong>{party.title}</strong>
                 </p>
                 <p>{party.description}</p>
+                <span>{party.spots.roles}</span>
               </div>
             </div>
           ))}
         </div>
+        <button type='submit' className='join-party-button'>Join</button>
       </div>
 
       <CreatePartyForm />
