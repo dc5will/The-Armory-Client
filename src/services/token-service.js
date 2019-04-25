@@ -1,4 +1,5 @@
 import config from "../config";
+import jwtDecode from 'jwt-decode'
 
 
 const TokenService = {
@@ -16,6 +17,16 @@ const TokenService = {
   },
   makeBasicAuthToken(userName, password) {
     return window.btoa(`${userName}:${password}`);
+  },
+  parseJwt(jwt) {
+    return jwtDecode(jwt)
+  },
+  parseAuthToken() {
+    const authToken = TokenService.getAuthToken()
+    if (authToken)
+      return TokenService.parseJwt(authToken)
+    else
+      return undefined
   }
 
 };
