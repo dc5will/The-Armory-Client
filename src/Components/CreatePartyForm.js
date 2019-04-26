@@ -70,6 +70,7 @@ title: "Overwatch"};
               required
               onChange={e => setPartyname(e.target.value)}
             />
+            <br />
             <label htmlFor="party-description-input">Description</label>
             <textarea
               id="party-description-input"
@@ -80,7 +81,25 @@ title: "Overwatch"};
               required
               onChange={e => setPartyDescription(e.target.value)}
             />
-            
+
+            <br />
+            <label htmlFor="party-game-dropdown">Choose Game</label>
+            <select
+              id="party-game-dropdown"
+              onChange={e => setChooseGame(e.target.value)}
+              value={chooseGame}
+            >
+              <option>Overwatch</option>
+              <option>Final Fantasy XIV</option>
+              <option>League of Legends</option>
+              <option>Fortnite</option>
+              <option>Apex Legends</option>
+              <option>DOTA 2</option>
+              <option>CSGO</option>
+              <option>Rainbow 6 Siege</option>
+            </select>
+            <br />
+
             <label htmlFor="party-requirement-input">Party Requirements</label>
             <select
               id="party-requirement-dropdown"
