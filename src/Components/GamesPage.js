@@ -5,14 +5,14 @@ import TokenService from "../services/token-service";
 
 export default function PartiesPage(props) {
   const [parties, setParties] = useState([]);
-  // const [game, setGame] = useState("");
 
-  console.log(props)
-
+  // http://localhost:3000/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties
+  
   function getAllParties() {
+    console.log(props)
     return fetch(
       // fetched specific parties id endpoint to test
-      `${config.API_ENDPOINT}/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties`,
+      `${config.API_ENDPOINT}${props.match.url}/parties`,
       {
         headers: {
           authorization: `bearer ${TokenService.getAuthToken()}`
@@ -20,19 +20,6 @@ export default function PartiesPage(props) {
         body: JSON.stringify(TokenService.getAuthToken)
       }
     ).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-    );
-  }
-
-  function getGameById(gameId) {
-    // grab all parties for a specific game
-    // fetched specific parties id endpoint to test
-    return fetch(`${config.API_ENDPOINT}/games/${gameId}/`, {
-      headers: {
-        authorization: `bearer ${TokenService.getAuthToken()}`
-      },
-      body: JSON.stringify(TokenService.getAuthToken)
-    }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   }
@@ -52,7 +39,7 @@ export default function PartiesPage(props) {
       });
       setParties(partyListing);
     });
-  }, []);
+  },[]);
 
   return (
     <main>
