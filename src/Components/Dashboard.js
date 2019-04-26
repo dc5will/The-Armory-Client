@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import config from '../config';
 import GamesContext from '../Contexts/gamesContext';
@@ -29,8 +30,9 @@ export default function Dashboard(props) {
     return staticData.map((data, index) => {
       return (
         <div key={index}>
+        <Link to={`/games/${data.id}`}>
           <img src={data.image_url} alt="Game Cover" />
-          <h3>{data.title}</h3>
+          <h3>{data.title}</h3></Link>
           {data.tags.map((tag, i) => {
             return <span key={i}>{tag} | </span>;
           })}

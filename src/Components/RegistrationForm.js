@@ -11,15 +11,16 @@ export default function RegisterForm(props) {
    function onRegister(e) {
       e.preventDefault();
       AuthApiService.postUser({ email, username, password })
-      .then(
-        AuthApiService.postLogin({email, password})
-        .then(res => {
-          TokenService.saveAuthToken(res.authToken);
-          props.onLoginSuccess();
-        }))
+      .then( res => {
+        return AuthApiService.postLogin({email, password})
+      })
+      .then(res => {
+         TokenService.saveAuthToken(res.authToken);
+         props.onLoginSuccess();
+      })
       .catch (error =>
         setError(error)
-        )
+       );
     
   }
 
@@ -28,7 +29,7 @@ export default function RegisterForm(props) {
       <div className="registrationForm">
         <h2>Register</h2>
         <p>{error.error}</p>
-        <form className="registration-form" onSubmit={e => onRegister(e)}>
+        <form className="registration-form" onSubmit={e => { e.preventDefault(); return false;}}>
           <div className="input-field">
             <label htmlFor="registration-name-input">Username: </label>
             <input
@@ -63,7 +64,7 @@ export default function RegisterForm(props) {
             />
           </div>
 
-          <button type="submit" className="submit-button">
+          <button type="submit" className="submit-button" onClick={e=>onRegister(e)}>
             Register
           </button>
         </form>
