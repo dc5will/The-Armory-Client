@@ -96,9 +96,9 @@ export default function PartiesPage(props) {
   return (
     <main>
       <div className="container">
+        <img src={gameInfo.image_url} alt="game-logo" width="40" />
         <h2>{gameInfo.title}</h2>
         <h3>Current Active Parties</h3>
-        <img src={gameInfo.image_url} alt="game-logo" width="40" />
         <div className="parties-list">{generateParties()}</div>
         <button type="submit" className="join-party-button">
           +
