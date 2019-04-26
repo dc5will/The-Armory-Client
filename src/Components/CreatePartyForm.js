@@ -36,6 +36,7 @@ export default function CreatePartyForm(props) {
               required
               onChange={e => setPartyname(e.target.value)}
             />
+            <br />
             <label htmlFor="party-description-input">Description</label>
             <input
               id="party-description-input"
@@ -45,6 +46,7 @@ export default function CreatePartyForm(props) {
               required
               onChange={e => setPartyDescription(e.target.value)}
             />
+            <br />
             <label htmlFor="party-game-dropdown">Choose Game</label>
             <select
               id="party-game-dropdown"
@@ -60,6 +62,7 @@ export default function CreatePartyForm(props) {
               <option>CSGO</option>
               <option>Rainbow 6 Siege</option>
             </select>
+            <br />
             <label htmlFor="party-requirement-input">Party Requirements</label>
             <select
               id="party-requirement-dropdown"
