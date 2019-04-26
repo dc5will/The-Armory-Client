@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import TokenService from '../services/token-service';
 import config from '../config';
 import GamesContext from '../Contexts/gamesContext';
+import Nav from './Nav';
 
 export default function Dashboard(props) {
   
@@ -46,6 +47,7 @@ export default function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
+      <Nav />
       <ul>{handleData(staticData)}</ul>
       <button onClick={onLogout}>Logout</button>
       {/* <p>{filter}</p>
