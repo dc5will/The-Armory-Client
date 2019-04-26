@@ -1,11 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { GamesProvider } from './Contexts/gamesContext';
+
 
 ReactDOM.render(
-  <Router>
+<Router>
+  <GamesProvider>
     <App />
-  </Router>,
-  document.getElementById("root")
-);
+  </GamesProvider>
+</Router>,
+ document.getElementById('root'));
+

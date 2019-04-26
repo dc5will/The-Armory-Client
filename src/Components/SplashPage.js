@@ -6,20 +6,20 @@ export default function SplashPage(props) {
   const [toggle, setToggle] = useState(false);
 
   const handleLoginSuccess = () => {
-    const { location, history } = props;
-    const destination = (location.state || {}).from || '/dashboard';
+    const { history } = props;
+    const destination = ('/dashboard')
     history.push(destination);
   };
 
   return toggle !== true ? (
     <div>
-      <RegistrationForm onLoginSuccess={handleLoginSuccess} />
-      <button onClick={e => setToggle(true)}>Already a member?</button>
+      <LoginForm onLoginSuccess={handleLoginSuccess}/>
+      <button onClick={e => setToggle(true)}>Not a member?</button>
     </div>
   ) : (
     <div>
-      <LoginForm onLoginSuccess={handleLoginSuccess}/>
-      <button onClick={e => setToggle(false)}>Not a member?</button>
+      <RegistrationForm onLoginSuccess={handleLoginSuccess} />
+      <button onClick={e => setToggle(false)}>Already a member?</button>
     </div>
   );
 }

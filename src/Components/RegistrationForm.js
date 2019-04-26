@@ -14,9 +14,9 @@ export default function RegisterForm(props) {
         console.log(res.email)
         AuthApiService.postLogin({email, password})
         .then(res => {
-          TokenService.saveAuthToken(res.saveToken);
+          TokenService.saveAuthToken(res.authToken);
+          props.onLoginSuccess();
         })
-        props.onLoginSuccess();
       })
     } catch (error) {
       console.log(error.message);

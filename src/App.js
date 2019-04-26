@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import PublicOnlyRoute from './routes/PublicOnlyRoute'
 import PrivateRoute from './routes/PrivateRoute';
 import GamesPage from './components/GamesPage';
+import './app.css'
 
 function App() {
   return (
