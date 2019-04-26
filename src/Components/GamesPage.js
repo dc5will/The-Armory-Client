@@ -5,12 +5,14 @@ import TokenService from "../services/token-service";
 
 export default function PartiesPage(props) {
   const [parties, setParties] = useState([]);
-  const [game, setGame] = useState("");
+  // const [game, setGame] = useState("");
 
   function getAllParties() {
-    // fetched specific parties id endpoint to test
     return fetch(
-      `${config.API_ENDPOINT}/parties/fb1d3c63-6a72-4013-be82-5b523c1dd1cd/`,
+      // fetched specific parties id endpoint to test
+      `${
+        config.API_ENDPOINT
+      }/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties`,
       {
         headers: {
           authorization: `bearer ${TokenService.getAuthToken()}`
@@ -34,8 +36,11 @@ export default function PartiesPage(props) {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   }
+  // api/games/${gameId}
+  // http://localhost:8000/api/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/ (overwatch)
+
+  // api/games/${gameId}/parties
   // http://localhost:8000/api/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties
-  // http://localhost:8000/api/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/
 
   useEffect(() => {
     // populate party listing from API
@@ -51,7 +56,7 @@ export default function PartiesPage(props) {
   return (
     <main>
       <div className="container">
-        {/* grab games specific game by ID */}
+        {/* need to grab game title by ID */}
         <h2>Overwatch</h2>
         <h3>Active Parties</h3>
         <div className="parties-list">
@@ -62,6 +67,9 @@ export default function PartiesPage(props) {
                   <strong>{party.title}</strong>
                 </p>
                 <p>{party.description}</p>
+                {/* Don't know how to map out filled and roles keys from spots array */}
+                <span>{party.reqs.id}</span>
+                <span>{party.spots.filled}</span>
                 <span>{party.spots.roles}</span>
               </div>
             </div>
