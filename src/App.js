@@ -6,7 +6,7 @@ import PublicOnlyRoute from './routes/PublicOnlyRoute'
 import PrivateRoute from './routes/PrivateRoute';
 import GamesPage from './components/GamesPage';
 import './app.css'
-import CreatePartyForm from './Components/CreatePartyForm';
+import CreatePartyForm from './Components/CreatePartyForm/CreatePartyForm';
 
 function App() {
   return (
