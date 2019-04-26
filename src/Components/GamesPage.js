@@ -7,6 +7,7 @@ export default function PartiesPage(props) {
   const [parties, setParties] = useState([]);
   // const [game, setGame] = useState("");
 
+  console.log(props)
 
   function getAllParties() {
     return fetch(
@@ -35,6 +36,7 @@ export default function PartiesPage(props) {
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
   }
+
   // api/games/${gameId}
   // http://localhost:8000/api/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/ (overwatch)
 
