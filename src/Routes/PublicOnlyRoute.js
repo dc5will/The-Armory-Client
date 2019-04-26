@@ -9,7 +9,7 @@ export default function PublicOnlyRoute({ component, ...props }) {
       {...props}
       render={componentProps => (
         TokenService.hasAuthToken()
-          ? <Redirect to={'/'} /> // this redirect will change to homepage when built
+          ? <Redirect to={'/dashboard'} /> // this redirect will change to homepage when built
           : <Component {...componentProps} />
       )}
     />

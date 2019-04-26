@@ -4,6 +4,7 @@ import SplashPage from './Components/SplashPage';
 import Dashboard from './Components/Dashboard';
 import PublicOnlyRoute from './Routes/PublicOnlyRoute'
 import PrivateRoute from './Routes/PrivateRoute';
+import './app.css'
 
 function App() {
   return (
