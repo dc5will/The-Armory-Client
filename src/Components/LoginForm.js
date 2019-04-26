@@ -7,7 +7,7 @@ export default function LoginForm(props) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('')
 
-  async function handleLogin (e) {
+  function handleLogin (e) {
       e.preventDefault();
       AuthApiService.postLogin({email, password})
       .then(res => {
