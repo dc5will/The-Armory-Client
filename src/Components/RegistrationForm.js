@@ -3,31 +3,32 @@ import AuthApiService from "../services/auth-api-service";
 import TokenService from "../services/token-service";
 
 export default function RegisterForm(props) {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  async function onRegister() {
-    try {
+   function onRegister(e) {
+      e.preventDefault();
       AuthApiService.postUser({ email, username, password })
-      .then(res => {
-        console.log(res.email)
+      .then(
         AuthApiService.postLogin({email, password})
         .then(res => {
           TokenService.saveAuthToken(res.authToken);
           props.onLoginSuccess();
-        })
-      })
-    } catch (error) {
-      console.log(error.message);
-    }
+        }))
+      .catch (error =>
+        setError(error)
+        )
+    
   }
 
   return (
     <main>
       <div className="registrationForm">
         <h2>Register</h2>
-        <form className="registration-form" onSubmit={e => e.preventDefault()}>
+        <p>{error.error}</p>
+        <form className="registration-form" onSubmit={e => onRegister(e)}>
           <div className="input-field">
             <label htmlFor="registration-name-input">Username: </label>
             <input
@@ -62,7 +63,7 @@ export default function RegisterForm(props) {
             />
           </div>
 
-          <button type="submit" className="submit-button" onClick={onRegister}>
+          <button type="submit" className="submit-button">
             Register
           </button>
         </form>
