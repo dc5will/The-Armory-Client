@@ -7,12 +7,11 @@ export default function PartiesPage(props) {
   const [parties, setParties] = useState([]);
   // const [game, setGame] = useState("");
 
+
   function getAllParties() {
     return fetch(
       // fetched specific parties id endpoint to test
-      `${
-        config.API_ENDPOINT
-      }/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties`,
+      `${config.API_ENDPOINT}/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties`,
       {
         headers: {
           authorization: `bearer ${TokenService.getAuthToken()}`
@@ -51,7 +50,7 @@ export default function PartiesPage(props) {
       });
       setParties(partyListing);
     });
-  });
+  }, []);
 
   return (
     <main>
@@ -70,19 +69,27 @@ export default function PartiesPage(props) {
                 <p>{party.description}</p>
                 {/* Don't know how to map out filled and roles keys from spots array */}
                 <span>{party.reqs.id}</span>
-                <span>{party.spots.filled}</span>
+                <div className="avatar">
+                  {/* current dropbox avatar_url doesnt work, but changed to any other url and it works, ex:
+                  https://i.ebayimg.com/images/g/PfAAAOSwA3dYIPRN/s-l300.jpg*/}
+                  {/* <span>{party.spots[0].filled.avatar_url}</span> */}
+                  <img
+                    src={party.spots[0].filled.avatar_url}
+                    alt="avatar_icon"
+                    width="60"
+                  />
+                </div>
                 <span>{party.spots.roles}</span>
               </div>
             </div>
           ))}
         </div>
         <button type="submit" className="join-party-button">
-          Join
+          +
         </button>
       </div>
 
       <CreatePartyForm />
-      
     </main>
   );
 }
