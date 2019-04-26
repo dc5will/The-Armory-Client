@@ -58,6 +58,7 @@ export default function PartiesPage(props) {
       <div className="container">
         {/* need to grab game title by ID */}
         <h2>Overwatch</h2>
+        {/* After seing new mockup, need to fetch tags from games endpoint */}
         <h3>Active Parties</h3>
         <div className="parties-list">
           {parties.map((party, index) => (
@@ -81,6 +82,7 @@ export default function PartiesPage(props) {
       </div>
 
       <CreatePartyForm />
+      
     </main>
   );
 }
