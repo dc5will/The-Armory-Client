@@ -6,6 +6,7 @@ import UserContext from '../Contexts/userContext';
 
 export default function Nav(props) {
   const userContext = useContext(UserContext)
+  const userAvatarImg = 'http://www.exiledkingdoms.com/forum/download/file.php?avatar=540_1457933885.jpg'
 
   function getUserInfo() {
     const { user_id } = TokenService.parseAuthToken();
@@ -33,7 +34,7 @@ export default function Nav(props) {
   function generateNavBar(user){
     return(
         <div>
-            <img src={user.avatar_url} alt='avatar profile pic'></img>
+            <img src={user.avatar_url ? user.avatar_url : userAvatarImg} alt='avatar profile pic'></img>
             <h2>{user.username}</h2>
             <button onClick={onLogout}>Logout</button>
         </div>

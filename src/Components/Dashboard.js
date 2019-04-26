@@ -40,16 +40,12 @@ export default function Dashboard(props) {
     });
   }
 
-  function onLogout(){
-    TokenService.clearAuthToken();
-    props.history.push('/')
-  }
 
   return (
     <div className="dashboard-container">
       <Nav props={props}/>
       <ul>{handleData(staticData)}</ul>
-      <button onClick={onLogout}>Logout</button>
+
       {/* <p>{filter}</p>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
