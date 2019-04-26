@@ -47,7 +47,7 @@ export default function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
-      <Nav />
+      <Nav props={props}/>
       <ul>{handleData(staticData)}</ul>
       <button onClick={onLogout}>Logout</button>
       {/* <p>{filter}</p>

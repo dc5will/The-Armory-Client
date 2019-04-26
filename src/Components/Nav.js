@@ -1,10 +1,10 @@
 //avatar image, username, account preferences, logout
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import config from "../config";
 import TokenService from "../services/token-service";
 import UserContext from '../Contexts/userContext';
 
-export default function Nav() {
+export default function Nav(props) {
   const userContext = useContext(UserContext)
 
   function getUserInfo() {
@@ -26,11 +26,16 @@ export default function Nav() {
     });
   }, []);
 
+  function onLogout(){
+    TokenService.clearAuthToken();
+    props.props.history.push('/')
+  }
   function generateNavBar(user){
     return(
         <div>
-            <img src={user.avatar_url}></img>
+            <img src={user.avatar_url} alt='avatar profile pic'></img>
             <h2>{user.username}</h2>
+            <button onClick={onLogout}>Logout</button>
         </div>
     )
   }
