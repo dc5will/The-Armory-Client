@@ -2,10 +2,19 @@ import React, { useState, useEffect, useContext } from 'react';
 import TokenService from '../services/token-service';
 import config from '../config';
 import GamesContext from '../Contexts/gamesContext';
+import Nav from './Nav';
 
-export default function Dashboard() {
+export default function Dashboard(props) {
   
   const games = useContext(GamesContext);
+  const staticData = games.gamesList
+  const [filter, setFilter] = useState({ filter: 'all' });
+
+  useEffect(() => {
+    getGames().then(data => {
+      games.setGamesList(data);
+    })
+  },[]);
 
   function getGames() {
     return fetch(`${config.API_ENDPOINT}/games`, {
@@ -15,17 +24,6 @@ export default function Dashboard() {
     }).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
   }
 
-  useEffect(() => {
-    getGames().then(data => {
-      games.setGamesList(data);
-    })
-  },[]);
-
-  const staticData = games.gamesList
-
- 
-
-  const [filter, setFilter] = useState({ filter: 'all' });
 
   function handleData(staticData) {
     return staticData.map((data, index) => {
@@ -42,9 +40,16 @@ export default function Dashboard() {
     });
   }
 
+  function onLogout(){
+    TokenService.clearAuthToken();
+    props.history.push('/')
+  }
+
   return (
     <div className="dashboard-container">
+      <Nav props={props}/>
       <ul>{handleData(staticData)}</ul>
+      <button onClick={onLogout}>Logout</button>
       {/* <p>{filter}</p>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
