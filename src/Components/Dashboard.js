@@ -50,7 +50,7 @@ export default function Dashboard(props) {
     return data.map((item, i) => {
       return item.tags.includes(keyword) ? (
         <div key={i}>
-          <Link to={`/games/${data.id}`}>
+          <Link to={`/games/${item.id}`}>
             <img src={item.image_url} alt="Game Cover" />
             <h3>{item.title}</h3>
           </Link>
