@@ -6,16 +6,17 @@ import GamesContext from '../Contexts/gamesContext';
 import Nav from './Nav';
 
 export default function Dashboard(props) {
-  
   const games = useContext(GamesContext);
-  const staticData = games.gamesList
-  const [filter, setFilter] = useState({ filter: 'all' });
+  const staticData = games.gamesList;
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     getGames().then(data => {
       games.setGamesList(data);
-    })
-  },[]);
+    });
+  }, []);
+
+
 
   function getGames() {
     return fetch(`${config.API_ENDPOINT}/games`, {
@@ -25,14 +26,16 @@ export default function Dashboard(props) {
     }).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
   }
 
+//I'm sure theres a better, cleaner way to display all games and filtered games but this is what I came up with.
 
-  function handleData(staticData) {
+  function DisplayAllGames(staticData) {
     return staticData.map((data, index) => {
       return (
         <div key={index}>
-        <Link to={`/games/${data.id}`}>
-          <img src={data.image_url} alt="Game Cover" />
-          <h3>{data.title}</h3></Link>
+          <Link to={`/games/${data.id}`}>
+            <img src={data.image_url} alt="Game Cover" />
+            <h3>{data.title}</h3>
+          </Link>
           {data.tags.map((tag, i) => {
             return <span key={i}>{tag} | </span>;
           })}
@@ -43,14 +46,49 @@ export default function Dashboard(props) {
   }
 
 
+  function filterGames(data, keyword) {
+    return data.map((item, i) => {
+      return item.tags.includes(keyword) ? (
+        <div key={i}>
+          <Link to={`/games/${data.id}`}>
+            <img src={item.image_url} alt="Game Cover" />
+            <h3>{item.title}</h3>
+          </Link>
+          {item.tags.map((tag, i) => {
+            return <span key={i}>{tag} | </span>;
+          })}
+          <p>Available Parties: {item.party_count}</p>
+        </div>
+      ) : (
+        <div key={i} />
+      );
+    });
+  }
+
+
+
+
   return (
     <div className="dashboard-container">
-      <Nav props={props}/>
-      <ul>{handleData(staticData)}</ul>
+      <Nav props={props} />
+      <button className="filterGames" onClick={e => setFilter('All')}>
+        All
+      </button>
+      <button className="filterGames" onClick={e => setFilter('Shooter')}>
+        Shooter
+      </button>
+      <button className="filterGames" onClick={e => setFilter('MOBA')}>
+        MOBA
+      </button>
+      <button className="filterGames" onClick={e => setFilter('MMORPG')}>
+        MMORPG
+      </button>
+      <ul>
+        {filter === 'All'
+          ? DisplayAllGames(staticData)
+          : filterGames(staticData, filter)}
+      </ul>
 
-      {/* <p>{filter}</p>
-  <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
-  <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
     </div>
   );
 }
