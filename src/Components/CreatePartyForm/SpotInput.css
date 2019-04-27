@@ -1,0 +1,17 @@
+.spot_input {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background-color: #f7f7f7;
+}
+
+.spot_input.spot_omitted {
+  background-color: #000000;
+}
+
+.show_input_options{
+  position: absolute;
+  left: 150%;
+  top: 0;
+  background-color: #f7f7f7;
+}

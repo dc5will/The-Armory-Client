@@ -1,16 +1,22 @@
-import React, { useState, useEffect } from "react";
-import CreatePartyForm from "./CreatePartyForm";
+import React, { useState, useEffect, useContext } from "react";
+import CreatePartyForm from "../Components/CreatePartyForm/CreatePartyForm";
 import config from "../config";
 import TokenService from "../services/token-service";
+import GameContext from '../Contexts/gameContext';
 
-export default function PartiesPage(props) {
+import io from 'socket.io-client';
+let socket;
+
+export default function GamePage(props) {
+  const context = useContext(GameContext);
   const [parties, setParties] = useState([]);
   const [gameInfo, setGame] = useState([]);
+  const [showCPF, toggleCPF] = useState(false);
 
   // Link from dashboard to Overwatch
-  // http://localhost:3000/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/parties
+  // http://localhost:3000/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed
   // Link from dashboard to FF
-  // http://localhost:3000/games/1c0aa6f7-0e03-4ceb-82de-ac53617f1b30/parties
+  // http://localhost:3000/games/1c0aa6f7-0e03-4ceb-82de-ac53617f1b30
 
   function getAllParties() {
     return fetch(`${config.API_ENDPOINT}${props.match.url}/parties`, {
@@ -43,19 +49,24 @@ export default function PartiesPage(props) {
       });
       setParties(partyListing);
     });
-  }, []);
-
-  useEffect(() => {
     // get game stuff
     getGame().then(games => {
       let gameInfo = {};
       gameInfo = games;
-      setGame(gameInfo);
+      context.setGame(gameInfo);
     });
+    // connect to socket io for this game
+    socket = io('http://localhost:8000');
+    socket.emit('join game', props.match.url);
+
+    socket.on('post party error', function(msg) { console.log(msg) });
   }, []);
 
+  useEffect(() => {
+    socket.on('posted party', function([msg]) { setParties([...parties, msg]) });
+  }, [parties])
+
   function generateSpots(party) {
-    console.log(party);
     return party.spots.map((spot, index) => {
       return (
         <div key={index}>
@@ -93,18 +104,24 @@ export default function PartiesPage(props) {
     ));
   }
 
+  function toggleCreatePartyForm(e) {
+    e.preventDefault();
+    toggleCPF(!showCPF);
+  }
+
   return (
-    <main>
-      <div className="container">
-        <img src={gameInfo.image_url} alt="game-logo" width="40" />
+    <div className="container">
+      <div className="party-list">
+        <img src={context.game.image_url} alt="game-logo" width="40" />
         <h2>{gameInfo.title}</h2>
         <h3>Current Active Parties</h3>
         <div className="parties-list">{generateParties()}</div>
-        <button type="submit" className="join-party-button">
+        <button type="button" className="join-party-button">
           +
         </button>
       </div>
-      <CreatePartyForm />
-    </main>
+      <button type="button" onClick={toggleCreatePartyForm}>Create Party</button>
+      {showCPF && <CreatePartyForm socket={socket} roomUrl={props.match.url}/>}
+    </div>
   );
 }

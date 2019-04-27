@@ -45,7 +45,6 @@ export default function Dashboard(props) {
     <div className="dashboard-container">
       <Nav props={props}/>
       <ul>{handleData(staticData)}</ul>
-
       {/* <p>{filter}</p>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
