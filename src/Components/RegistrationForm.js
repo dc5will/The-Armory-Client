@@ -28,7 +28,7 @@ export default function RegisterForm(props) {
     <main>
       <div className="registrationForm">
         <h2>Register</h2>
-        <p>{error.error}</p>
+        <p>{error}</p>
         <form className="registration-form" onSubmit={e => {onRegister(e)}}>
           <div className="input-field">
             <label htmlFor="registration-name-input">Username: </label>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import config from '../config';
 import GamesContext from '../Contexts/gamesContext';
-import Nav from './Nav';
+import Nav from '../Components/Nav';
 
 export default function Dashboard(props) {
   const games = useContext(GamesContext);
@@ -70,13 +70,6 @@ export default function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
-<<<<<<< HEAD:src/Routes/Dashboard.js
-      <Nav props={props}/>
-      <ul>{handleData(staticData)}</ul>
-      {/* <p>{filter}</p>
-  <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
-  <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
-=======
       <Nav props={props} />
       <button className="filterGames" onClick={e => setFilter('All')}>
         All
@@ -96,7 +89,6 @@ export default function Dashboard(props) {
           : filterGames(staticData, filter)}
       </ul>
 
->>>>>>> c9b45ed928218eb02042ceec11627c26ffaf0d31:src/Components/Dashboard.js
     </div>
   );
 }
