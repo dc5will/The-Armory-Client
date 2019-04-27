@@ -1,21 +1,20 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import SplashPage from './components/SplashPage';
-import Dashboard from './components/Dashboard';
-import PublicOnlyRoute from './routes/PublicOnlyRoute'
-import PrivateRoute from './routes/PrivateRoute';
-import GamesPage from './components/GamesPage';
+import SplashPage from './Components/SplashPage';
+import Dashboard from './Routes/Dashboard';
+import PublicOnlyRoute from './Routes/PublicOnlyRoute'
+import PrivateRoute from './Routes/PrivateRoute';
+import GamePage from './Routes/GamePage';
 import './app.css'
-import CreatePartyForm from './Components/CreatePartyForm/CreatePartyForm';
 
 function App() {
   return (
   <Switch>
-    
-    <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
-    <Route exact path={'/party'} component={CreatePartyForm}/>
-    <PrivateRoute path={'/dashboard'} component={Dashboard}/>
-    <PrivateRoute path={'/games/:gameId'} component={GamesPage}/>
+    <main>
+      <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
+      <PrivateRoute path={'/dashboard'} component={Dashboard}/>
+      <PrivateRoute path={'/games/:gameId'} component={GamePage}/>
+    </main>
   </Switch>
   
   )
