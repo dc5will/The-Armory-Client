@@ -7,6 +7,7 @@ import PrivateRoute from './Routes/PrivateRoute';
 import GamePage from './Routes/GamePage';
 import './app.css'
 
+
 function App() {
   return (
   <Switch>
@@ -16,7 +17,6 @@ function App() {
       <PrivateRoute path={'/games/:gameId'} component={GamePage}/>
     </main>
   </Switch>
-  
   )
 }
 

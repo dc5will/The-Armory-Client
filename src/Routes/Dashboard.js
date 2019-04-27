@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import TokenService from '../services/token-service';
 import config from '../config';
 import GamesContext from '../Contexts/gamesContext';
+import Nav from './Nav';
 
 export default function Dashboard(props) {
   
@@ -39,15 +40,11 @@ export default function Dashboard(props) {
     });
   }
 
-  function onLogout(){
-    TokenService.clearAuthToken();
-    props.history.push('/')
-  }
 
   return (
     <div className="dashboard-container">
+      <Nav props={props}/>
       <ul>{handleData(staticData)}</ul>
-      <button onClick={onLogout}>Logout</button>
       {/* <p>{filter}</p>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button>
   <button onClick={e => setFilter({filter: 'all'})}>All Games</button> */}
