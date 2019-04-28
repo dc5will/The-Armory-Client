@@ -1,4 +1,5 @@
 import React, { useEffect, useContext, useState } from 'react';
+import { Prompt } from 'react-router-dom';
 import TokenService from '../services/token-service';
 import config from '../config';
 import PartyContext from '../Contexts/partyContext';
@@ -8,23 +9,23 @@ let socket;
 export default function PartyPage(props) {
   const partyContext = useContext(PartyContext);
   const [partyState, setParty] = useState('');
+  const [warning, setWarning] = useState(null);
   const party = partyState;
 
   useEffect(() => {
-   getPartyById()
+    getPartyById()
       .then(res => setParty(res))
       .then(partyContext.setParty(partyState));
     socket = io('http://localhost:8000');
-    socket.on('left party', (party) => {
-      partyContext.setParty(party)
+    socket.on('left party', party => {
+      partyContext.setParty(party);
     });
     return () => {
       leave();
-    }   
+    };
   }, []);
 
-
-  function getPartyById(props) {
+  function getPartyById() {
     return fetch(
       `${config.API_ENDPOINT}/parties/fb1d3c63-6a72-4013-be82-5b523c1dd1cd`, //this will need to change back to props.match when the join party functionality is ready
       {
@@ -35,18 +36,32 @@ export default function PartyPage(props) {
     ).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
   }
 
-  //probably no the right way to call socket.io, do I need useEffect?
-  //also, tried setting up prompt and triggering it during a state change
-  //but nothing was happening.
-  function leave(){
-     socket.emit('leave party', {party_id: party.id, room_id: props.match.url, user_auth: TokenService.getAuthToken(), game_id: party.game_id})
-     socket.disconnect()
-    console.log(props)
-
+  function leave() {
+    socket.emit('leave party', {
+      party_id: party.id,
+      room_id: props.match.url,
+      user_auth: TokenService.getAuthToken(),
+      game_id: party.game_id
+    });
+    socket.disconnect();
+    props.history.replace(`/games/${party.game_id}`);
+    console.log(props);
   }
 
-  function handleLeave(){
 
+  // Couldnt get prompt to work in a functional component
+  // so this function confirms the exit of the party
+
+  function displayWarning() {
+    return warning ? (
+      <div>
+        <p>Are you sure you want to leave this party?</p>
+        <button onClick={e => leave()}>Confirm</button>
+        <button onClick={e => setWarning(!warning)}>Cancel</button>
+      </div>
+    ) : (
+      <button onClick={e => setWarning(!warning)}>Leave party</button>
+    );
   }
 
   function generateReqs(party) {
@@ -55,16 +70,21 @@ export default function PartyPage(props) {
     });
   }
 
-//for each spot check filled
-//fix roles display
-
   function generateRoles(party) {
-    return party.spots.map(spot => {
-      console.log(spot)
-      return spot.roles.map((role, i) => {
-        const user = spot.filled
-        return <li key={i}>{role.role_name} - {user!==null ? user.username: 'Available'}</li>;
+    return party.spots.map((spot, i) => {
+      let roleStr = '';
+      const user = spot.filled;
+      spot.roles.forEach(role => {
+        roleStr += role.role_name + ' | ';
       });
+      return (
+        <li key={i}>
+          {user !== null 
+            ? user.username 
+            : 'Available'}{' - '} 
+            {roleStr}{' '}
+        </li>
+      );
     });
   }
 
@@ -81,13 +101,12 @@ export default function PartyPage(props) {
     );
   }
 
-
   return (
+    <div>
       <div>
-        <div>
-          {party ? generateDisplayParty(party) : 'Loading'}
-        </div>
-        <button onClick={leave}>Leave party</button>
+      {party ? generateDisplayParty(party) : 'Loading'}
       </div>
-  )
+      {displayWarning()}
+    </div>
+  );
 }

@@ -7,6 +7,7 @@ import { GameProvider } from "./Contexts/gameContext";
 import { UserProvider } from "./Contexts/userContext";
 import { PartyProvider } from "./Contexts/partyContext";
 
+
 ReactDOM.render(
   <Router>
     <UserProvider>
