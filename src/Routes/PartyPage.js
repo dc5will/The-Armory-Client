@@ -11,10 +11,16 @@ export default function PartyPage(props) {
   const party = partyState;
 
   useEffect(() => {
-    getPartyById()
+   getPartyById()
       .then(res => setParty(res))
       .then(partyContext.setParty(partyState));
-      socket = io('http://localhost:8000');
+    socket = io('http://localhost:8000');
+    socket.on('left party', (party) => {
+      partyContext.setParty(party)
+    });
+    return () => {
+      leave();
+    }   
   }, []);
 
 
@@ -32,10 +38,14 @@ export default function PartyPage(props) {
   //probably no the right way to call socket.io, do I need useEffect?
   //also, tried setting up prompt and triggering it during a state change
   //but nothing was happening.
-  function leave(e, props){
-    e.preventDefault()
-      socket.emit('leave room', 'fb1d3c63-6a72-4013-be82-5b523c1dd1cd');
-    //console.log(window.history.back())
+  function leave(){
+     socket.emit('leave party', {party_id: party.id, room_id: props.match.url, user_auth: TokenService.getAuthToken(), game_id: party.game_id})
+     socket.disconnect()
+    console.log(props)
+
+  }
+
+  function handleLeave(){
 
   }
 
@@ -45,8 +55,12 @@ export default function PartyPage(props) {
     });
   }
 
+//for each spot check filled
+//fix roles display
+
   function generateRoles(party) {
     return party.spots.map(spot => {
+      console.log(spot)
       return spot.roles.map((role, i) => {
         const user = spot.filled
         return <li key={i}>{role.role_name} - {user!==null ? user.username: 'Available'}</li>;
@@ -73,7 +87,7 @@ export default function PartyPage(props) {
         <div>
           {party ? generateDisplayParty(party) : 'Loading'}
         </div>
-        <button onClick={e => leave(e)}>Leave party</button>
+        <button onClick={leave}>Leave party</button>
       </div>
   )
 }
