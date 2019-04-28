@@ -5,6 +5,7 @@ import Dashboard from './Routes/Dashboard';
 import PublicOnlyRoute from './Routes/PublicOnlyRoute'
 import PrivateRoute from './Routes/PrivateRoute';
 import GamePage from './Routes/GamePage';
+import PartyPage from './Routes/PartyPage';
 import './app.css'
 
 
@@ -15,6 +16,7 @@ function App() {
       <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
       <PrivateRoute path={'/dashboard'} component={Dashboard}/>
       <PrivateRoute path={'/games/:gameId'} component={GamePage}/>
+      <PrivateRoute path={'/party/:partyId'} component={PartyPage}/>
     </main>
   </Switch>
   )
