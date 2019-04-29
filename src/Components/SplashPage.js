@@ -13,13 +13,14 @@ export default function SplashPage(props) {
 
   return toggle !== true ? (
     <div>
+    <RegistrationForm onLoginSuccess={handleLoginSuccess} />
+    <button onClick={e => setToggle(false)}>Already a member?</button>
+    </div>
+    ) : (
+    <div>
       <LoginForm onLoginSuccess={handleLoginSuccess}/>
       <button onClick={e => setToggle(true)}>Not a member?</button>
     </div>
-  ) : (
-    <div>
-      <RegistrationForm onLoginSuccess={handleLoginSuccess} />
-      <button onClick={e => setToggle(false)}>Already a member?</button>
-    </div>
+  
   );
 }
