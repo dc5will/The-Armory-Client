@@ -57,13 +57,20 @@ export default function GamePage(props) {
     });
     // connect to socket io for this game
     socket = io('http://localhost:8000');
-    socket.emit('join game', props.match.url);
+    socket.emit('join room', props.match.url);
 
     socket.on('post party error', function(msg) { console.log(msg) });
+
+    return () => {
+      socket.emit('leave game');
+      socket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
-    socket.on('posted party', function([msg]) { setParties([...parties, msg]) });
+    socket.on('posted party', function([msg]) { 
+      setParties([...parties, msg]) 
+    });
   }, [parties])
 
   function generateSpots(party) {
@@ -121,7 +128,7 @@ export default function GamePage(props) {
         </button>
       </div>
       <button type="button" onClick={toggleCreatePartyForm}>Create Party</button>
-      {showCPF && <CreatePartyForm socket={socket} roomUrl={props.match.url}/>}
+      {showCPF && <CreatePartyForm socket={socket} roomUrl={props.match.url} history={props.history}/>}
     </div>
   );
 }

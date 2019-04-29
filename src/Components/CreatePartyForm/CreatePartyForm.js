@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import SpotInput from "./SpotInput";
 import GameContext from '../../Contexts/gameContext';
-
+import config from "../../config";
 import TokenService from "../../services/token-service";
 
 
@@ -82,20 +82,38 @@ export default function CreatePartyForm(props) {
       if (!spotObj[key].omitted)
         spots.push(spotObj[key]);
     });
-    props.socket.emit('post party',
-      {
-        room_id: props.roomUrl,
-        user_auth: TokenService.getAuthToken(),
-        party: {
-          game_id: context.game.id,
-          title: partyName,
-          description: partyDescription,
-          require_app: false,
-        },
-        spots,
-        requirement: partyRequirements,
-      }
+    let newParty = {
+      room_id: props.roomUrl,
+      party: {
+        game_id: context.game.id,
+        title: partyName,
+        description: partyDescription,
+        require_app: false,
+      },
+      spots,
+      requirement: partyRequirements,
+    };
+
+    fetch(`${config.API_ENDPOINT}/parties`, {
+      method: 'POST',
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(newParty),
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
     )
+    .then(([party]) => {
+      props.history.push(`/party/${party.id}`);
+    })
+    .catch(err => {
+      //UPDATE TO DISPLAY ERROR
+      console.error(err);
+    });
   }
 
   return (
