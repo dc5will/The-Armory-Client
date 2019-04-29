@@ -78,7 +78,7 @@ export default function RegisterForm(props) {
 
           <div>
           {tosConfirm()}
-          <label htmlFor='TOS-box'>I agree to the <Link to={'/tos'}>terms of service and privacy policy.</Link></label>
+          <label htmlFor='TOS-box'>I am over 13 and agree to the <Link to={'/tos'}>terms of service and privacy policy.</Link></label>
           </div>
 
           <button type="submit" className="submit-button">
