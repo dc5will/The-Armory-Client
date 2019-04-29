@@ -5,14 +5,13 @@ import config from '../config';
 import PartyContext from '../Contexts/partyContext';
 import io from 'socket.io-client';
 import UserContext from '../Contexts/userContext';
+import PartyChat from '../Components/PartyChat/PartyChat';
 let socket;
 
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
   const userContext = useContext(UserContext);
   const [warning, setWarning] = useState(null);
-
-  console.log(userContext);
 
   useEffect(() => {
     getPartyById();
@@ -24,6 +23,9 @@ export default function PartyPage(props) {
       getPartyById();
     });
 
+    socket.on('update chat', function(){
+      console.log('message received')
+    })
 
     socket.on('left party', party => {
       context.setParty(party);
@@ -34,6 +36,13 @@ export default function PartyPage(props) {
     };
   }, []);
 
+  function sendChatMessage(message){
+    const messageData = {
+      room_id: props.match.url,
+      message
+    }
+    socket.emit('chat message', messageData)
+  }
 
   function getPartyById() {
     return fetch(
@@ -128,6 +137,7 @@ export default function PartyPage(props) {
       {context.party.title ? generateDisplayParty(context.party) : 'Loading'}
       </div>
       {displayWarning()}
+      <PartyChat sendChatMessage={sendChatMessage}/>
     </div>
   );
 }
