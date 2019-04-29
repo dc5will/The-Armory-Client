@@ -3,6 +3,7 @@ import CreatePartyForm from "../Components/CreatePartyForm/CreatePartyForm";
 import config from "../config";
 import TokenService from "../services/token-service";
 import GameContext from '../Contexts/gameContext';
+import Spot from '../Components/Spot/Spot';
 
 import io from 'socket.io-client';
 let socket;
@@ -24,9 +25,15 @@ export default function GamePage(props) {
         authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify(TokenService.getAuthToken)
-    }).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-    );
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+      .then(parties => {
+        setParties(parties);
+      });
   }
 
   function getGame() {
@@ -35,52 +42,40 @@ export default function GamePage(props) {
         authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify(TokenService.getAuthToken)
-    }).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-    );
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+      .then(game => {
+        context.setGame(game);
+      });
   }
 
   useEffect(() => {
     // populate party listing from API
-    getAllParties().then(parties => {
-      let partyListing = [];
-      parties.forEach(party => {
-        partyListing.push(party);
-      });
-      setParties(partyListing);
-    });
+    getAllParties();
     // get game stuff
-    getGame().then(games => {
-      let gameInfo = {};
-      gameInfo = games;
-      context.setGame(gameInfo);
-    });
+    getGame();
     // connect to socket io for this game
     socket = io('http://localhost:8000');
-    socket.emit('join game', props.match.url);
+    socket.emit('join room', props.match.url);
 
-    socket.on('post party error', function(msg) { console.log(msg) });
+    socket.on('update parties', function() { 
+      getAllParties();
+    });
+
+    return () => {
+      socket.emit('leave game');
+      socket.disconnect();
+    };
   }, []);
-
-  useEffect(() => {
-    socket.on('posted party', function([msg]) { setParties([...parties, msg]) });
-  }, [parties])
 
   function generateSpots(party) {
     return party.spots.map((spot, index) => {
       return (
-        <div key={index}>
-          <img
-            src={
-              (spot.filled)
-              ? spot.filled.avatar_url
-              : "https://banner2.kisspng.com/20180503/lge/kisspng-batman-computer-icons-bane-avatar-5aebcc92207686.890462141525402770133.jpg"
-            }
-            className='avatar_url'
-            alt="avatar_icon"
-            width="60"
-          />
-        </div>
+        <Spot key={index} spot={spot} gameId={props.match.params.gameId} partyId={party.id} history={props.history}/>
       );
     });
   }
@@ -116,12 +111,9 @@ export default function GamePage(props) {
         <h2>{gameInfo.title}</h2>
         <h3>Current Active Parties</h3>
         <div className="parties-list">{generateParties()}</div>
-        <button type="button" className="join-party-button">
-          +
-        </button>
       </div>
       <button type="button" onClick={toggleCreatePartyForm}>Create Party</button>
-      {showCPF && <CreatePartyForm socket={socket} roomUrl={props.match.url}/>}
+      {showCPF && <CreatePartyForm socket={socket} roomUrl={props.match.url} history={props.history}/>}
     </div>
   );
 }
