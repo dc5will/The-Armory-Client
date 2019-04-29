@@ -27,6 +27,8 @@ export default function Nav(props) {
     });
   }, []);
 
+  console.log('nav bar user context: ', userContext);
+  
   function onLogout(){
     TokenService.clearAuthToken();
     props.props.history.push('/')

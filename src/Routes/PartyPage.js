@@ -4,11 +4,15 @@ import TokenService from '../services/token-service';
 import config from '../config';
 import PartyContext from '../Contexts/partyContext';
 import io from 'socket.io-client';
+import UserContext from '../Contexts/userContext';
 let socket;
 
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
+  const userContext = useContext(UserContext);
   const [warning, setWarning] = useState(null);
+
+  console.log(userContext);
 
   useEffect(() => {
     getPartyById();
@@ -58,9 +62,13 @@ export default function PartyPage(props) {
       game_id: context.party.game_id
     });
     socket.disconnect();
-    console.log(props);
+    
   }
 
+  function handleLeave(){
+    leave();
+    props.history.replace(`/games/${context.party.game_id}`);
+  }
 
   // Couldnt get prompt to work in a functional component
   // so this function confirms the exit of the party
@@ -69,7 +77,7 @@ export default function PartyPage(props) {
     return warning ? (
       <div>
         <p>Are you sure you want to leave this party?</p>
-        <button onClick={e => leave()}>Confirm</button>
+        <button onClick={e => handleLeave()}>Confirm</button>
         <button onClick={e => setWarning(!warning)}>Cancel</button>
       </div>
     ) : (
