@@ -7,44 +7,57 @@ import io from 'socket.io-client';
 let socket;
 
 export default function PartyPage(props) {
-  const partyContext = useContext(PartyContext);
-  const [partyState, setParty] = useState('');
+  const context = useContext(PartyContext);
   const [warning, setWarning] = useState(null);
-  const party = partyState;
 
   useEffect(() => {
-    getPartyById()
-      .then(res => setParty(res))
-      .then(partyContext.setParty(partyState));
+    getPartyById();
+    
     socket = io('http://localhost:8000');
-    socket.on('left party', party => {
-      partyContext.setParty(party);
+    socket.emit('join room', props.match.url);
+
+    socket.on('update party', function() { 
+      getPartyById();
     });
+
+
+    socket.on('left party', party => {
+      context.setParty(party);
+    });
+
     return () => {
       leave();
     };
   }, []);
 
+
   function getPartyById() {
     return fetch(
-      `${config.API_ENDPOINT}/parties/fb1d3c63-6a72-4013-be82-5b523c1dd1cd`, //this will need to change back to props.match when the join party functionality is ready
+      `${config.API_ENDPOINT}/parties/${props.match.params.partyId}`, //this will need to change back to props.match when the join party functionality is ready
       {
         headers: {
           authorization: `Bearer ${TokenService.getAuthToken()}`
         }
       }
-    ).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
+    )
+      .then(res => (
+        (!res.ok)
+          ? TokenService.clearAuthToken()
+          : res.json()
+      ))
+      .then(respJson => {
+        context.setParty(respJson);
+      });
   }
 
   function leave() {
     socket.emit('leave party', {
-      party_id: party.id,
+      party_id: context.party.id,
       room_id: props.match.url,
       user_auth: TokenService.getAuthToken(),
-      game_id: party.game_id
+      game_id: context.party.game_id
     });
     socket.disconnect();
-    props.history.replace(`/games/${party.game_id}`);
     console.log(props);
   }
 
@@ -65,13 +78,13 @@ export default function PartyPage(props) {
   }
 
   function generateReqs(party) {
-    return party.reqs.map((req, i) => {
+    return context.party.reqs.map((req, i) => {
       return <li key={i}>{req.req_name}</li>;
     });
   }
 
   function generateRoles(party) {
-    return party.spots.map((spot, i) => {
+    return context.party.spots.map((spot, i) => {
       let roleStr = '';
       const user = spot.filled;
       spot.roles.forEach(role => {
@@ -91,8 +104,8 @@ export default function PartyPage(props) {
   function generateDisplayParty(party) {
     return (
       <div>
-        <h1>{party.title}</h1>
-        <p>{party.description}</p>
+        <h1>{context.party.title}</h1>
+        <p>{context.party.description}</p>
         <h3>Spots:</h3>
         <ul>{generateRoles(party)}</ul>
         <h3>Requirements:</h3>
@@ -104,7 +117,7 @@ export default function PartyPage(props) {
   return (
     <div>
       <div>
-      {party ? generateDisplayParty(party) : 'Loading'}
+      {context.party.title ? generateDisplayParty(context.party) : 'Loading'}
       </div>
       {displayWarning()}
     </div>

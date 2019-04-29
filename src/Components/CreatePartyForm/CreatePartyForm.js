@@ -103,12 +103,13 @@ export default function CreatePartyForm(props) {
       body: JSON.stringify(newParty),
     })
     .then(res =>
-      (!res.ok)
+       (!res.ok)
         ? res.json().then(e => Promise.reject(e))
         : res.json()
     )
-    .then(([party]) => {
-      props.history.push(`/party/${party.id}`);
+    .then((respJson) => {
+      console.log(respJson)
+      props.history.push(`/party/${respJson.id}`);
     })
     .catch(err => {
       //UPDATE TO DISPLAY ERROR
