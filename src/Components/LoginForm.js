@@ -24,16 +24,16 @@ export default function LoginForm(props) {
       <h2>Login</h2>
       <p>{error.error}</p>
       <form className="LoginForm" onSubmit={e => handleLogin(e)}>
-        <label htmlFor="email-input">Email:</label>
+        <label htmlFor="email-input">Email or Username: </label>
         <input
           required
-          type="email"
+          type='text'
           name="email-input"
           id="email-input"
           placeholder="username@example.com"
           onChange={e => setEmail(e.target.value)}
         />
-        <label htmlFor="password-input">Password:</label>
+        <label htmlFor="password-input">Password: </label>
         <input
           required
           type="password"
