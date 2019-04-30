@@ -18,5 +18,6 @@ export default function Confirmation(props){
     confirm();
   }, []
 )
+return<div></div>
 
 }
