@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { Link } from 'react-router-dom';
 import AuthApiService from "../services/auth-api-service";
 import TokenService from "../services/token-service";
+import UserContext from "../Contexts/userContext";
 
 export default function RegisterForm(props) {
+  const context = useContext(UserContext)
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,10 +22,19 @@ export default function RegisterForm(props) {
          props.onLoginSuccess();
       })
       .catch (error =>
-        setError(error)
+        setError(error.error)
        );
-    
   }
+
+  function tosConfirm(){
+    return(
+    !context.tosCheck ? 
+    <input type='checkbox' name='TOS-box' disabled required/>
+     : <input type='checkbox' name='TOS-box' required/>
+    )
+  }
+
+
 
   return (
     <main>
@@ -62,6 +74,11 @@ export default function RegisterForm(props) {
               required
               onChange={e => setPassword(e.target.value)}
             />
+          </div>
+
+          <div>
+          {tosConfirm()}
+          <label htmlFor='TOS-box'>I am over 13 and agree to the <Link to={'/tos'}>terms of service and privacy policy.</Link></label>
           </div>
 
           <button type="submit" className="submit-button">
