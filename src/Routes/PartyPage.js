@@ -4,16 +4,12 @@ import TokenService from "../services/token-service";
 import config from "../config";
 import PartyContext from "../Contexts/partyContext";
 import io from "socket.io-client";
-import UserContext from "../Contexts/userContext";
 import PartyChat from "../Components/PartyChat/PartyChat";
-import generate from "@babel/generator";
 let socket;
 
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
-  const userContext = useContext(UserContext);
   const [warning, setWarning] = useState(null);
-  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     getPartyById();
@@ -40,16 +36,9 @@ export default function PartyPage(props) {
     };
   }, []);
 
-  // function generateChatLog() {
-  //   console.log(messages);
-  //   return messages.map(message => {
-  //     return <li>{message}</li>;
-  //   });
-  // }
-
   function sendChatMessage(message) {
     // get new message data from user
-    const {user_id, sub} = TokenService.parseJwt(TokenService.getAuthToken());
+    const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
     const messageData = {
       room_id: props.match.url,
       message,
@@ -59,10 +48,12 @@ export default function PartyPage(props) {
     socket.emit("chat message", messageData);
   }
 
-  function generateChat() {
-    return context.partyChat.map(message => {
-      return <li key={message.message_id}>{message.sub}: {message.message}</li>
-    })
+  function sendChatEdit(message) {
+    // create a new message object with the message_id already included
+    // send it over socket
+    // check on the back end if the object already contains an id
+    // if it does, send it to the room and have the client check through the context and update as necessary
+    // maybe use an edit key on the object to see if it is an edit or not
   }
 
   function getPartyById() {
@@ -95,7 +86,7 @@ export default function PartyPage(props) {
 
     // clears party chat context when user leaves a party and joins a new one
     context.setPartyChat([]);
-    
+
     props.history.replace(`/games/${context.party.game_id}`);
   }
 
@@ -156,7 +147,6 @@ export default function PartyPage(props) {
         {context.party.title ? generateDisplayParty(context.party) : "Loading"}
       </div>
       {displayWarning()}
-      <ul>{generateChat()}</ul>
       <PartyChat sendChatMessage={sendChatMessage} />
     </div>
   );
