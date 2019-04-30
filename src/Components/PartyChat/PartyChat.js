@@ -46,7 +46,8 @@ export default function PartyChat(props) {
               ) : (
                 <>
                 <input
-                  value={editNewMessage}
+                  // value={editNewMessage}
+                  defaultValue={message.message}
                   id={message.message_id}
                   onChange={e => handleEditChange(e)}
                 />
