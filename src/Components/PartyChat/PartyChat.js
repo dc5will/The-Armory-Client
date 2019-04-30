@@ -21,6 +21,7 @@ export default function PartyChat(props){
     function handleSubmit(e){
         e.preventDefault();
         props.sendChatMessage(message);
+        setMessage('');
     }
 
     function handleChatChange(e){

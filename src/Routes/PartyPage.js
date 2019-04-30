@@ -1,33 +1,37 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { Prompt } from 'react-router-dom';
-import TokenService from '../services/token-service';
-import config from '../config';
-import PartyContext from '../Contexts/partyContext';
-import io from 'socket.io-client';
-import UserContext from '../Contexts/userContext';
-import PartyChat from '../Components/PartyChat/PartyChat';
+import React, { useEffect, useContext, useState } from "react";
+import { Prompt } from "react-router-dom";
+import TokenService from "../services/token-service";
+import config from "../config";
+import PartyContext from "../Contexts/partyContext";
+import io from "socket.io-client";
+import UserContext from "../Contexts/userContext";
+import PartyChat from "../Components/PartyChat/PartyChat";
+import generate from "@babel/generator";
 let socket;
 
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
   const userContext = useContext(UserContext);
   const [warning, setWarning] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     getPartyById();
-    
-    socket = io('http://localhost:8000');
-    socket.emit('join room', props.match.url);
 
-    socket.on('update party', function() { 
+    socket = io("http://localhost:8000");
+    socket.emit("join room", props.match.url);
+
+    socket.on("update party", function() {
       getPartyById();
     });
 
-    socket.on('update chat', function(){
-      console.log('message received')
-    })
+    socket.on("update chat", function(msg) {
+      const array = context.partyChat;
+      array.push(msg);
+      context.setPartyChat(array);
+    });
 
-    socket.on('left party', party => {
+    socket.on("left party", party => {
       context.setParty(party);
     });
 
@@ -36,12 +40,29 @@ export default function PartyPage(props) {
     };
   }, []);
 
-  function sendChatMessage(message){
+  // function generateChatLog() {
+  //   console.log(messages);
+  //   return messages.map(message => {
+  //     return <li>{message}</li>;
+  //   });
+  // }
+
+  function sendChatMessage(message) {
+    // get new message data from user
+    const {user_id, sub} = TokenService.parseJwt(TokenService.getAuthToken());
     const messageData = {
       room_id: props.match.url,
-      message
-    }
-    socket.emit('chat message', messageData)
+      message,
+      user_id,
+      sub
+    };
+    socket.emit("chat message", messageData);
+  }
+
+  function generateChat() {
+    return context.partyChat.map(message => {
+      return <li key={message.message_id}>{message.sub}: {message.message}</li>
+    })
   }
 
   function getPartyById() {
@@ -53,29 +74,28 @@ export default function PartyPage(props) {
         }
       }
     )
-      .then(res => (
-        (!res.ok)
-          ? TokenService.clearAuthToken()
-          : res.json()
-      ))
+      .then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()))
       .then(respJson => {
         context.setParty(respJson);
       });
   }
 
   function leave() {
-    socket.emit('leave party', {
+    socket.emit("leave party", {
       party_id: context.party.id,
       room_id: props.match.url,
       user_auth: TokenService.getAuthToken(),
       game_id: context.party.game_id
     });
     socket.disconnect();
-    
   }
 
-  function handleLeave(){
+  function handleLeave() {
     leave();
+
+    // clears party chat context when user leaves a party and joins a new one
+    context.setPartyChat([]);
+    
     props.history.replace(`/games/${context.party.game_id}`);
   }
 
@@ -102,17 +122,16 @@ export default function PartyPage(props) {
 
   function generateRoles(party) {
     return context.party.spots.map((spot, i) => {
-      let roleStr = '';
+      let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        roleStr += role.role_name + ' | ';
+        roleStr += role.role_name + " | ";
       });
       return (
         <li key={i}>
-          {user !== null 
-            ? user.username 
-            : 'Available'}{' - '} 
-            {roleStr}{' '}
+          {user !== null ? user.username : "Available"}
+          {" - "}
+          {roleStr}{" "}
         </li>
       );
     });
@@ -134,10 +153,11 @@ export default function PartyPage(props) {
   return (
     <div>
       <div>
-      {context.party.title ? generateDisplayParty(context.party) : 'Loading'}
+        {context.party.title ? generateDisplayParty(context.party) : "Loading"}
       </div>
       {displayWarning()}
-      <PartyChat sendChatMessage={sendChatMessage}/>
+      <ul>{generateChat()}</ul>
+      <PartyChat sendChatMessage={sendChatMessage} />
     </div>
   );
 }
