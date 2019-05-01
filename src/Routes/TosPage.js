@@ -2,22 +2,15 @@ import React, { useContext } from 'react';
 import UserContext from '../Contexts/userContext';
 
 
-export default function Dashboard(props) {
+
+export default function TOS ({hide}) {
   const context = useContext(UserContext);
 
-
-function agreeToTos(){
+  function agreeToTos(){
   context.setTosCheck(true)
-  props.history.push('/')
-}
-
-function disagree(){
-  context.setTosCheck(false)
-  props.history.push('/')
-}
-
-
-
+  hide()
+  }
+ 
   return (
   <div><h2>Privacy Policy</h2>
   <div>
@@ -114,7 +107,7 @@ function disagree(){
 <div>
 <p>I am over the age of 13 and agree to the terms of service</p>
 <button onClick={agreeToTos}>I agree</button>
-<button onClick={disagree}>I disagree</button>
+<button onClick={hide}>I disagree</button>
 </div></div>
   );
 }

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import AuthApiService from "../services/auth-api-service";
 import TokenService from "../services/token-service";
 import UserContext from "../Contexts/userContext";
+import useModal from "./Modal/useModal";
+import Modal from "./Modal/Modal";
+import TOS from "../Routes/TosPage";
 
 export default function RegisterForm(props) {
   const context = useContext(UserContext)
@@ -10,6 +13,7 @@ export default function RegisterForm(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const {isShowing, toggle} = useModal();
 
    function onRegister(e) {
       e.preventDefault();
@@ -29,8 +33,9 @@ export default function RegisterForm(props) {
   function tosConfirm(){
     return(
     !context.tosCheck ? 
-    <input type='checkbox' name='TOS-box' disabled required/>
-     : <input type='checkbox' name='TOS-box' required/>
+    <button type="submit" className="submit-button" disabled>Register</button>
+     :
+    <button type="submit" className="submit-button">Register</button>
     )
   }
 
@@ -76,14 +81,14 @@ export default function RegisterForm(props) {
             />
           </div>
 
+
           <div>
-          {tosConfirm()}
-          <label htmlFor='TOS-box'>I am over 13 and agree to the <Link to={'/tos'}>terms of service and privacy policy.</Link></label>
+          <button className="button-default" onClick={toggle}>Terms of service</button>
+          <Modal isShowing={isShowing} hide={toggle} content={<TOS hide={toggle}/>}/>
           </div>
 
-          <button type="submit" className="submit-button">
-            Register
-          </button>
+          {tosConfirm()}
+
         </form>
       </div>
     </main>

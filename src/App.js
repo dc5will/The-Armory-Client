@@ -6,11 +6,10 @@ import PublicOnlyRoute from './Routes/PublicOnlyRoute'
 import PrivateRoute from './Routes/PrivateRoute';
 import GamePage from './Routes/GamePage';
 import PartyPage from './Routes/PartyPage';
-import termsOfService from './Routes/TosPage';
-
-
-import './app.css'
 import Confirmation from './Components/Confirmation';
+import './app.css'
+
+
 
 
 function App() {
@@ -19,7 +18,6 @@ function App() {
     <main>
       <Route path={'/confirmation'} component={Confirmation} />
       <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
-      <PublicOnlyRoute exact path={'/tos'} component={termsOfService} />
       <PrivateRoute path={'/dashboard'} component={Dashboard}/>
       <PrivateRoute path={'/games/:gameId'} component={GamePage}/>
       <PrivateRoute path={'/party/:partyId'} component={PartyPage}/>
