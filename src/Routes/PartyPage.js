@@ -21,9 +21,19 @@ export default function PartyPage(props) {
       getPartyById();
     });
 
-    socket.on("update chat", function(msg) {
+    socket.on("update chat", function(messageData) {
+      console.log(messageData);
       const array = context.partyChat;
-      array.push(msg);
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].message_id === messageData.message_id) {
+          array[i] = messageData;
+          context.setPartyChat(array);
+          return;
+        }
+      }
+      console.log(context.partyChat);
+      
+      array.push(messageData);
       context.setPartyChat(array);
     });
 
@@ -48,12 +58,22 @@ export default function PartyPage(props) {
     socket.emit("chat message", messageData);
   }
 
-  function sendChatEdit(message) {
+  function sendChatEdit(edittedMessage, id) {
     // create a new message object with the message_id already included
     // send it over socket
     // check on the back end if the object already contains an id
     // if it does, send it to the room and have the client check through the context and update as necessary
     // maybe use an edit key on the object to see if it is an edit or not
+    const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
+    console.log(edittedMessage, id);
+    const edittedMessageData = {
+      room_id: props.match.url,
+      message: edittedMessage,
+      message_id: id,
+      user_id,
+      sub
+    };
+    socket.emit("chat message", edittedMessageData);
   }
 
   function getPartyById() {
@@ -147,7 +167,10 @@ export default function PartyPage(props) {
         {context.party.title ? generateDisplayParty(context.party) : "Loading"}
       </div>
       {displayWarning()}
-      <PartyChat sendChatMessage={sendChatMessage} />
+      <PartyChat
+        sendChatMessage={sendChatMessage}
+        sendChatEdit={sendChatEdit}
+      />
     </div>
   );
 }
