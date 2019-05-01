@@ -10,12 +10,14 @@ import termsOfService from './Routes/TosPage';
 
 
 import './app.css'
+import Confirmation from './Components/Confirmation';
 
 
 function App() {
   return (
   <Switch>
     <main>
+      <Route path={'/confirmation'} component={Confirmation} />
       <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
       <PublicOnlyRoute exact path={'/tos'} component={termsOfService} />
       <PrivateRoute path={'/dashboard'} component={Dashboard}/>
