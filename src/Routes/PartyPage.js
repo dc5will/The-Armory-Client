@@ -56,11 +56,26 @@ export default function PartyPage(props) {
   function sendChatMessage(message) {
     // get new message data from user
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
+    const date = new Date();
+    const hours = date.getHours();
+    function getMinutes(){
+      if (date.getMinutes() === 0){
+        return '00';
+      }
+      if (date.getMinutes() < 10){
+        return `0${date.getMinutes()}`
+      }
+    }
+    const minutes = getMinutes();
+    const amOrPm = (date.getHours() >= 12 ? 'PM' : 'AM');
+    const timeStamp = `${hours - 12}:${minutes} ${amOrPm}`
+    console.log(timeStamp);
     const messageData = {
       room_id: props.match.url,
       message,
       user_id,
-      sub
+      sub,
+      timeStamp
     };
     socket.emit("chat message", messageData);
   }

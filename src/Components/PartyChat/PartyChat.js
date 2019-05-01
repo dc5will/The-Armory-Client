@@ -67,12 +67,22 @@ export default function PartyChat(props) {
       } else {
         return (
           <>
+            <button
+              className="user-options-button"
+              onClick={e => handleCloseOptionsButton(e)}
+            >
+              #
+            </button>
             {generateEditButton(message)}
             {generateDeleteButton(message)}
           </>
         );
       }
     }
+  }
+
+  function handleCloseOptionsButton(e) {
+    setOptionsButton("");
   }
 
   function handleOptionsButtonClick(e) {
@@ -99,9 +109,12 @@ export default function PartyChat(props) {
   function generateMessage(message) {
     if (editId !== message.message_id) {
       return (
-        <p className="chat-message">
-          {message.sub}: {message.message}
-        </p>
+        <div>
+          <p>{message.timeStamp}</p>
+          <p className="chat-message">
+            {message.sub}: {message.message}
+          </p>
+        </div>
       );
     } else if (editId === message.message_id) {
       return (
@@ -139,6 +152,7 @@ export default function PartyChat(props) {
     e.preventDefault();
     props.sendChatEdit(editNewMessage, editId);
     setEditId("");
+    setOptionsButton("");
   }
 
   function editMessage(e) {
