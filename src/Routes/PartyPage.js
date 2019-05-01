@@ -35,10 +35,13 @@ export default function PartyPage(props) {
     });
 
     socket.on("delete chat message", function(messageId) {
-      const newPartyChat = context.partyChat.filter(
-        message => message.message_id !== messageId
-      );
-      context.setPartyChat(newPartyChat);
+      const array = context.partyChat;
+      for (let i = 0; i < array.length; i++){
+        if(array[i].message_id === messageId){
+          array.splice(i, 1);
+        }
+      }
+      context.setPartyChat(array);
     });
 
     socket.on("left party", party => {
