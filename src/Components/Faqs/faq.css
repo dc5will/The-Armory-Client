@@ -1,0 +1,9 @@
+.faq-container{
+  width: 50%;
+  margin: 0 auto;
+}
+
+li{
+  list-style-type: none;
+  font-weight: bolder;
+}
