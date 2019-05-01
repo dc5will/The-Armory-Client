@@ -22,7 +22,6 @@ export default function PartyPage(props) {
     });
 
     socket.on("update chat", function(messageData) {
-      console.log(messageData);
       const array = context.partyChat;
       for (let i = 0; i < array.length; i++) {
         if (array[i].message_id === messageData.message_id) {
@@ -31,10 +30,15 @@ export default function PartyPage(props) {
           return;
         }
       }
-      console.log(context.partyChat);
-      
       array.push(messageData);
       context.setPartyChat(array);
+    });
+
+    socket.on("delete chat message", function(messageId) {
+      const newPartyChat = context.partyChat.filter(
+        message => message.message_id !== messageId
+      );
+      context.setPartyChat(newPartyChat);
     });
 
     socket.on("left party", party => {
@@ -59,13 +63,7 @@ export default function PartyPage(props) {
   }
 
   function sendChatEdit(edittedMessage, id) {
-    // create a new message object with the message_id already included
-    // send it over socket
-    // check on the back end if the object already contains an id
-    // if it does, send it to the room and have the client check through the context and update as necessary
-    // maybe use an edit key on the object to see if it is an edit or not
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
-    console.log(edittedMessage, id);
     const edittedMessageData = {
       room_id: props.match.url,
       message: edittedMessage,
@@ -74,6 +72,14 @@ export default function PartyPage(props) {
       sub
     };
     socket.emit("chat message", edittedMessageData);
+  }
+
+  function deleteChatMessage(messageId) {
+    const deletedMessage = {
+      room_id: props.match.url,
+      message_id: messageId
+    };
+    socket.emit("delete chat message", deletedMessage);
   }
 
   function getPartyById() {
@@ -170,6 +176,7 @@ export default function PartyPage(props) {
       <PartyChat
         sendChatMessage={sendChatMessage}
         sendChatEdit={sendChatEdit}
+        deleteChatMessage={deleteChatMessage}
       />
     </div>
   );

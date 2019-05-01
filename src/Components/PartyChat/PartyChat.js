@@ -6,6 +6,7 @@ export default function PartyChat(props) {
   const [message, setMessage] = useState("");
   const [editId, setEditId] = useState("");
   const [editNewMessage, setEditNewMessage] = useState("");
+  const [optionsButton, setOptionsButton] = useState("");
   const context = useContext(PartyContext);
 
   function generateForm() {
@@ -42,12 +43,57 @@ export default function PartyChat(props) {
               id={message.message_id}
             >
               {generateMessage(message)}
-              {generateEditButton(message)}
+              {generateUserOptionsButton(message)}
             </li>
           );
         })}
       </ul>
     );
+  }
+
+  function generateUserOptionsButton(message) {
+    const { sub } = TokenService.parseJwt(TokenService.getAuthToken());
+    if (message.sub === sub) {
+      if (optionsButton !== message.message_id) {
+        return (
+          <button
+            className="user-options-button"
+            id={message.message_id}
+            onClick={e => handleOptionsButtonClick(e)}
+          >
+            #
+          </button>
+        );
+      } else {
+        return (
+          <>
+            {generateEditButton(message)}
+            {generateDeleteButton(message)}
+          </>
+        );
+      }
+    }
+  }
+
+  function handleOptionsButtonClick(e) {
+    setOptionsButton(e.target.id);
+  }
+
+  function generateDeleteButton(message) {
+    return (
+      <button
+        className="delete-button"
+        id={message.message_id}
+        onClick={e => handleDeleteMessage(e)}
+      >
+        Delete
+      </button>
+    );
+  }
+
+  function handleDeleteMessage(e) {
+    console.log("deleted");
+    props.deleteChatMessage(e.target.id);
   }
 
   function generateMessage(message) {
@@ -65,10 +111,7 @@ export default function PartyChat(props) {
             id={message.message_id}
             onChange={e => handleEditChange(e)}
           />
-          <button
-            className="save-edit-button"
-            id={message.message_id}
-          >
+          <button className="save-edit-button" id={message.message_id}>
             Save
           </button>
         </form>
@@ -77,16 +120,15 @@ export default function PartyChat(props) {
   }
 
   function generateEditButton(message) {
-    const { sub } = TokenService.parseJwt(TokenService.getAuthToken());
-    if(message.sub === sub){
-      return (
-        <button className='edit-chat-button' id={message.message_id} onClick={e => editMessage(e)}>
-            Edit
-          </button>
-      );
-    } else {
-      return '';
-    }
+    return (
+      <button
+        className="edit-chat-button"
+        id={message.message_id}
+        onClick={e => editMessage(e)}
+      >
+        Edit
+      </button>
+    );
   }
 
   function handleEditChange(e) {
