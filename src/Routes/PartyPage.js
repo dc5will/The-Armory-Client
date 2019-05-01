@@ -26,6 +26,27 @@ export default function PartyPage(props) {
       for (let i = 0; i < array.length; i++) {
         if (array[i].message_id === messageData.message_id) {
           array[i] = messageData;
+
+          const date = new Date();
+          const hours = date.getHours();
+          function getMinutes() {
+            if (date.getMinutes() === 0) {
+              return "00";
+            }
+            if (date.getMinutes() < 10) {
+              return `0${date.getMinutes()}`;
+            } else {
+              return date.getMinutes();
+            }
+          }
+          const minutes = getMinutes();
+          const amOrPm = date.getHours() >= 12 ? "PM" : "AM";
+          const timeStamp = `${hours - 12}:${minutes} ${amOrPm}`;
+
+          array[i].timeStamp = timeStamp;
+
+          array[i].edited = true;
+
           context.setPartyChat(array);
           return;
         }
@@ -36,8 +57,8 @@ export default function PartyPage(props) {
 
     socket.on("delete chat message", function(messageId) {
       const array = context.partyChat;
-      for (let i = 0; i < array.length; i++){
-        if(array[i].message_id === messageId){
+      for (let i = 0; i < array.length; i++) {
+        if (array[i].message_id === messageId) {
           array.splice(i, 1);
         }
       }
@@ -58,17 +79,19 @@ export default function PartyPage(props) {
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
     const date = new Date();
     const hours = date.getHours();
-    function getMinutes(){
-      if (date.getMinutes() === 0){
-        return '00';
+    function getMinutes() {
+      if (date.getMinutes() === 0) {
+        return "00";
       }
-      if (date.getMinutes() < 10){
-        return `0${date.getMinutes()}`
+      if (date.getMinutes() < 10) {
+        return `0${date.getMinutes()}`;
+      } else {
+        return date.getMinutes();
       }
     }
     const minutes = getMinutes();
-    const amOrPm = (date.getHours() >= 12 ? 'PM' : 'AM');
-    const timeStamp = `${hours - 12}:${minutes} ${amOrPm}`
+    const amOrPm = date.getHours() >= 12 ? "PM" : "AM";
+    const timeStamp = `${hours - 12}:${minutes} ${amOrPm}`;
     console.log(timeStamp);
     const messageData = {
       room_id: props.match.url,

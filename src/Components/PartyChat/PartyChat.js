@@ -83,6 +83,7 @@ export default function PartyChat(props) {
 
   function handleCloseOptionsButton(e) {
     setOptionsButton("");
+    setEditId("");
   }
 
   function handleOptionsButtonClick(e) {
@@ -111,23 +112,27 @@ export default function PartyChat(props) {
       return (
         <div>
           <p>{message.timeStamp}</p>
-          <p className="chat-message">
-            {message.sub}: {message.message}
-          </p>
+          <p className="chat-message-user">{message.sub}: </p>
+          <p className="chat-message">{message.message}</p>
+          {message.edited ? "(edited)" : ""}
         </div>
       );
     } else if (editId === message.message_id) {
       return (
-        <form onSubmit={e => handleEditSubmit(e)}>
-          <input
-            defaultValue={message.message}
-            id={message.message_id}
-            onChange={e => handleEditChange(e)}
-          />
-          <button className="save-edit-button" id={message.message_id}>
-            Save
-          </button>
-        </form>
+        <div>
+          <p>{message.timeStamp}</p>
+          <p className="chat-message-user">{message.sub}: </p>
+          <form onSubmit={e => handleEditSubmit(e)}>
+            <input
+              defaultValue={message.message}
+              id={message.message_id}
+              onChange={e => handleEditChange(e)}
+            />
+            <button className="save-edit-button" id={message.message_id}>
+              Save
+            </button>
+          </form>
+        </div>
       );
     }
   }
