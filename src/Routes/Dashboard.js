@@ -23,20 +23,19 @@ export default function Dashboard(props) {
     }).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
   }
 
-  const submitForm = e => {
+  const submitSearch = e => {
     e.preventDefault();
     const { search } = e.target;
     const params = { query: search.value };
     console.log("query: search.value =", params);
     getGamesByTitle(params).then(data => {
       games.setGamesList(data);
-      console.log("returned list after search =", games);
     });
   };
 
   function getGamesByTitle(params) {
     let url = `${config.API_ENDPOINT}/games`;
-    console.log(url);
+    // console.log(url);
     if (params.query) {
       url += `?query=${encodeURIComponent(params.query)}`;
     }
@@ -50,7 +49,7 @@ export default function Dashboard(props) {
   function displayGamesList(staticData) {
     console.log('staticData =', staticData)
     if (staticData.length === 0) {
-      return <span id='search-failed'>Game not found, please try again!</span>
+      return <span id='game-search-no-result'>Game not found, please try again!</span>
     } else {
       return staticData.map((data, index) => {
         return (
@@ -72,14 +71,14 @@ export default function Dashboard(props) {
   return (
     <div className="dashboard-container">
       <Nav props={props} />
-      <form onSubmit={submitForm}>
+      <form className='game-search-form' onSubmit={submitSearch}>
         <input
+          id="title-search-input"
           type="text"
           name="search"
-          placeholder="Search games"
-          className="searchBar"
+          placeholder="Enter game title"
         />
-        <button type="submit" id="games-search-button">
+        <button type="submit" className="games-search-button">
           Search
         </button>
       </form>
