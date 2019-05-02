@@ -8,15 +8,12 @@ import Nav from '../Components/Nav';
 export default function Dashboard(props) {
   const games = useContext(GamesContext);
   const staticData = games.gamesList;
-  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     getGames().then(data => {
       games.setGamesList(data);
     });
   }, []);
-
-
 
   function getGames() {
     return fetch(`${config.API_ENDPOINT}/games`, {
@@ -26,9 +23,31 @@ export default function Dashboard(props) {
     }).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
   }
 
-//I'm sure theres a better, cleaner way to display all games and filtered games but this is what I came up with.
+	const submitForm = e => {
+		e.preventDefault();
+    const { search } = e.target;
+    const params = { query: search.value };
+    console.log('query: search.value =', params)
+		getGamesByTitle(params).then(data => {
+      games.setGamesList(data)
+      console.log('returned list after search =', games)
+		});
+	};
 
-  function DisplayAllGames(staticData) {
+  function getGamesByTitle(params) {
+    let url = `${config.API_ENDPOINT}/games`;
+    console.log(url);
+    if (params.query) {
+      url += `?query=${encodeURIComponent(params.query)}`;
+    }
+    return fetch(url, {
+      method: 'GET'
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  }
+
+  function displayGamesList(staticData) {
     return staticData.map((data, index) => {
       return (
         <div key={index}>
@@ -45,50 +64,19 @@ export default function Dashboard(props) {
     });
   }
 
-
-  function filterGames(data, keyword) {
-    return data.map((item, i) => {
-      return item.tags.includes(keyword) ? (
-        <div key={i}>
-          <Link to={`/games/${item.id}`}>
-            <img src={item.image_url} alt="Game Cover" />
-            <h3>{item.title}</h3>
-          </Link>
-          {item.tags.map((tag, i) => {
-            return <span key={i}>{tag} | </span>;
-          })}
-          <p>Available Parties: {item.party_count}</p>
-        </div>
-      ) : (
-        <div key={i} />
-      );
-    });
-  }
-
-
-
-
   return (
     <div className="dashboard-container">
       <Nav props={props} />
-      <button className="filterGames" onClick={e => setFilter('All')}>
-        All
-      </button>
-      <button className="filterGames" onClick={e => setFilter('Shooter')}>
-        Shooter
-      </button>
-      <button className="filterGames" onClick={e => setFilter('MOBA')}>
-        MOBA
-      </button>
-      <button className="filterGames" onClick={e => setFilter('MMORPG')}>
-        MMORPG
-      </button>
-      <ul>
-        {filter === 'All'
-          ? DisplayAllGames(staticData)
-          : filterGames(staticData, filter)}
-      </ul>
-
+      <form onSubmit={submitForm}>
+				<input
+					type='text'
+					name='search'
+					placeholder='Search games'
+					className='searchBar'
+				/>
+        <button type='submit' id='games-search-button'>Search</button>
+        </form>
+        {displayGamesList(staticData)}
     </div>
   );
 }
