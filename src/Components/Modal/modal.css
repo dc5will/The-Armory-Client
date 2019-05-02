@@ -7,5 +7,6 @@
   border: 1px solid grey;
   overflow-x: auto;
   max-height: calc(100vh - 210px);
-  width:50%;
+  width: fit-content;
+  max-width: 50%;
 }

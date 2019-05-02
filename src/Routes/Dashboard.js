@@ -17,7 +17,6 @@ export default function Dashboard(props) {
   }, []);
 
 
-
   function getGames() {
     return fetch(`${config.API_ENDPOINT}/games`, {
       headers: {

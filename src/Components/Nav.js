@@ -1,12 +1,17 @@
 //avatar image, username, account preferences, logout
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import config from "../config";
 import TokenService from "../services/token-service";
 import UserContext from '../Contexts/userContext';
+import useModal from "./Modal/useModal";
+import Modal from "./Modal/Modal";
+import UserProfile from "./UserProfile";
 
 export default function Nav(props) {
   const userContext = useContext(UserContext)
   const userAvatarImg = 'http://www.exiledkingdoms.com/forum/download/file.php?avatar=540_1457933885.jpg'
+  const { isShowing, toggle } = useModal();
+  const [update, setUpdate] = useState(false)
 
   function getUserInfo() {
     const { user_id } = TokenService.parseAuthToken();
@@ -21,11 +26,12 @@ export default function Nav(props) {
       });
   }
 
+
   useEffect(() => {
     getUserInfo().then(user => {
       userContext.setUser(user.userInfo);
     });
-  }, []);
+  }, [update]);
 
   console.log('nav bar user context: ', userContext);
   
@@ -33,11 +39,22 @@ export default function Nav(props) {
     TokenService.clearAuthToken();
     props.props.history.push('/')
   }
+
+  function updatePage(){
+    setUpdate(!update)
+}
+
   function generateNavBar(user){
     return(
         <div>
             <img src={user.avatar_url ? user.avatar_url : userAvatarImg} alt='avatar profile pic'></img>
             <h2>{user.username}</h2>
+            <button type='button' onClick={e => toggle()}>Edit Profile</button>
+            <Modal
+              isShowing={isShowing}
+              hide={toggle}
+              content={<UserProfile update={updatePage} />}
+            />
             <button onClick={onLogout}>Logout</button>
         </div>
     )

@@ -12,3 +12,19 @@ img {
   display: flex;
   flex-wrap: wrap;
 }
+
+.avatars {
+  width: 75px;
+  margin: 2px;
+  border-radius: 25%;
+  cursor: pointer;
+}
+
+.avatars:hover{
+  width: 78px;
+  border: 3px solid yellowgreen;
+}
+.avatars:active{
+  width: 78px;
+  border: 4px solid yellowgreen;
+}
