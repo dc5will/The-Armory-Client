@@ -70,7 +70,7 @@ export default function UserProfile(props) {
         console.log(res);
         confirmNewPassword(newPass, confirmPass);
       })
-      .catch(error => setError(error));
+      .catch(error => setError(error.error));
   }
 
   console.log(avatar_url)
@@ -89,6 +89,7 @@ export default function UserProfile(props) {
             <img src={'https://s3-us-west-2.amazonaws.com/files.geekgirlauthority.com/wp-content/uploads/2016/05/CuteSprayAvatars-76_OW_JP_400x400-300x300.png'} alt="soldier" className="avatars" onClick={e => setAvatar_url(e.target.src)}/>
             <img src={'http://www.ffxivrealm.com/data/avatars/l/0/826.jpg?1371910121'} alt="ffcacti" className="avatars" onClick={e => setAvatar_url(e.target.src)}/>
             <img src={'http://steamavatars.co/?media_dl=308'} alt="dota" className="avatars" onClick={e => setAvatar_url(e.target.src)}/>
+            <img src={'http://i66.tinypic.com/o9mqad.png'} alt="TJ" className="avatars" onClick={e => setAvatar_url(e.target.src)}/>
           </div>
 
           <div className="input-field">
