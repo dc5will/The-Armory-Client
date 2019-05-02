@@ -8,6 +8,7 @@ import Nav from "../Components/Nav";
 export default function Dashboard(props) {
   const games = useContext(GamesContext);
   const staticData = games.gamesList;
+  const [filter, setFilter] = useState('All');
 
   useEffect(() => {
     getGames().then(data => {
@@ -68,6 +69,26 @@ export default function Dashboard(props) {
     }
   }
 
+  // filter for tags
+  function filterGames(data, keyword) {
+    return data.map((item, i) => {
+      return item.tags.includes(keyword) ? (
+        <div key={i}>
+          <Link to={`/games/${item.id}`}>
+            <img src={item.image_url} alt="Game Cover" />
+            <h3>{item.title}</h3>
+          </Link>
+          {item.tags.map((tag, i) => {
+            return <span key={i}>{tag} | </span>;
+          })}
+          <p>Available Parties: {item.party_count}</p>
+        </div>
+      ) : (
+        <div key={i} />
+      );
+    });
+  }
+
   return (
     <div className="dashboard-container">
       <Nav props={props} />
@@ -82,7 +103,24 @@ export default function Dashboard(props) {
           Search
         </button>
       </form>
-      {displayGamesList(staticData)}
+      {/* {displayGamesList(staticData)} */}
+      <button className="filterGames" onClick={e => setFilter('All')}>
+        All
+      </button>
+      <button className="filterGames" onClick={e => setFilter('Shooter')}>
+        Shooter
+      </button>
+      <button className="filterGames" onClick={e => setFilter('MOBA')}>
+        MOBA
+      </button>
+      <button className="filterGames" onClick={e => setFilter('MMORPG')}>
+        MMORPG
+      </button>
+      <ul>
+        {filter === 'All'
+          ? displayGamesList(staticData)
+          : filterGames(staticData, filter)}
+      </ul>
     </div>
   );
 }
