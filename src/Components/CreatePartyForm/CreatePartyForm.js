@@ -93,7 +93,6 @@ export default function CreatePartyForm(props) {
       spots,
       requirement: partyRequirements,
     };
-
     fetch(`${config.API_ENDPOINT}/parties`, {
       method: 'POST',
       headers: {

@@ -26,22 +26,8 @@ export default function PartyPage(props) {
       for (let i = 0; i < array.length; i++) {
         if (array[i].message_id === messageData.message_id) {
           array[i] = messageData;
-
           const date = new Date();
-          const hours = date.getHours();
-          function getMinutes() {
-            if (date.getMinutes() === 0) {
-              return "00";
-            }
-            if (date.getMinutes() < 10) {
-              return `0${date.getMinutes()}`;
-            } else {
-              return date.getMinutes();
-            }
-          }
-          const minutes = getMinutes();
-          const amOrPm = date.getHours() >= 12 ? "PM" : "AM";
-          const timeStamp = `${hours - 12}:${minutes} ${amOrPm}`;
+          const timeStamp = date.toLocaleTimeString();
 
           array[i].timeStamp = timeStamp;
 
@@ -78,21 +64,7 @@ export default function PartyPage(props) {
     // get new message data from user
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
     const date = new Date();
-    const hours = date.getHours();
-    function getMinutes() {
-      if (date.getMinutes() === 0) {
-        return "00";
-      }
-      if (date.getMinutes() < 10) {
-        return `0${date.getMinutes()}`;
-      } else {
-        return date.getMinutes();
-      }
-    }
-    const minutes = getMinutes();
-    const amOrPm = date.getHours() >= 12 ? "PM" : "AM";
-    const timeStamp = `${hours - 12}:${minutes} ${amOrPm}`;
-    console.log(timeStamp);
+    const timeStamp = date.toLocaleTimeString();
     const messageData = {
       room_id: props.match.url,
       message,
@@ -196,6 +168,7 @@ export default function PartyPage(props) {
   }
 
   function generateDisplayParty(party) {
+    console.log(context);
     return (
       <div>
         <h1>{context.party.title}</h1>
