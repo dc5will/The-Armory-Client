@@ -69,12 +69,15 @@ export default function PartyPage(props) {
 
   function sendChatEdit(edittedMessage, id) {
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
+    const date = new Date();
+    const timeStamp = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     const edittedMessageData = {
       room_id: props.match.url,
       message: edittedMessage,
       id,
       user_id,
-      sub
+      sub,
+      timeStamp
     };
     socket.emit("chat message", edittedMessageData);
   }
