@@ -48,7 +48,6 @@ export default function PartyPage(props) {
     .then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()))
     .then(respJson => {
       context.setPartyChat(respJson);
-      console.log(respJson);
     });
   }
 
@@ -57,12 +56,14 @@ export default function PartyPage(props) {
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
     const date = new Date();
     const timeStamp = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const unix_stamp = date.getTime();
     const messageData = {
       room_id: props.match.url,
       message,
       user_id,
       sub,
-      timeStamp
+      timeStamp,
+      unix_stamp
     };
     socket.emit("chat message", messageData);
   }
@@ -71,15 +72,17 @@ export default function PartyPage(props) {
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
     const date = new Date();
     const timeStamp = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const unix_stamp = date.getTime();
     const edittedMessageData = {
       room_id: props.match.url,
       message: edittedMessage,
       id,
       user_id,
       sub,
-      timeStamp
+      timeStamp,
+      unix_stamp
     };
-    socket.emit("chat message", edittedMessageData);
+    socket.emit("edit chat message", edittedMessageData);
   }
 
   function deleteChatMessage(targetMessage) {

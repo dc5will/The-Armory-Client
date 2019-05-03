@@ -11,13 +11,16 @@ export default function PartyChat(props) {
 
   function generateForm() {
     return (
-      <form onSubmit={e => handleSubmit(e)}>
+      <form className="chat-form" onSubmit={e => handleSubmit(e)}>
         <input
+          className="chat-input"
           type="text"
           value={message}
           onChange={e => handleChatChange(e)}
         />
-        <button type="submit">Send</button>
+        <button className="chat-submit-button" type="submit">
+          Send
+        </button>
       </form>
     );
   }
@@ -34,7 +37,7 @@ export default function PartyChat(props) {
 
   function generateChat() {
     return (
-      <ul>
+      <ul className="chat-log-container">
         {context.partyChat.map(message => {
           return (
             <li
@@ -112,20 +115,21 @@ export default function PartyChat(props) {
   function generateMessage(message) {
     if (editId !== message.id) {
       return (
-        <div>
-          <p>{message.time_created}</p>
-          <p className="chat-message-user">{message.username}: </p>
-          <p className="chat-message">{message.message_body}</p>
-          {message.edited ? "(edited)" : ""}
-        </div>
+        <>
+          <p className="time-stamp">{message.time_created}</p>
+          <h4 className="chat-message-user">{message.username}: </h4>
+          <p className="chat-message-body">{message.message_body}</p>
+          {message.edited ? <p className="edited-message">(edited)</p> : ""}
+        </>
       );
     } else if (editId === message.id) {
       return (
-        <div>
-          <p>{message.timeStamp}</p>
+        <>
+          <p className="time-stamp">{message.time_created}</p>
           <p className="chat-message-user">{message.username}: </p>
-          <form onSubmit={e => handleEditSubmit(e)}>
+          <form className="edit-form" onSubmit={e => handleEditSubmit(e)}>
             <input
+              className="edit-input"
               defaultValue={message.message_body}
               id={message.id}
               onChange={e => handleEditChange(e)}
@@ -134,7 +138,7 @@ export default function PartyChat(props) {
               Save
             </button>
           </form>
-        </div>
+        </>
       );
     }
   }
