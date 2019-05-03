@@ -22,24 +22,6 @@ export default function PartyPage(props) {
     });
 
     socket.on("update chat", function(messageData) {
-      // const array = context.partyChat;
-      // for (let i = 0; i < array.length; i++) {
-      //   if (array[i].message_id === messageData.message_id) {
-      //     array[i] = messageData;
-      //     const date = new Date();
-      //     const timeStamp = date.toLocaleTimeString();
-
-      //     array[i].timeStamp = timeStamp;
-
-      //     array[i].edited = true;
-
-      //     context.setPartyChat(array);
-      //     return;
-      //   }
-      // }
-      // array.push(messageData);
-      // context.setPartyChat(array);
-      console.log(messageData);
       context.setPartyChat(messageData);
     });
 
@@ -80,7 +62,7 @@ export default function PartyPage(props) {
     // get new message data from user
     const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
     const date = new Date();
-    const timeStamp = date.toLocaleTimeString();
+    const timeStamp = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     const messageData = {
       room_id: props.match.url,
       message,
@@ -96,7 +78,7 @@ export default function PartyPage(props) {
     const edittedMessageData = {
       room_id: props.match.url,
       message: edittedMessage,
-      message_id: id,
+      id,
       user_id,
       sub
     };
