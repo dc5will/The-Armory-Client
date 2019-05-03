@@ -22,23 +22,25 @@ export default function PartyPage(props) {
     });
 
     socket.on("update chat", function(messageData) {
-      const array = context.partyChat;
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].message_id === messageData.message_id) {
-          array[i] = messageData;
-          const date = new Date();
-          const timeStamp = date.toLocaleTimeString();
+      // const array = context.partyChat;
+      // for (let i = 0; i < array.length; i++) {
+      //   if (array[i].message_id === messageData.message_id) {
+      //     array[i] = messageData;
+      //     const date = new Date();
+      //     const timeStamp = date.toLocaleTimeString();
 
-          array[i].timeStamp = timeStamp;
+      //     array[i].timeStamp = timeStamp;
 
-          array[i].edited = true;
+      //     array[i].edited = true;
 
-          context.setPartyChat(array);
-          return;
-        }
-      }
-      array.push(messageData);
-      context.setPartyChat(array);
+      //     context.setPartyChat(array);
+      //     return;
+      //   }
+      // }
+      // array.push(messageData);
+      // context.setPartyChat(array);
+      console.log(messageData);
+      context.setPartyChat(messageData);
     });
 
     socket.on("delete chat message", function(messageId) {
@@ -59,6 +61,20 @@ export default function PartyPage(props) {
       leave();
     };
   }, []);
+
+
+  useEffect(() => {
+    getChatLog()
+  }, []);
+
+  function getChatLog(){
+    return fetch(`${config.API_ENDPOINT}/parties/messages/${props.match.params.partyId}`)
+    .then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()))
+    .then(respJson => {
+      context.setPartyChat(respJson);
+      console.log(respJson);
+    });
+  }
 
   function sendChatMessage(message) {
     // get new message data from user
@@ -168,7 +184,6 @@ export default function PartyPage(props) {
   }
 
   function generateDisplayParty(party) {
-    console.log(context);
     return (
       <div>
         <h1>{context.party.title}</h1>

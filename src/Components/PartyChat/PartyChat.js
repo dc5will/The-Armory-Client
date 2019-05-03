@@ -39,8 +39,8 @@ export default function PartyChat(props) {
           return (
             <li
               className="chat-message-container"
-              key={message.message_id}
-              id={message.message_id}
+              key={message.id}
+              id={message.id}
             >
               {generateMessage(message)}
               {generateUserOptionsButton(message)}
@@ -53,12 +53,12 @@ export default function PartyChat(props) {
 
   function generateUserOptionsButton(message) {
     const { sub } = TokenService.parseJwt(TokenService.getAuthToken());
-    if (message.sub === sub) {
-      if (optionsButton !== message.message_id) {
+    if (message.username === sub) {
+      if (optionsButton !== message.id) {
         return (
           <button
             className="user-options-button"
-            id={message.message_id}
+            id={message.id}
             onClick={e => handleOptionsButtonClick(e)}
           >
             #
@@ -94,7 +94,7 @@ export default function PartyChat(props) {
     return (
       <button
         className="delete-button"
-        id={message.message_id}
+        id={message.id}
         onClick={e => handleDeleteMessage(e)}
       >
         Delete
@@ -108,27 +108,27 @@ export default function PartyChat(props) {
   }
 
   function generateMessage(message) {
-    if (editId !== message.message_id) {
+    if (editId !== message.id) {
       return (
         <div>
-          <p>{message.timeStamp}</p>
-          <p className="chat-message-user">{message.sub}: </p>
-          <p className="chat-message">{message.message}</p>
+          <p>{message.time_created}</p>
+          <p className="chat-message-user">{message.username}: </p>
+          <p className="chat-message">{message.message_body}</p>
           {message.edited ? "(edited)" : ""}
         </div>
       );
-    } else if (editId === message.message_id) {
+    } else if (editId === message.id) {
       return (
         <div>
           <p>{message.timeStamp}</p>
-          <p className="chat-message-user">{message.sub}: </p>
+          <p className="chat-message-user">{message.username}: </p>
           <form onSubmit={e => handleEditSubmit(e)}>
             <input
-              defaultValue={message.message}
-              id={message.message_id}
+              defaultValue={message.message_body}
+              id={message.id}
               onChange={e => handleEditChange(e)}
             />
-            <button className="save-edit-button" id={message.message_id}>
+            <button className="save-edit-button" id={message.id}>
               Save
             </button>
           </form>
@@ -141,7 +141,7 @@ export default function PartyChat(props) {
     return (
       <button
         className="edit-chat-button"
-        id={message.message_id}
+        id={message.id}
         onClick={e => editMessage(e)}
       >
         Edit
