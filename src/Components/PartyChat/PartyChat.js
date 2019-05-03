@@ -103,8 +103,10 @@ export default function PartyChat(props) {
   }
 
   function handleDeleteMessage(e) {
-    console.log("deleted");
-    props.deleteChatMessage(e.target.id);
+    const targetMessage = context.partyChat.find(
+      message => message.id === e.target.id
+    );
+    props.deleteChatMessage(targetMessage);
   }
 
   function generateMessage(message) {

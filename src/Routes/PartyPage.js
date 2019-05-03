@@ -25,14 +25,8 @@ export default function PartyPage(props) {
       context.setPartyChat(messageData);
     });
 
-    socket.on("delete chat message", function(messageId) {
-      const array = context.partyChat;
-      for (let i = 0; i < array.length; i++) {
-        if (array[i].message_id === messageId) {
-          array.splice(i, 1);
-        }
-      }
-      context.setPartyChat(array);
+    socket.on("delete chat message", function(messages) {
+      context.setPartyChat(messages);
     });
 
     socket.on("left party", party => {
@@ -85,10 +79,11 @@ export default function PartyPage(props) {
     socket.emit("chat message", edittedMessageData);
   }
 
-  function deleteChatMessage(messageId) {
+  function deleteChatMessage(targetMessage) {
     const deletedMessage = {
       room_id: props.match.url,
-      message_id: messageId
+      id: targetMessage.id,
+      party_id: targetMessage.party_id
     };
     socket.emit("delete chat message", deletedMessage);
   }
