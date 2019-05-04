@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 const PartyContext = React.createContext({
   party: {},
-  setParty: () => {}
+  partyChat: [],
+  setParty: () => {},
+  setPartyChat: () => {}
 });
 
 export default PartyContext;
@@ -10,17 +12,25 @@ export default PartyContext;
 export class PartyProvider extends Component {
   constructor(props){
     super(props)
-    const state = { party: {} };
+    const state = { 
+      party: {},
+      partyChat: []
+    };
     this.state = state;
   }
   setParty = party => {
     this.setState({party});
   }
+  setPartyChat = partyChat => {
+    this.setState({partyChat});
+  }
 
   render(){
     const value = {
       party: this.state.party,
-      setParty: this.setParty
+      partyChat: this.state.partyChat,
+      setParty: this.setParty,
+      setPartyChat: this.setPartyChat
     }
     return (
       <PartyContext.Provider value={value}>

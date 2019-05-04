@@ -6,13 +6,19 @@ import PublicOnlyRoute from './Routes/PublicOnlyRoute'
 import PrivateRoute from './Routes/PrivateRoute';
 import GamePage from './Routes/GamePage/GamePage';
 import PartyPage from './Routes/PartyPage';
+import Confirmation from './Components/Confirmation';
 import './app.css'
+import FAQ from './Components/Faqs/FAQ';
+
+
 
 
 function App() {
   return (
   <Switch>
     <main>
+      <Route path={'/confirmation'} component={Confirmation} />
+      <PublicOnlyRoute path={'/faqs'} component={FAQ} />
       <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
       <PrivateRoute path={'/dashboard'} component={Dashboard}/>
       <PrivateRoute path={'/games/:gameId'} component={GamePage}/>

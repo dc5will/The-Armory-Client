@@ -1,31 +1,35 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { Prompt } from 'react-router-dom';
-import TokenService from '../services/token-service';
-import config from '../config';
-import PartyContext from '../Contexts/partyContext';
-import io from 'socket.io-client';
-import UserContext from '../Contexts/userContext';
+import React, { useEffect, useContext, useState } from "react";
+import { Prompt } from "react-router-dom";
+import TokenService from "../services/token-service";
+import config from "../config";
+import PartyContext from "../Contexts/partyContext";
+import io from "socket.io-client";
+import PartyChat from "../Components/PartyChat/PartyChat";
 let socket;
 
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
-  const userContext = useContext(UserContext);
   const [warning, setWarning] = useState(null);
-
-  console.log(userContext);
 
   useEffect(() => {
     getPartyById();
-    
-    socket = io('http://localhost:8000');
-    socket.emit('join room', props.match.url);
 
-    socket.on('update party', function() { 
+    socket = io("http://localhost:8000");
+    socket.emit("join room", props.match.url);
+
+    socket.on("update party", function() {
       getPartyById();
     });
 
+    socket.on("update chat", function(messageData) {
+      context.setPartyChat(messageData);
+    });
 
-    socket.on('left party', party => {
+    socket.on("delete chat message", function(messages) {
+      context.setPartyChat(messages);
+    });
+
+    socket.on("left party", party => {
       context.setParty(party);
     });
 
@@ -34,6 +38,61 @@ export default function PartyPage(props) {
     };
   }, []);
 
+
+  useEffect(() => {
+    getChatLog()
+  }, []);
+
+  function getChatLog(){
+    return fetch(`${config.API_ENDPOINT}/parties/messages/${props.match.params.partyId}`)
+    .then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()))
+    .then(respJson => {
+      context.setPartyChat(respJson);
+    });
+  }
+
+  function sendChatMessage(message) {
+    // get new message data from user
+    const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
+    const date = new Date();
+    const timeStamp = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const unix_stamp = date.getTime();
+    const messageData = {
+      room_id: props.match.url,
+      message,
+      user_id,
+      sub,
+      timeStamp,
+      unix_stamp
+    };
+    socket.emit("chat message", messageData);
+  }
+
+  function sendChatEdit(edittedMessage, id) {
+    const { user_id, sub } = TokenService.parseJwt(TokenService.getAuthToken());
+    const date = new Date();
+    const timeStamp = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+    const unix_stamp = date.getTime();
+    const edittedMessageData = {
+      room_id: props.match.url,
+      message: edittedMessage,
+      id,
+      user_id,
+      sub,
+      timeStamp,
+      unix_stamp
+    };
+    socket.emit("edit chat message", edittedMessageData);
+  }
+
+  function deleteChatMessage(targetMessage) {
+    const deletedMessage = {
+      room_id: props.match.url,
+      id: targetMessage.id,
+      party_id: targetMessage.party_id
+    };
+    socket.emit("delete chat message", deletedMessage);
+  }
 
   function getPartyById() {
     return fetch(
@@ -44,29 +103,28 @@ export default function PartyPage(props) {
         }
       }
     )
-      .then(res => (
-        (!res.ok)
-          ? TokenService.clearAuthToken()
-          : res.json()
-      ))
+      .then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()))
       .then(respJson => {
         context.setParty(respJson);
       });
   }
 
   function leave() {
-    socket.emit('leave party', {
+    socket.emit("leave party", {
       party_id: context.party.id,
       room_id: props.match.url,
       user_auth: TokenService.getAuthToken(),
       game_id: context.party.game_id
     });
     socket.disconnect();
-    
   }
 
-  function handleLeave(){
+  function handleLeave() {
     leave();
+
+    // clears party chat context when user leaves a party and joins a new one
+    context.setPartyChat([]);
+
     props.history.replace(`/games/${context.party.game_id}`);
   }
 
@@ -93,17 +151,16 @@ export default function PartyPage(props) {
 
   function generateRoles(party) {
     return context.party.spots.map((spot, i) => {
-      let roleStr = '';
+      let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        roleStr += role.role_name + ' | ';
+        roleStr += role.role_name + " | ";
       });
       return (
         <li key={i}>
-          {user !== null 
-            ? user.username 
-            : 'Available'}{' - '} 
-            {roleStr}{' '}
+          {user !== null ? user.username : "Available"}
+          {" - "}
+          {roleStr}{" "}
         </li>
       );
     });
@@ -125,9 +182,14 @@ export default function PartyPage(props) {
   return (
     <div>
       <div>
-      {context.party.title ? generateDisplayParty(context.party) : 'Loading'}
+        {context.party.title ? generateDisplayParty(context.party) : "Loading"}
       </div>
       {displayWarning()}
+      <PartyChat
+        sendChatMessage={sendChatMessage}
+        sendChatEdit={sendChatEdit}
+        deleteChatMessage={deleteChatMessage}
+      />
     </div>
   );
 }

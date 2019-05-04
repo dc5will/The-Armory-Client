@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 
@@ -13,13 +14,16 @@ export default function SplashPage(props) {
 
   return toggle !== true ? (
     <div>
-      <LoginForm onLoginSuccess={handleLoginSuccess}/>
-      <button onClick={e => setToggle(true)}>Not a member?</button>
+    <RegistrationForm onLoginSuccess={handleLoginSuccess} />
+    <button onClick={e => setToggle(true)}>Already a member?</button>
+    <Link to={'/faqs'}>What is Squad Armory?</Link>
     </div>
-  ) : (
+    ) : (
     <div>
-      <RegistrationForm onLoginSuccess={handleLoginSuccess} />
-      <button onClick={e => setToggle(false)}>Already a member?</button>
+      <LoginForm onLoginSuccess={handleLoginSuccess}/>
+      <button onClick={e => setToggle(false)}>Not a member?</button>
+      <Link to={'/faqs'}>What is Squad Armory?</Link>
     </div>
+  
   );
 }
