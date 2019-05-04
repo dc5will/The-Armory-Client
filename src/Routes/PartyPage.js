@@ -17,8 +17,9 @@ export default function PartyPage(props) {
     socket = io("http://localhost:8000");
     socket.emit("join room", props.match.url);
 
-    socket.on("update party", function() {
-      getPartyById();
+    socket.on("update party", function(party) {
+      context.setParty(party);
+      console.log(party);
     });
 
     socket.on("update chat", function(messageData) {
@@ -105,6 +106,7 @@ export default function PartyPage(props) {
     )
       .then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()))
       .then(respJson => {
+
         context.setParty(respJson);
       });
   }
