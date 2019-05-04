@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import TokenService from "../services/token-service";
-import config from "../config";
 import GamesContext from "../Contexts/gamesContext";
 import Nav from "../Components/Nav";
 import Game from "../Components/Game";
+import GamesApiService from "../services/games-api-service";
 
 export default function Dashboard(props) {
   const games = useContext(GamesContext);
@@ -11,41 +10,20 @@ export default function Dashboard(props) {
   const [filter, setFilter] = useState("All");
 
   useEffect(() => {
-    getGames().then(data => {
+    GamesApiService.getGames().then(data => {
       games.setGamesList(data);
     });
   }, []);
-
-  function getGames() {
-    return fetch(`${config.API_ENDPOINT}/games`, {
-      headers: {
-        authorization: `Bearer ${TokenService.getAuthToken()}`
-      }
-    }).then(res => (!res.ok ? TokenService.clearAuthToken() : res.json()));
-  }
 
   const submitSearch = e => {
     e.preventDefault();
     const { search } = e.target;
     const params = { query: search.value };
     console.log("query: search.value =", params);
-    getGamesByTitle(params).then(data => {
+    GamesApiService.getGamesByTitle(params).then(data => {
       games.setGamesList(data);
     });
   };
-
-  function getGamesByTitle(params) {
-    let url = `${config.API_ENDPOINT}/games`;
-    // console.log(url);
-    if (params.query) {
-      url += `?query=${encodeURIComponent(params.query)}`;
-    }
-    return fetch(url, {
-      method: "GET"
-    }).then(res =>
-      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
-    );
-  }
 
   function displayGamesList(staticData) {
     console.log("staticData =", staticData);
@@ -56,10 +34,8 @@ export default function Dashboard(props) {
         </span>
       );
     } else {
-      return staticData.map((props) => {
-        return (
-            <Game props={props} />
-        );
+      return staticData.map(props => {
+        return <Game props={props} />;
       });
     }
   }
@@ -68,7 +44,7 @@ export default function Dashboard(props) {
   function filterGames(staticData, keyword) {
     return staticData.map((props, index) => {
       return props.tags.includes(keyword) ? (
-          <Game props={props} />
+        <Game props={props} />
       ) : (
         <div key={index} />
       );
@@ -102,6 +78,8 @@ export default function Dashboard(props) {
       <button className="filterGames" onClick={e => setFilter("MMORPG")}>
         MMORPG
       </button>
+      <br/>
+      <p>Filtering by: {filter}</p>
       <ul>
         {filter === "All"
           ? displayGamesList(staticData)
