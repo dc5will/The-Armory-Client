@@ -79,7 +79,7 @@ export default function Dashboard(props) {
         MMORPG
       </button>
       <br/>
-      <p>Filtering by: {filter}</p>
+      <p>Tag filter: {filter}</p>
       <ul>
         {filter === "All"
           ? displayGamesList(staticData)
