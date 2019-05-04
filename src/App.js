@@ -4,7 +4,7 @@ import SplashPage from './Components/SplashPage';
 import Dashboard from './Routes/Dashboard';
 import PublicOnlyRoute from './Routes/PublicOnlyRoute'
 import PrivateRoute from './Routes/PrivateRoute';
-import GamePage from './Routes/GamePage';
+import GamePage from './Routes/GamePage/GamePage';
 import PartyPage from './Routes/PartyPage';
 import './app.css'
 
