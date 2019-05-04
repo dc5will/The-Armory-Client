@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import TokenService from "../services/token-service";
 import config from "../config";
 import GamesContext from "../Contexts/gamesContext";
 import Nav from "../Components/Nav";
+import Game from "../Components/Game";
 
 export default function Dashboard(props) {
   const games = useContext(GamesContext);
   const staticData = games.gamesList;
-  const [filter, setFilter] = useState('All');
+  const [filter, setFilter] = useState("All");
 
   useEffect(() => {
     getGames().then(data => {
@@ -48,43 +48,29 @@ export default function Dashboard(props) {
   }
 
   function displayGamesList(staticData) {
-    console.log('staticData =', staticData)
+    console.log("staticData =", staticData);
     if (staticData.length === 0) {
-      return <span id='game-search-no-result'>Game not found, please try again!</span>
+      return (
+        <span className="game-search-no-result">
+          Game not found, please try again!
+        </span>
+      );
     } else {
-      return staticData.map((data, index) => {
+      return staticData.map((props) => {
         return (
-          <div key={index}>
-            <Link to={`/games/${data.id}`}>
-              <img src={data.image_url} alt="Game Cover" />
-              <h3>{data.title}</h3>
-            </Link>
-            {data.tags.map((tag, i) => {
-              return <span key={i}>{tag} | </span>;
-            })}
-            <p>Available Parties: {data.party_count}</p>
-          </div>
+            <Game props={props} />
         );
       });
     }
   }
 
   // filter for tags
-  function filterGames(data, keyword) {
-    return data.map((item, i) => {
-      return item.tags.includes(keyword) ? (
-        <div key={i}>
-          <Link to={`/games/${item.id}`}>
-            <img src={item.image_url} alt="Game Cover" />
-            <h3>{item.title}</h3>
-          </Link>
-          {item.tags.map((tag, i) => {
-            return <span key={i}>{tag} | </span>;
-          })}
-          <p>Available Parties: {item.party_count}</p>
-        </div>
+  function filterGames(staticData, keyword) {
+    return staticData.map((props, index) => {
+      return props.tags.includes(keyword) ? (
+          <Game props={props} />
       ) : (
-        <div key={i} />
+        <div key={index} />
       );
     });
   }
@@ -92,7 +78,7 @@ export default function Dashboard(props) {
   return (
     <div className="dashboard-container">
       <Nav props={props} />
-      <form className='game-search-form' onSubmit={submitSearch}>
+      <form className="game-search-form" onSubmit={submitSearch}>
         <input
           id="title-search-input"
           type="text"
@@ -104,20 +90,20 @@ export default function Dashboard(props) {
         </button>
       </form>
       {/* {displayGamesList(staticData)} */}
-      <button className="filterGames" onClick={e => setFilter('All')}>
+      <button className="filterGames" onClick={e => setFilter("All")}>
         All
       </button>
-      <button className="filterGames" onClick={e => setFilter('Shooter')}>
+      <button className="filterGames" onClick={e => setFilter("Shooter")}>
         Shooter
       </button>
-      <button className="filterGames" onClick={e => setFilter('MOBA')}>
+      <button className="filterGames" onClick={e => setFilter("MOBA")}>
         MOBA
       </button>
-      <button className="filterGames" onClick={e => setFilter('MMORPG')}>
+      <button className="filterGames" onClick={e => setFilter("MMORPG")}>
         MMORPG
       </button>
       <ul>
-        {filter === 'All'
+        {filter === "All"
           ? displayGamesList(staticData)
           : filterGames(staticData, filter)}
       </ul>
