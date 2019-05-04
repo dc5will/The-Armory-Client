@@ -1,18 +1,21 @@
 import React, { useState, useContext, useEffect } from "react";
-import SpotInput from "./SpotInput";
+import SpotInput from "./SpotInput/SpotInput";
 import GameContext from '../../Contexts/gameContext';
 import config from "../../config";
 import TokenService from "../../services/token-service";
-
+import Dropdown from '../Dropdown/Dropdown';
 
 export default function CreatePartyForm(props) {
-  const context = useContext(GameContext);
+  const gameContext = useContext(GameContext);
+  //inputs
   const [partyName, setPartyname] = useState("");
-  const [partyDescription, setPartyDescription] = useState("");
-  const [partyRequirements, setPartyRequirements] = useState(undefined);
-  const [spotObj, setSpotObj] = useState({});
-
-  //populate roles and requirements from context loaded on main game page
+  const [partyDescription, setPartyDescription] = useState('');
+  const [partyRequirement, setPartyRequirement] = useState(undefined);
+  const [partyRequirement2, setPartyRequirement2] = useState(undefined);
+  const [partyGamemode, setPartyGamemode] = useState(0);
+  //spots
+  const [spotMenuShown, setSpotMenuShown] = useState(undefined);
+  const [spotsObj, setSpotsObj] = useState({});
 
   useEffect(() => {
     let temp = {};
@@ -22,117 +25,164 @@ export default function CreatePartyForm(props) {
       omitted: false,
       showOptions: false,
     };
-    //we don't include the first one as a spot since the owner will always be included
-    for (let i = 1; i < context.game.party_limit; i++) {
+    //we don't include the first one as a spot-input since the owner will always be included
+    for (let i = 1; i < gameContext.partyLimit; i++) {
       temp[i] = blankSpot;
     }
-    setSpotObj(temp);
+    setSpotsObj(temp);
   }, []);
 
-  function mapRequirements() {
-    return Object.keys(context.game.requirements).map((key) => {
-      return <option key={key} value={key}>{context.game.requirements[key]}</option>
-    })
-  };
-
-  function toggleOptions(index) {
-    let temp = {...spotObj};
-    Object.keys(temp).forEach(key => {
-      if (key === index || temp[key].showOptions) {
-        temp[key] = {...temp[key], showOptions: !temp[key].showOptions}
-      }
+  function getActiveValues(target) {
+    const spots = [];
+    Object.entries(spotsObj).forEach(([_, value]) => {
+      !value.omitted && spots.push(
+        {
+          filled: value.filled,
+          roles: value.roles,
+        }
+      );
     });
-    setSpotObj(temp);
-  }
+    let gamemode = target.querySelector('button[name=gamemode]');
+    gamemode ? (gamemode = gamemode.dataset.value) : (gamemode = 0);
 
-  function omitSpot(index) {
-    const newArr = {
-      ...spotObj
+    const [req, req2] = target.querySelectorAll('button[name=requirements]');
+    const reqs = [];
+    req && reqs.push(req.dataset.value);
+    req2 && reqs.push(req2.dataset.value);
+
+    return {
+      room_id: props.roomUrl,
+      party: {
+        game_id: gameContext.id,
+        title: partyName,
+        description: partyDescription,
+        gamemode: parseInt(gamemode),
+        require_app: false,
+      },
+      spots,
+      requirement: reqs,
     };
-    newArr[index] = {...spotObj[index], omitted: !newArr[index].omitted, showOptions: false }
-    setSpotObj(newArr);
   }
-
-  function mapSpots() {
-    let temp = [];
-    let tempOmitted = [];
-    Object.keys(spotObj).forEach(i => {
-      let tempComp = <SpotInput 
-        key={i}
-        index={i}
-        omitSpot={omitSpot}
-        omitted={spotObj[i].omitted}
-        showOptions={spotObj[i].showOptions}
-        toggleOptions={toggleOptions}
-      />;
-      if (spotObj[i].omitted) {
-        tempOmitted.push(tempComp);
-      } else {
-        temp.push(tempComp);
-      }
-    });
-    return temp.concat(tempOmitted);
-  };
 
 
   function onPartyCreate(e) {
     e.preventDefault();
-    const spots = [];
-    Object.keys(spotObj).forEach(key => {
-      if (!spotObj[key].omitted)
-        spots.push(spotObj[key]);
-    });
-    let newParty = {
-      room_id: props.roomUrl,
-      party: {
-        game_id: context.game.id,
-        title: partyName,
-        description: partyDescription,
-        require_app: false,
-      },
-      spots,
-      requirement: partyRequirements,
+    const newParty = getActiveValues(e.target);
+    fetch(
+        `${config.API_ENDPOINT}/parties`, 
+        {
+          method: 'POST',
+          headers: {
+            authorization: `Bearer ${TokenService.getAuthToken()}`,
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newParty),
+        }
+      )
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+      .then((respJson) => {
+        props.history.push(`/party/${respJson}`);
+      })
+      .catch(err => {
+        //UPDATE TO DISPLAY ERROR
+        console.error(err);
+      });
+  }
+
+  //SPOT HANDLERS
+  function toggleSpotOptionsMenu(index) {
+    (spotMenuShown === index)
+      ? setSpotMenuShown(undefined)
+      : setSpotMenuShown(index);
+  }
+
+  function toggleOmitSpot(index) {
+    let newSpotsObj = {...spotsObj};
+    newSpotsObj[index] = {
+      ...newSpotsObj[index], 
+      omitted: !newSpotsObj[index].omitted, 
+      roles: [] 
     };
-    fetch(`${config.API_ENDPOINT}/parties`, {
-      method: 'POST',
-      headers: {
-        authorization: `Bearer ${TokenService.getAuthToken()}`,
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(newParty),
-    })
-    .then(res =>
-       (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
-    .then((respJson) => {
-      console.log(respJson)
-      props.history.push(`/party/${respJson.id}`);
-    })
-    .catch(err => {
-      //UPDATE TO DISPLAY ERROR
-      console.error(err);
+    setSpotsObj(newSpotsObj);
+  }
+
+  function handleSpotSubmit(index, roles) {
+    let newSpotsObj = {...spotsObj};
+    let newObj = {...newSpotsObj[index]};
+
+    newObj.omitted = false;
+    newObj.roles = roles;
+
+    newSpotsObj[index] = newObj;
+    setSpotsObj(newSpotsObj);
+  }
+
+  function generateSpotInputs() {
+    let temp = [];
+    let tempOmitted = [];
+
+    Object.entries(spotsObj).forEach(([key, value]) => {
+      let tempSpot = (
+        <SpotInput
+          key={key}
+          index={key}
+          omitted={value.omitted}
+          toggleOmitSpot={toggleOmitSpot}
+          toggleSpotOptionsMenu={toggleSpotOptionsMenu}
+          showOptions={key === spotMenuShown}
+          roles={value.roles}
+          handleSpotSubmit={handleSpotSubmit}
+        />
+      );
+      (value.omitted)
+        ? tempOmitted.push(tempSpot)
+        : temp.push(tempSpot);
     });
+
+    return temp.concat(tempOmitted);
+  }
+
+  function getPartyRequirement2Options() {
+    let temp = {...gameContext.requirements};
+    delete temp[partyRequirement];
+
+    return {0: { name: 'Select a requirement...' }, ...temp}
+  }
+
+  function handleReset(e) {
+    setPartyname('');
+    setPartyDescription('');
+    setPartyRequirement(undefined);
+    setPartyRequirement2(undefined);
+    setPartyGamemode(0);
+    const newSpotsObj = {...spotsObj};
+    Object.keys(newSpotsObj).forEach(key => {
+      newSpotsObj[key] = {...newSpotsObj[key], roles: [], omitted: false };
+    });
+    setSpotsObj(newSpotsObj);
+    setSpotMenuShown(undefined);
   }
 
   return (
-    <main>
-      <div className="createPartyForm">
-        <h2>Create Party</h2>
+    <form className="create-party-form" onSubmit={onPartyCreate}>
+      <h2>Create Party</h2>
 
-        <form className="create-party-form" onSubmit={onPartyCreate}>
-          <div className="input-field">
-            <label htmlFor="party-name-input">Party Name</label>
+        <div className="input-field">
+          <label>Party Name
             <input
-              id="party-name-input"
               type="text"
               placeholder="party"
               value={partyName}
               required
               onChange={e => setPartyname(e.target.value)}
             />
-            <label htmlFor="party-description-input">Description</label>
+          </label>
+
+          <label>Description
             <textarea
               id="party-description-input"
               type="text"
@@ -141,52 +191,78 @@ export default function CreatePartyForm(props) {
               value={partyDescription}
               onChange={e => setPartyDescription(e.target.value)}
             />
+          </label>
 
-            <label htmlFor="party-requirement-input">Party Requirements</label>
-            <select
-              id="party-requirement-dropdown"
-              onChange={e => setPartyRequirements(e.target.value)}
-              value={partyRequirements}
-            >
-              <option value={null}>None</option>
-              {mapRequirements()}
-            </select>
+          <Dropdown
+            label='Party Requirements'
+            active={partyRequirement}
+            onChange={e => setPartyRequirement(e.target.value)}
+            name="requirements"
+            onButtonClick={e => {
+              if (partyRequirement2) {
+                setPartyRequirement(partyRequirement2);
+                setPartyRequirement2(undefined);
+              } else {
+                setPartyRequirement(undefined);
+              }
+            }}
+            startValue={partyRequirement}
+            options={{0: { name: 'Select a requirement...' }, ...gameContext.requirements}}
+          />
 
-            <div className='spot-container'>
-              <div className="spot_input">Owner spot</div>
-              {mapSpots()}
-            </div>
+          {partyRequirement
+            ? (<Dropdown
+                label='Party Requirements'
+                active={partyRequirement2}
+                onChange={e => setPartyRequirement2(e.target.value)}
+                onButtonClick={() => setPartyRequirement2(undefined)}
+                name="requirements"
+                startValue={partyRequirement2}
+                options={getPartyRequirement2Options()}
+              />)
+            : (<Dropdown
+                inactive={true}
+              />)
+          }
 
-          </div>
+          <Dropdown 
+            id="party-gamemode-dropdown"
+            label="Gamemode"
+            active={partyGamemode}
+            onChange={e => setPartyGamemode(e.target.value)}
+            onButtonClick={() => setPartyGamemode(0)}
+            startValue={partyGamemode}
+            name="gamemode"
+            options={{0: { name: 'Select a gamemode...', icon_url: '' }, ...gameContext.gamemodes}}
+          />
 
-          <button
-            type="submit"
-            className="create-party-button"
-          >
-            Create
-          </button>
-        </form>
-      </div>
-    </main>
+        </div>
+
+        <div className='spot-container'>
+          <div className="spot_input">Owner Spot</div>
+          {generateSpotInputs()}
+        </div>
+        
+        <button
+          type="reset"
+          className="create-party-reset-button"
+          onClick={handleReset}
+        >
+          Reset
+        </button>
+        <button
+          type="submit"
+          className="create-party-button"
+        >
+          Create Party
+        </button>
+        <button
+          aria-label="cancel"
+          className="create-party-cancel-button"
+          onClick={props.toggleCreatePartyForm}
+        >
+          Cancel
+        </button>
+    </form>
   );
 }
-
-
-// const placeholderObject = {
-//   game_id: '',
-//   party: {
-//     game_id,
-//     title,
-//     owner_id,
-//     description,
-//     require_app,
-//   },
-//   spots: [
-//     {
-//       filled: 1,
-//       roles: []
-//     },
-//   ],    
-//   req: [ 
-//   ],  
-// }
