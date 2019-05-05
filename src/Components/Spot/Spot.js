@@ -6,7 +6,6 @@ import TokenService from '../../services/token-service';
 export default function Spot(props) {
   function handleJoinSpot(e) {
     e.preventDefault();
-    console.log(props.spot);
     fetch(`${config.API_ENDPOINT}/spot/${props.spot.id}`, {
       method: 'PATCH',
       headers: {
@@ -30,16 +29,20 @@ export default function Spot(props) {
   
   return (
     <div>
-      <img
+      {/* <img
         src={
-          (props.spot.filled)
-          ? props.spot.filled.avatar_url
+          (props.spot.roles[0])
+          ? props.spot.roles[0].icon_url
           : "https://banner2.kisspng.com/20180503/lge/kisspng-batman-computer-icons-bane-avatar-5aebcc92207686.890462141525402770133.jpg"
         }
-        className='avatar_url'
-        alt="avatar_icon"
+        className='role_url'
+        alt=''
         width="60"
-      />
+      /> */}
+      <p>Squad Member {props.index} - {`${!!props.spot.filled}`}</p>
+      {props.spot.roles.map((role, i) => {
+        return <p key={i}>{role.name}</p>
+      })}
       {!props.spot.filled && <button type="button" onClick={handleJoinSpot}>Join spot</button>}
     </div>
   );
