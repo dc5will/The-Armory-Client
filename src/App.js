@@ -10,23 +10,24 @@ import Confirmation from './Components/Confirmation';
 import './app.css'
 import FAQ from './Components/Faqs/FAQ';
 import UserProfile from './Components/UserProfile';
+import PageNotFound from './Routes/NotFound';
 
 
 
 
 function App() {
   return (
-  <Switch>
-    <main>
+  <main>
+    <Switch>
       <Route path={'/confirmation'} component={Confirmation} />
-      <Route path={'/prof'} component={UserProfile} />
       <PublicOnlyRoute path={'/faqs'} component={FAQ} />
       <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
       <PrivateRoute path={'/dashboard'} component={Dashboard}/>
       <PrivateRoute path={'/games/:gameId'} component={GameContextRoute}/>
       <PrivateRoute path={'/party/:partyId'} component={PartyPage}/>
-    </main>
-  </Switch>
+      <Route component={PageNotFound} />
+    </Switch>
+  </main>
   )
 }
 

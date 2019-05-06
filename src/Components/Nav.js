@@ -6,10 +6,10 @@ import UserContext from '../Contexts/userContext';
 import useModal from "./Modal/useModal";
 import Modal from "./Modal/Modal";
 import UserProfile from "./UserProfile";
+import basicAvatar from '../resources/basicAvatar.png'
 
 export default function Nav(props) {
   const userContext = useContext(UserContext)
-  const userAvatarImg = 'http://www.exiledkingdoms.com/forum/download/file.php?avatar=540_1457933885.jpg'
   const { isShowing, toggle } = useModal();
   const [update, setUpdate] = useState(false)
 
@@ -47,13 +47,13 @@ export default function Nav(props) {
   function generateNavBar(user){
     return(
         <div>
-            <img src={user.avatar_url ? user.avatar_url : userAvatarImg} alt='avatar profile pic'></img>
+            <img src={user.avatar_url ? user.avatar_url : basicAvatar} alt='avatar profile pic'></img>
             <h2>{user.username}</h2>
             <button type='button' onClick={e => toggle()}>Edit Profile</button>
             <Modal
               isShowing={isShowing}
               hide={toggle}
-              content={<UserProfile update={updatePage} />}
+              content={<UserProfile update={updatePage} toggle={toggle} />}
             />
             <button onClick={onLogout}>Logout</button>
         </div>
