@@ -96,7 +96,7 @@ export default function UserProfile(props) {
             <p>Choose a new avatar:</p>
             <img
               src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKh4dv2ykYZJuJ7vSszU4Vozhm1UtFmKQ_dwIXbQLjBUAb-hVU"
+               require('../resources/ninja.jpg')
               }
               alt="ninja"
               className="avatars"
@@ -104,7 +104,7 @@ export default function UserProfile(props) {
             />
             <img
               src={
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWdx9y2u5MR9pKaegRIT9WY3kbY6J_dB9qTxO2JIzHAkZCkYjQ"
+                require('../resources/pikachu.png')
               }
               alt="pikachu"
               className="avatars"
@@ -112,28 +112,28 @@ export default function UserProfile(props) {
             />
             <img
               src={
-                "https://s3-us-west-2.amazonaws.com/files.geekgirlauthority.com/wp-content/uploads/2016/05/CuteSprayAvatars-76_OW_JP_400x400-300x300.png"
+                require('../resources/soldier76.png')
               }
-              alt="soldier"
+              alt="Soldier 76"
               className="avatars"
               onClick={e => setAvatar_url(e.target.src)}
             />
             <img
               src={
-                "http://www.ffxivrealm.com/data/avatars/l/0/826.jpg?1371910121"
+                require('../resources/Cactuar.jpg')
               }
-              alt="ffcacti"
+              alt="Cactuar"
               className="avatars"
               onClick={e => setAvatar_url(e.target.src)}
             />
             <img
-              src={"http://steamavatars.co/?media_dl=308"}
+              src={require('../resources/axe.jpg')}
               alt="dota"
               className="avatars"
               onClick={e => setAvatar_url(e.target.src)}
             />
             <img
-              src={"http://i66.tinypic.com/o9mqad.png"}
+              src={require('../resources/TJICON.png')}
               alt="TJ"
               className="avatars"
               onClick={e => setAvatar_url(e.target.src)}
