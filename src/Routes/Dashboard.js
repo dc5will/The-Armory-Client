@@ -35,7 +35,7 @@ export default function Dashboard(props) {
       );
     } else {
       return staticData.map(props => {
-        return <Game props={props} />;
+        return <Game props={props} key={props.id} />;
       });
     }
   }
@@ -44,7 +44,7 @@ export default function Dashboard(props) {
   function filterGames(staticData, keyword) {
     return staticData.map((props, index) => {
       return props.tags.includes(keyword) ? (
-        <Game props={props} />
+        <Game props={props} key={props.id}/>
       ) : (
         <div key={index} />
       );
