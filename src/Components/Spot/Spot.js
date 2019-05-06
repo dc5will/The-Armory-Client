@@ -1,9 +1,12 @@
 //avatar image, username, account preferences, logout
-import React from "react";
+import React, { useContext } from "react";
 import config from "../../config";
 import TokenService from '../../services/token-service';
+import GameContext from "../../Contexts/gameContext";
 
 export default function Spot(props) {
+  const { setError } = useContext(GameContext);
+
   function handleJoinSpot(e) {
     e.preventDefault();
     fetch(`${config.API_ENDPOINT}/spot/${props.spot.id}`, {
@@ -22,23 +25,12 @@ export default function Spot(props) {
         }
       })
       .catch(err => {
-        //UPDATE TO DISPLAY ERROR
-        console.error(err);
+        setError(err);
       });
   }
   
   return (
     <div>
-      {/* <img
-        src={
-          (props.spot.roles[0])
-          ? props.spot.roles[0].icon_url
-          : "https://banner2.kisspng.com/20180503/lge/kisspng-batman-computer-icons-bane-avatar-5aebcc92207686.890462141525402770133.jpg"
-        }
-        className='role_url'
-        alt=''
-        width="60"
-      /> */}
       <p>Squad Member {props.index} - {`${!!props.spot.filled}`}</p>
       {props.spot.roles.map((role, i) => {
         return <p key={i}>{role.name}</p>

@@ -3,9 +3,10 @@ import CreatePartyForm from "../../Components/CreatePartyForm/CreatePartyForm";
 import config from "../../config";
 import TokenService from "../../services/token-service";
 import GameContext from '../../Contexts/gameContext';
-import Spot from '../../Components/Spot/Spot';
 import FilterPartiesForm from '../../Components/FilterPartiesForm/FilterPartiesForm';
 import helpers from '../../services/helpers';
+import Party from '../../Components/Party/Party';
+import Error from '../../Components/Error/Error';
 
 import './GamePage.css';
 
@@ -40,7 +41,7 @@ export default function GamePage(props) {
       await gameContext.getAllParties();
       toggleLoading(false);
     } catch(err) {
-      console.log(err);
+      gameContext.setError(err);
     }
   }
 
@@ -59,26 +60,22 @@ export default function GamePage(props) {
   }, []);
 
   useEffect(() => {
-    socket.on('posted party', function(data) { 
-      console.log('hey!');
-      if (checkFilters(data.pages_available, data.party)) {
-        console.log('hi!');
-        gameContext.setParties([...gameContext.parties, data.party]);
-        if (checkIfFilters) {
-          socket.emit('get updated pages available', { 
-            gameId: gameContext.id,
-            roleFilters: gameContext.roleFilters, 
-            requirementFilters: gameContext.requirementFilters,
-            searchTerm: gameContext.searchTerm,
-            gamemodeFilter: gameContext.gamemodeFilter
-          });
-        }
+    socket.on('posted party', async function(data) { 
+      let pagesAvailable = data.pages_available;
+      let partiesAvailable = data.parties_available;
+      //if we have filters on we need an accurate count
+      if (checkIfFilters()) {
+        const temp = await gameContext.getAllParties(true);
+        pagesAvailable = temp.pages_available;
+        partiesAvailable = temp.parties_available;
       }
-    });
-
-    socket.on('updated pages available', function(pagesAvailable) {
-      console.log(pagesAvailable);
-      gameContext.setPagesAvailable(pagesAvailable);
+      if (checkFilters(pagesAvailable, data.party)) {
+        gameContext.setParties([...gameContext.parties, {
+          ...data.party,
+          pages_available: pagesAvailable,
+          parties_available: partiesAvailable
+        }]);
+      }
     });
 
     socket.on('spot updated', function(data) {
@@ -114,13 +111,11 @@ export default function GamePage(props) {
   }
 
   function checkFilters(pagesAvailable, party) {
-    const { requirementFilters, roleFilters, searchTerm, gamemodeFilter, currentPage, requirements, roles, gamemodes } = gameContext;
-    console.log(currentPage, pagesAvailable);
-    if (currentPage !== pagesAvailable) return false;
+    const { requirementFilters, roleFilters, searchTerm, gamemodeFilter, requirements, roles, gamemodes } = gameContext;
+    if (gameContext.currentPage !== (pagesAvailable - 1)) return false;
     let relevant = true;
 
     //requirement filters check
-    console.log(requirementFilters);
     if (requirementFilters.length > 0) {
       for (let i = 0; i < requirementFilters.length; i++) {
         let temp = false;
@@ -133,68 +128,40 @@ export default function GamePage(props) {
     }
     if (relevant === false) return false;
 
-    // //role filters check
-    // if (roleFilters.length > 0) {
-    //   //for each filter
-    //   for (let i = 0; i < roleFilters.length; i++) {
-    //     let temp = false;
-    //     //for each spot
-    //     for (let j = 0; j < party.spots.length; j++) {
-    //       //check for each role in each spot
-    //       for (let k = 0; k < party.spots[j].roles.length; k++) {
-    //         if (party.spots[j].roles[k].name === roles[roleFilters[i]].name) temp = true;
-    //       }
-    //     }
-    //     if (temp === false) relevant = false;
-    //   }
-    // }
-    // if (relevant === false) return false;
+    //role filters check
+    if (roleFilters.length > 0) {
+      //for each filter
+      for (let i = 0; i < roleFilters.length; i++) {
+        let temp = false;
+        //for each spot
+        for (let j = 0; j < party.spots.length; j++) {
+          //check for each role in each spot
+          for (let k = 0; k < party.spots[j].roles.length; k++) {
+            if (party.spots[j].roles[k].name === roles[roleFilters[i]].name) temp = true;
+          }
+        }
+        if (temp === false) relevant = false;
+      }
+    }
+    if (relevant === false) return false;
 
-    // //searchTerm check
-    // if (searchTerm) {
-    //   if (!(party.title.includes(searchTerm) || party.description.includes(searchTerm))) relevant = false;
-    // }
-    // if (relevant === false) return false;
+    //searchTerm check
+    if (searchTerm) {
+      if (!(party.title.includes(searchTerm) || party.description.includes(searchTerm))) relevant = false;
+    }
+    if (relevant === false) return false;
 
-    // //gamemode check
-    // if (gamemodeFilter) {
-    //   if (party.gamemode !== gamemodeFilter) return false;
-    // }
+    //gamemode check
+    if (gamemodeFilter) {
+      if (party.gamemode.name !== gamemodes[gamemodeFilter].name) return false;
+    }
 
     return relevant;
   }
 
-  function generateSpots(party) {
-    return party.spots
-      .map((spot, index) => {
-        return (
-          <Spot key={index} index={index} spot={spot} gameId={props.match.params.gameId} partyId={party.id} history={props.history}/>
-        );
-      });
-  }
-
   function generateParties() {
     return gameContext.parties.map((party, index) => (
-      <div key={index}>
-        <div className="party-container">
-          <p>
-            <strong>{party.title}</strong>
-          </p>
-          {(party.gamemode) && <><img src={party.gamemode.icon_url} alt=""/><p>{party.gamemode.mode_name}</p></>}
-          {party.reqs.map((req, i) => {
-            if (req.name) {
-              return <p key={i}>{req.name}</p>
-            }
-          })}
-          <p>{party.description}</p>
-          <div className="avatar-container">
-            {/* current dropbox avatar_url doesnt work, but changed to any other url and it works, ex:
-            https://i.ebayimg.com/images/g/PfAAAOSwA3dYIPRN/s-l300.jpg*/}
-            {generateSpots(party)}
-          </div>
-          <span>{party.spots.roles}</span>
-        </div>
-      </div>
+      <Party key={index} index={index} party={party} gameId={props.match.params.gameId}/>
     ));
   }
 
@@ -205,8 +172,8 @@ export default function GamePage(props) {
 
   async function handlePartiesScroll(e) {
     if (e.target.scrollTop/(e.target.scrollHeight - e.target.clientHeight) === 1) {
-      if (gameContext.currentPage < gameContext.pagesAvailable) {
-        gameContext.getAllParties();
+      if (gameContext.currentPage < gameContext.pagesAvailable - 1) {
+        gameContext.incrementCurrentPage(gameContext.getAllParties);
       }
     };
   }
@@ -216,6 +183,7 @@ export default function GamePage(props) {
   }
   return (
     <div className="container">
+      {gameContext.error && <Error close={gameContext.clearError} error={gameContext.error}/>}
       <div className="party-details">
         <img src={gameContext.imageUrl} alt="game-logo" width="40" />
         <h2>{gameContext.title}</h2>

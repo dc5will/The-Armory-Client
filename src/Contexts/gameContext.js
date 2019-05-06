@@ -4,6 +4,10 @@ import TokenService from "../services/token-service";
 import helpers from '../services/helpers';
 
 const GameContext = React.createContext({
+  error: {},
+  setError: () => {},
+  clearError: () => {},
+
   setGame: () => {},
   id: {},
   title: {},
@@ -18,8 +22,9 @@ const GameContext = React.createContext({
   getAllParties: () => {},
   setParties: () => {},
   setPagesAvailable: () => {},
+  incrementCurrentPage: () => {},
   partiesAvailable: {},
-  pagesAvailable: 0,
+  pagesAvailable: 1,
   currentPage: 0,
   parties: [],
 
@@ -38,6 +43,8 @@ export class GameProvider extends Component {
   constructor(props){
     super(props)
     const state = {   
+      error: '',
+
       id: {},
       title: {},
       imageUrl: {},
@@ -49,7 +56,7 @@ export class GameProvider extends Component {
 
       partiesLoading: true,
       partiesAvailable: {},
-      pagesAvailable: 0,
+      pagesAvailable: 1,
       currentPage: 0,
       parties: [],
 
@@ -59,6 +66,14 @@ export class GameProvider extends Component {
       roleFilters: [],
     };
     this.state = state;
+  }
+
+  setError = error => {
+    this.setState({ error: error.error || error.message });
+  }
+
+  clearError = () => {
+    this.setState({ error: '' });
   }
   
   setGame = game => {
@@ -74,8 +89,7 @@ export class GameProvider extends Component {
     });
   }
 
-  getAllParties = async () => {
-    // ${props.match.url}
+  generatePartiesUrl = () => {
     let url = `${config.API_ENDPOINT}/games/${this.state.id}/parties`;
 
     const { currentPage, requirementFilters, roleFilters, searchTerm, gamemodeFilter } = this.state;
@@ -95,6 +109,31 @@ export class GameProvider extends Component {
       }); 
       url += temp.join('&');
     }
+    return url;
+  }
+
+  getPartiesCount = (url) => {
+    return fetch(url+'&countonly=true', {
+      headers: {
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(TokenService.getAuthToken)
+    })
+      .then(res => {
+        return (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      })
+      .catch(err => this.setError(err));
+  }
+
+  getAllParties = async (countonly) => {
+    const { currentPage } = this.state;
+    const url = this.generatePartiesUrl();
+
+    if (countonly === true) {
+      return this.getPartiesCount(url);
+    } 
 
     return fetch(url, {
       headers: {
@@ -115,10 +154,6 @@ export class GameProvider extends Component {
           partiesLoading: false,
         };
 
-        if (this.state.currentPage < resJson.pages_available) {
-          newState.currentPage = this.state.currentPage + 1;
-        }
-
         if (currentPage) {
           const newParties = [...this.state.parties];
           resJson.parties.forEach(party => {
@@ -131,7 +166,8 @@ export class GameProvider extends Component {
           newState.parties = resJson.parties;
         }
         this.setState(newState);
-      });
+      })
+      .catch(err => this.setError(err));
   }
 
   setParties = (parties, pagesAvailable, currentPage) => {
@@ -140,8 +176,14 @@ export class GameProvider extends Component {
     this.setState(newState);
   }
 
-  setPagesAvailable(pagesAvailable) {
+  setPagesAvailable = (pagesAvailable) => {
     this.setState({ pagesAvailable });
+  }
+
+  incrementCurrentPage = (fn) => {
+    this.setState({ currentPage: this.state.currentPage + 1 }, () => {
+      fn && fn()
+    });
   }
 
   setFilters = (searchTerm, reqs, roles) => {
@@ -193,11 +235,15 @@ export class GameProvider extends Component {
 
   render(){
     const value = {
+      setError: this.setError,
+      clearError: this.clearError,
+
       setGame: this.setGame,
 
       getAllParties: this.getAllParties,
       setParties: this.setParties,
       setPagesAvailable: this.setPagesAvailable,
+      incrementCurrentPage: this.incrementCurrentPage,
 
       setFilters: this.setFilters,
       resetFilters: this.resetFilters,

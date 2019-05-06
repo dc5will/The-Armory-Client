@@ -67,9 +67,8 @@ export default function UserProfile(props) {
       body: JSON.stringify(user)
     })
       .then(res =>
-        !res.ok ? setError(res.error) : setError("Profile successfully updated")
-      )
-      .then(props.update());
+        !res.ok ? setError(res.error) : props.update() && props.toggle()
+      );
   }
 
   function authorizeChanges(e) {
