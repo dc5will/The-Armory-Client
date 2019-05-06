@@ -66,10 +66,6 @@ exports[`Dashboard component renders the UI as expected 1`] = `
     MMORPG
   </button>
   <br />
-  <p>
-    Tag filter: 
-    All
-  </p>
   <ul>
     <span
       className="game-search-no-result"
