@@ -33,6 +33,28 @@ export default function UserProfile(props) {
     });
   }
 
+  // console.log(props.update)
+  
+  function confirmNewPassword(newPass, confirmPass) {
+    if (newPass) {
+      if (newPass === confirmPass) {
+        let user = { email, avatar_url, password: newPass };
+        saveChanges(user);
+        setNewPass("");
+        setConfirmPass("");
+        setCurrentPass("");
+      } else {
+        setError("Passwords do not match");
+        return;
+      }
+    } else {
+      let user = { email, avatar_url };
+      console.log(user);
+      saveChanges(user);
+      setEmail('');
+    }
+  }
+  
   function saveChanges(user) {
     console.log(user);
     const { user_id } = TokenService.parseAuthToken();
@@ -50,33 +72,13 @@ export default function UserProfile(props) {
       .then(props.update());
   }
 
-  // console.log(props.update)
-
-  function confirmNewPassword(newPass, confirmPass) {
-    if (newPass) {
-      if (newPass === confirmPass) {
-        let user = { email, avatar_url, password: newPass };
-        saveChanges(user);
-        setNewPass("");
-        setConfirmPass("");
-        setCurrentPass("");
-      } else {
-        setError("Passwords do not match");
-        return;
-      }
-    } else {
-      let user = { email, avatar_url };
-      saveChanges(user);
-      // setEmail('');
-    }
-  }
-
   function authorizeChanges(e) {
     e.preventDefault();
     console.log(currentEmail, currentPass);
     AuthApiService.postLogin({ email: currentEmail, password: currentPass })
       .then(res => {
-        console.log(res);
+        // console.log(res.authToken);
+        TokenService.saveAuthToken(res.authToken);
         confirmNewPassword(newPass, confirmPass);
       })
       .catch(error => setError(error.error));
