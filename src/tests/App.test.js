@@ -1,17 +1,30 @@
-import React from 'react';
-import App from '../App';
-import ReactDOM from 'react-dom';
-import { MemoryRouter } from 'react-router-dom';
+import React from "react";
+import App from "../App";
+import ReactDOM from "react-dom";
+import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
 
-describe('App component', () => {
-
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
+describe("App component", () => {
+  it("renders without crashing", () => {
+    const div = document.createElement("div");
     ReactDOM.render(
       <MemoryRouter>
         <App />
-      </MemoryRouter>, div
+      </MemoryRouter>,
+      div
     );
     ReactDOM.unmountComponentAtNode(div);
-  })
-})
+  });
+});
+
+// snapshot test
+it("renders the UI as expected", () => {
+  const tree = renderer
+    .create(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
+});

@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePartyForm component renders the UI as expected 1`] = `
+<form
+  className="create-party-form"
+  onSubmit={[Function]}
+>
+  <h2>
+    Create Party
+  </h2>
+  <div
+    className="input-field"
+  >
+    <label>
+      Party Name
+      <input
+        onChange={[Function]}
+        placeholder="party"
+        required={true}
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Description
+      <textarea
+        id="party-description-input"
+        maxLength="140"
+        onChange={[Function]}
+        placeholder="limit 140 chars"
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Party Requirements
+      <select
+        onChange={[Function]}
+      >
+        <option
+          value="0"
+        >
+          Select a requirement...
+        </option>
+      </select>
+    </label>
+    <div
+      className="inactive-dropdown"
+    />
+    <label>
+      Gamemode
+      <select
+        onChange={[Function]}
+        value={0}
+      >
+        <option
+          value="0"
+        >
+          Select a gamemode...
+        </option>
+      </select>
+    </label>
+  </div>
+  <div
+    className="spot-container"
+  >
+    <div
+      className="spot_input"
+    >
+      Owner Spot
+    </div>
+  </div>
+  <button
+    className="create-party-reset-button"
+    onClick={[Function]}
+    type="reset"
+  >
+    Reset
+  </button>
+  <button
+    className="create-party-button"
+    type="submit"
+  >
+    Create Party
+  </button>
+  <button
+    aria-label="cancel"
+    className="create-party-cancel-button"
+  >
+    Cancel
+  </button>
+</form>
+`;

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard component renders the UI as expected 1`] = `
+<div
+  className="dashboard-container"
+>
+  <div>
+    <div>
+      <img
+        alt="avatar profile pic"
+        src="basicAvatar.png"
+      />
+      <h2 />
+      <button
+        onClick={[Function]}
+        type="button"
+      >
+        Edit Profile
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        Logout
+      </button>
+    </div>
+  </div>
+  <form
+    className="game-search-form"
+    onSubmit={[Function]}
+  >
+    <input
+      id="title-search-input"
+      name="search"
+      placeholder="Enter game title"
+      type="text"
+    />
+    <button
+      className="games-search-button"
+      type="submit"
+    >
+      Search
+    </button>
+  </form>
+  <button
+    className="filterGames"
+    onClick={[Function]}
+  >
+    All
+  </button>
+  <button
+    className="filterGames"
+    onClick={[Function]}
+  >
+    Shooter
+  </button>
+  <button
+    className="filterGames"
+    onClick={[Function]}
+  >
+    MOBA
+  </button>
+  <button
+    className="filterGames"
+    onClick={[Function]}
+  >
+    MMORPG
+  </button>
+  <br />
+  <p>
+    Tag filter: 
+    All
+  </p>
+  <ul>
+    <span
+      className="game-search-no-result"
+    >
+      Game not found, please try again!
+    </span>
+  </ul>
+</div>
+`;
