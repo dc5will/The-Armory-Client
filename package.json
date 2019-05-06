@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-to-json": "^3.3.5",
     "install": "^0.12.2",
     "jwt-decode": "^2.2.0",
     "npm": "^6.9.0",
