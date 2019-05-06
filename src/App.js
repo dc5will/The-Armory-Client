@@ -9,6 +9,7 @@ import PartyPage from './Routes/PartyPage';
 import Confirmation from './Components/Confirmation';
 import './app.css'
 import FAQ from './Components/Faqs/FAQ';
+import UserProfile from './Components/UserProfile';
 
 
 
@@ -18,6 +19,7 @@ function App() {
   <Switch>
     <main>
       <Route path={'/confirmation'} component={Confirmation} />
+      <Route path={'/prof'} component={UserProfile} />
       <PublicOnlyRoute path={'/faqs'} component={FAQ} />
       <PublicOnlyRoute exact path={'/'} component={SplashPage}/>
       <PrivateRoute path={'/dashboard'} component={Dashboard}/>

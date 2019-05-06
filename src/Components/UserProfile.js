@@ -1,68 +1,195 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import UserContext from "../Contexts/userContext";
+import TokenService from "../services/token-service";
+import config from "../config";
+import AuthApiService from "../services/auth-api-service";
 
 export default function UserProfile(props) {
-  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [avatar_url, setAvatar_url] = useState("");
+  const [currentPass, setCurrentPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const [confirmPass, setConfirmPass] = useState("");
+  const [error, setError] = useState("");
+  const context = useContext(UserContext);
+  const curr = context.user;
+  const currentEmail = curr.email;
 
-  async function onProfileSubmit() {
-    // add in api services for updating user profile information
+  useEffect(() => {
+    populateContext().then(user => {
+      context.setUser(user.userInfo);
+    });
+  }, []);
+
+  function populateContext() {
+    const { user_id } = TokenService.parseAuthToken();
+    return fetch(`${config.API_ENDPOINT}/user/${user_id}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${TokenService.getAuthToken()}`
+      }
+    }).then(res => {
+      return !res.ok ? TokenService.clearAuthToken() : res.json();
+    });
   }
+
+  // console.log(props.update)
+  
+  function confirmNewPassword(newPass, confirmPass) {
+    if (newPass) {
+      if (newPass === confirmPass) {
+        let user = { email, avatar_url, password: newPass };
+        saveChanges(user);
+        setNewPass("");
+        setConfirmPass("");
+        setCurrentPass("");
+      } else {
+        setError("Passwords do not match");
+        return;
+      }
+    } else {
+      let user = { email, avatar_url };
+      console.log(user);
+      saveChanges(user);
+      setEmail('');
+    }
+  }
+  
+  function saveChanges(user) {
+    console.log(user);
+    const { user_id } = TokenService.parseAuthToken();
+    return fetch(`${config.API_ENDPOINT}/user/${user_id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify(user)
+    })
+      .then(res =>
+        !res.ok ? setError(res.error) : setError("Profile successfully updated")
+      )
+      .then(props.update());
+  }
+
+  function authorizeChanges(e) {
+    e.preventDefault();
+    console.log(currentEmail, currentPass);
+    AuthApiService.postLogin({ email: currentEmail, password: currentPass })
+      .then(res => {
+        // console.log(res.authToken);
+        TokenService.saveAuthToken(res.authToken);
+        confirmNewPassword(newPass, confirmPass);
+      })
+      .catch(error => setError(error.error));
+  }
+
+  console.log(avatar_url);
 
   return (
     <main>
       <div className="profileForm">
         <h2>Profile Settings</h2>
-        <form className="profile-form" onSubmit={e => e.preventDefault()}>
+        <form className="profile-form" onSubmit={e => authorizeChanges(e)}>
+          <p>{error}</p>
+
           <div className="input-field">
-            <label htmlFor="profile-name-input">Username: </label>
-            <input
-              id="profile-name-input"
-              type="text"
-              placeholder="change username"
-              value={username}
-              required
-              onChange={e => setUsername(e.target.value)}
+            <p>Choose a new avatar:</p>
+            <img
+              src={
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKh4dv2ykYZJuJ7vSszU4Vozhm1UtFmKQ_dwIXbQLjBUAb-hVU"
+              }
+              alt="ninja"
+              className="avatars"
+              onClick={e => setAvatar_url(e.target.src)}
+            />
+            <img
+              src={
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWdx9y2u5MR9pKaegRIT9WY3kbY6J_dB9qTxO2JIzHAkZCkYjQ"
+              }
+              alt="pikachu"
+              className="avatars"
+              onClick={e => setAvatar_url(e.target.src)}
+            />
+            <img
+              src={
+                "https://s3-us-west-2.amazonaws.com/files.geekgirlauthority.com/wp-content/uploads/2016/05/CuteSprayAvatars-76_OW_JP_400x400-300x300.png"
+              }
+              alt="soldier"
+              className="avatars"
+              onClick={e => setAvatar_url(e.target.src)}
+            />
+            <img
+              src={
+                "http://www.ffxivrealm.com/data/avatars/l/0/826.jpg?1371910121"
+              }
+              alt="ffcacti"
+              className="avatars"
+              onClick={e => setAvatar_url(e.target.src)}
+            />
+            <img
+              src={"http://steamavatars.co/?media_dl=308"}
+              alt="dota"
+              className="avatars"
+              onClick={e => setAvatar_url(e.target.src)}
+            />
+            <img
+              src={"http://i66.tinypic.com/o9mqad.png"}
+              alt="TJ"
+              className="avatars"
+              onClick={e => setAvatar_url(e.target.src)}
             />
           </div>
+
           <div className="input-field">
             <label htmlFor="profile-email-input">Email: </label>
             <input
               id="profile-email-input"
               type="email"
-              placeholder="change email"
+              placeholder={curr.email}
               value={email}
-              required
               onChange={e => setEmail(e.target.value)}
             />
           </div>
+
           <div className="input-field">
-            <label htmlFor="profile-password-input">Password: </label>
+            <label htmlFor="profile-password-input">New Password: </label>
             <input
               id="profile-password-input"
               type="password"
               placeholder="change password"
-              value={password}
-              required
-              onChange={e => setPassword(e.target.value)}
-            />
-          </div>
-          {/* Let users upload their own images? Predetermined avatars? Link to their own images hosted elsewhere? */}
-          <div className="input-field">
-            <label htmlFor="profile-avatar-input">Avatar: </label>
-            <input
-              id="profile-avatar-input"
-              type="url"
-              placeholder="change avatar"
-              value={avatar_url}
-              required
-              onChange={e => setAvatar_url(e.target.value)}
+              value={newPass}
+              onChange={e => setNewPass(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="submit-button" onClick={onProfileSubmit}>
-            Save Changes
+          <div className="input-field">
+            <label htmlFor="profile-password-input">
+              Confirm New Password:{" "}
+            </label>
+            <input
+              id="profile-password-input"
+              type="password"
+              placeholder="change password"
+              value={confirmPass}
+              onChange={e => setConfirmPass(e.target.value)}
+            />
+          </div>
+
+          <div className="input-field">
+            <label htmlFor="profile-password-input">Current Password: </label>
+            <input
+              id="profile-password-input"
+              type="password"
+              placeholder="current password"
+              required
+              value={currentPass}
+              onChange={e => setCurrentPass(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className="submit-button">
+            Update Profile
           </button>
         </form>
       </div>
