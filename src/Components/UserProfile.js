@@ -68,7 +68,7 @@ export default function UserProfile(props) {
     })
       .then(res =>
         !res.ok ? setError(res.error) : props.update() && props.toggle()
-      )
+      );
   }
 
   function authorizeChanges(e) {
