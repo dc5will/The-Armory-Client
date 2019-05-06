@@ -53,7 +53,7 @@ export default function Nav(props) {
             <Modal
               isShowing={isShowing}
               hide={toggle}
-              content={<UserProfile update={updatePage} />}
+              content={<UserProfile update={updatePage} toggle={toggle} />}
             />
             <button onClick={onLogout}>Logout</button>
         </div>
