@@ -1,0 +1,11 @@
+.dashboard-container{
+  background-color: #212227;
+}
+.game-item-container{
+  display: inline-block;
+  margin: 15px;
+}
+
+ul{
+  width: 50%;
+}

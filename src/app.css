@@ -28,3 +28,12 @@ img {
   width: 78px;
   border: 4px solid yellowgreen;
 }
+
+#root{
+  font-family: Rajdhani;
+  color: white;
+}
+
+body{
+  margin: 0;
+}

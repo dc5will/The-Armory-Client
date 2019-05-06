@@ -3,6 +3,7 @@ import GamesContext from "../Contexts/gamesContext";
 import Nav from "../Components/Nav";
 import Game from "../Components/Game";
 import GamesApiService from "../services/games-api-service";
+import './dashboard.css'
 
 export default function Dashboard(props) {
   const games = useContext(GamesContext);
@@ -79,7 +80,6 @@ export default function Dashboard(props) {
         MMORPG
       </button>
       <br/>
-      <p>Tag filter: {filter}</p>
       <ul>
         {filter === "All"
           ? displayGamesList(staticData)
