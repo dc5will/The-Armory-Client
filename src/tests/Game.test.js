@@ -5,9 +5,10 @@ import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
 // import { render } from 'react-testing-library';
 
-describe('Game component', () => {
+describe.skip('Game component', () => {
 
-  it.skip('renders without crashing', () => {
+  // TypeError: Cannot read property 'id' of undefined
+  it('renders without crashing', () => {
 
     const div = document.createElement('div');
     ReactDOM.render(
@@ -18,7 +19,7 @@ describe('Game component', () => {
     ReactDOM.unmountComponentAtNode(div);
   })
 
-  it.skip("renders the UI as expected", () => {
+  it("renders the UI as expected", () => {
     const tree = renderer
       .create(
         <MemoryRouter>
