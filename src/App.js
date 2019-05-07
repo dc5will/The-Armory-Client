@@ -9,15 +9,15 @@ import PartyPage from './Routes/PartyPage';
 import Confirmation from './Components/Confirmation';
 import './app.css'
 import FAQ from './Components/Faqs/FAQ';
-import UserProfile from './Components/UserProfile';
 import PageNotFound from './Routes/NotFound';
+
 
 
 
 
 function App() {
   return (
-  <main>
+    <main>
     <Switch>
       <Route path={'/confirmation'} component={Confirmation} />
       <PublicOnlyRoute path={'/faqs'} component={FAQ} />

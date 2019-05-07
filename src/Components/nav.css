@@ -1,0 +1,69 @@
+.avatar_url {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.avatars {
+  width: 75px;
+  margin: 2px;
+  border-radius: 25%;
+  cursor: pointer;
+}
+
+.avatars:hover{
+  width: 78px;
+  border: 3px solid yellowgreen;
+}
+.avatars:active{
+  width: 78px;
+  border: 4px solid yellowgreen;
+}
+
+.nav-container{
+  width: 90%;
+  height: 5%;
+  float: right;
+  margin-top: 10px;
+}
+.nav-content-container h2{
+  margin: 5px;
+}
+
+.nav-content-container{
+  text-align: right;
+}
+
+.nav-logout{
+  border: 2px solid #43582D;
+  background-color: #7FAF23;
+  color: white;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+.avatar-nav-main{
+  border: 2px solid #7FAF23;
+  border-radius: 50%;
+  width: 50px;
+  float: right;
+  margin: 0px 25px 0px 20px;
+  cursor: pointer;
+}
+
+.nav-icon-bar{
+  border: 1px solid white;
+  min-height: 100vh;
+  width: 7%;
+  float:left;
+}
+
+.logo{
+  width: 90px;
+}
