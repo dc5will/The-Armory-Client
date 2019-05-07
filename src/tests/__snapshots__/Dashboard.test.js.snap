@@ -41,32 +41,39 @@ exports[`Dashboard component renders the UI as expected 1`] = `
       Search
     </button>
   </form>
-  <button
-    className="filterGames"
-    onClick={[Function]}
+  <div
+    className="filter-tabs"
   >
-    All
-  </button>
-  <button
-    className="filterGames"
-    onClick={[Function]}
+    <button
+      autoFocus={true}
+      className="filterGames"
+      onClick={[Function]}
+    >
+      All
+    </button>
+    <button
+      className="filterGames"
+      onClick={[Function]}
+    >
+      Shooter
+    </button>
+    <button
+      className="filterGames"
+      onClick={[Function]}
+    >
+      MOBA
+    </button>
+    <button
+      className="filterGames"
+      onClick={[Function]}
+    >
+      MMORPG
+    </button>
+  </div>
+  <ul
+    className="game-display-container"
   >
-    Shooter
-  </button>
-  <button
-    className="filterGames"
-    onClick={[Function]}
-  >
-    MOBA
-  </button>
-  <button
-    className="filterGames"
-    onClick={[Function]}
-  >
-    MMORPG
-  </button>
-  <br />
-  <ul>
+    <br />
     <span
       className="game-search-no-result"
     >

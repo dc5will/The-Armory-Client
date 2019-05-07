@@ -67,7 +67,8 @@ export default function Dashboard(props) {
         </button>
       </form>
       {/* {displayGamesList(staticData)} */}
-      <button className="filterGames" onClick={e => setFilter("All")}>
+      <div className='filter-tabs'>
+      <button className="filterGames" autoFocus onClick={e => setFilter("All")}>
         All
       </button>
       <button className="filterGames" onClick={e => setFilter("Shooter")}>
@@ -79,8 +80,9 @@ export default function Dashboard(props) {
       <button className="filterGames" onClick={e => setFilter("MMORPG")}>
         MMORPG
       </button>
+      </div>
+      <ul className='game-display-container'>
       <br/>
-      <ul>
         {filter === "All"
           ? displayGamesList(staticData)
           : filterGames(staticData, filter)}

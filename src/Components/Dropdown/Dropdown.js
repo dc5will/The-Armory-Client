@@ -1,21 +1,39 @@
 import React from 'react';
 import './Dropdown.css';
+import Select from 'react-select';
+import config from '../../config';
+import { callbackify } from 'util';
 
 export default function Dropdown(props) {
   if (props.inactive) {
     return <div className="inactive-dropdown"/>
   }
 
-  function generateOptions() {
-    return Object.entries(props.options).map(([key, value]) => {
-      return <option key={key} value={key}>{value.name}</option>
-    });
+  const options = Object.entries(props.options).map(([key, value]) => {
+    console.log(`${config.IMAGES_ENDPOINT}/${props.gameId}/${value.icon_url}`);
+    return { 
+      value: key, 
+      label: (value.icon_url 
+        ? <span className="drop-image-container"><img className="dropdown-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${value.icon_url}`} alt=""/>{value.name}</span> 
+        : value.name)
+    };
+  });
+  
+  const customStyles = {
+    control: () => ({}),
+    menu: () => ({}),
+    option: () => ({})
   }
 
   let temp = (
-    <select value={props.startValue} onChange={props.onChange}>
-      {generateOptions()}
-    </select>
+    <Select 
+      classNamePrefix='r-dropdown'
+      styles={customStyles}
+      isSearchable={false}
+      value={props.startValue}
+      onChange={props.onChange}
+      options={options}
+    />
   );
 
 
@@ -30,9 +48,15 @@ export default function Dropdown(props) {
 
   return (props.label)
     ? (
-        <label>{props.label}
-          {temp}
-        </label>
+        <div className="dropdown">
+          <label>{props.label}
+            {temp}
+          </label>
+        </div>
       )
-    : (temp);
+    : (
+        <div className="dropdown">
+          {temp}
+        </div>
+      );
 }
