@@ -171,11 +171,18 @@ export default function GamePage(props) {
   }
 
   async function handlePartiesScroll(e) {
+    //document, NOT window
     if (e.target.scrollTop/(e.target.scrollHeight - e.target.clientHeight) === 1) {
       if (gameContext.currentPage < gameContext.pagesAvailable - 1) {
         gameContext.incrementCurrentPage(gameContext.getAllParties);
       }
     };
+  }
+
+  function generateGameTags() {
+    return gameContext.tags.map((tag, i) => {
+      return <span key={i} className="small-detail">{tag}</span>
+    });
   }
 
   if (loading) {
@@ -185,11 +192,19 @@ export default function GamePage(props) {
     <div className="container">
       {gameContext.error && <Error close={gameContext.clearError} error={gameContext.error}/>}
       <div className="party-details">
-        <img src={gameContext.imageUrl} alt="game-logo" width="40" />
-        <h2>{gameContext.title}</h2>
-        {/* <p>{gameContext.partiesAvailable}</p> */}
-        <FilterPartiesForm />
-        <button type="button" onClick={toggleCreatePartyForm}>Create Party</button>
+        <div className="party-details-top">
+          <img className="party-details__image" src={gameContext.imageUrl} alt="game-logo" width="40" />
+          <div className="party-details__main">
+            <h2>{gameContext.title}</h2>
+            {generateGameTags()}
+          </div>
+
+          {/* <p>{gameContext.partiesAvailable}</p> */}
+          <FilterPartiesForm />
+        </div>
+        <div className="party-details__create-container">
+          <button className="green-button create-squad-button" type="button" onClick={toggleCreatePartyForm}>Create Party</button>
+        </div>
       </div>
       {showCPF && <CreatePartyForm toggleCreatePartyForm={toggleCreatePartyForm} roomUrl={props.match.url} history={props.history}/>}
       <hr/>

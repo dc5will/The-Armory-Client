@@ -1,10 +1,11 @@
 import React, { useState, useContext } from 'react';
 import GameContext from '../../Contexts/gameContext';
 import Dropdown from '../Dropdown/Dropdown';
-
+import './FilterPartiesForm.css'
 
 export default function FilterPartyForm() {
-  const { gamemodes, requirements, roles, gamemodeFilter, setFilters, resetFilters, setGamemodeFilter } = useContext(GameContext);
+  const gameContext = useContext(GameContext);
+  const { gamemodes, requirements, roles, gamemodeFilter, setFilters, resetFilters, setGamemodeFilter } = gameContext;
   const [searchTerm, setSearchTerm] = useState('');
   const [requirementFilter, setRequirementFilter] = useState(undefined);
   const [requirementFilter2, setRequirementFilter2] = useState(undefined);
@@ -60,20 +61,20 @@ export default function FilterPartyForm() {
       if (key == gamemodeFilter) {
         return <div key={key} className="gamemode-filter-selected">{value.name}</div>;
       }
-      return <button key={key} type="submit" data-value={key} onClick={onClick}>{value.name}</button>;
+      return <button className="green-button-flat" key={key} type="submit" data-value={key} onClick={onClick}>{value.name}</button>;
     });
   }
 
   function generateRequirementFilterDropdown() {
     let temp = [];
-    let options = {0: { name: 'Select a requirement...'}, ...requirements};
+    let options = {...requirements};
 
     temp.push(
       <Dropdown
         key={0}
         name="requirements"
         active={requirementFilter}
-        onChange={e => setRequirementFilter(e.target.value)}
+        onChange={e => setRequirementFilter(e.value)}
         onButtonClick={e => 
           {
             if (requirementFilter2) {
@@ -85,7 +86,7 @@ export default function FilterPartyForm() {
           }
         }
         startValue={requirementFilter}
-        // options={[[undefined, { classN 'All' }], ...Object.entries(context.game.gamemodes)]}
+        placeholder='Select a requirement...'
         options={options}
       />
     );
@@ -99,10 +100,10 @@ export default function FilterPartyForm() {
         name="requirements"
         active={requirementFilter2}
         inactive={!requirementFilter}
-        onChange={e => setRequirementFilter2(e.target.value)}
+        onChange={e => setRequirementFilter2(e.value)}
         onButtonClick={e => setRequirementFilter2(undefined)}
         startValue={requirementFilter2}
-        // options={[[undefined, { name: 'All' }], ...Object.entries(context.game.gamemodes)]}
+        placeholder='Select a requirement...'
         options={tempOptions2}
       />
     );
@@ -112,14 +113,15 @@ export default function FilterPartyForm() {
 
   function generateRoleFilterDropdown() {
     let temp = [];
-    let options = {0: { name: 'Select a role...'}, ...roles};
+    let options = {...roles};
 
     temp.push(
       <Dropdown
         key={0}
         name="roles"
         active={roleFilter}
-        onChange={e => setRoleFilter(e.target.value)}
+        gameId={gameContext.id}
+        onChange={e => setRoleFilter(e.value)}
         onButtonClick={e => 
           {
             if (roleFilter2) {
@@ -131,7 +133,7 @@ export default function FilterPartyForm() {
           }
         }
         startValue={roleFilter}
-        // options={[[undefined, { name: 'All' }], ...Object.entries(context.game.gamemodes)]}
+        placeholder='Select a role...'
         options={options}
       />
     );
@@ -145,10 +147,10 @@ export default function FilterPartyForm() {
         name="roles"
         active={roleFilter2}
         inactive={!roleFilter}
-        onChange={e => setRoleFilter2(e.target.value)}
+        onChange={e => setRoleFilter2(e.value)}
         onButtonClick={e => setRoleFilter2(undefined)}
+        placeholder='Select a role...'
         startValue={roleFilter2}
-        // options={[[undefined, { name: 'All' }], ...Object.entries(context.game.gamemodes)]}
         options={tempOptions2}
       />
     );
@@ -157,21 +159,25 @@ export default function FilterPartyForm() {
   }
 
   return (  
-    <form className="parties-filters" onSubmit={handleFilterSubmitClick}>
-      <h4>Search</h4>
-      <hr/>
-      <input type="text" onChange={handleSearchChange} value={searchTerm} maxLength="72"/>
-      <div className="parties-filters">
-        <h4>Requirements</h4>
-        <hr/>
+    <form className="squads-filters" onSubmit={handleFilterSubmitClick}>
+      <fieldset className="squads-filters__fieldset">
+        <legend>Search</legend>
+        <label className="input-with-icon">
+          <i className="fas fa-search relative-fieldset-icon"/>
+          <input className="solo-input-transitions" type="text" onChange={handleSearchChange} placeholder="Search by name or description" value={searchTerm} maxLength="72"/>
+        </label>
+      </fieldset>
+      <fieldset className="squads-filters__fieldset">
+        <legend>Requirements</legend>
         {generateRequirementFilterDropdown()}
-      </div>
+      </fieldset>
       <div className="parties-filters">
         <h4>Roles</h4>
         <hr/>
         {generateRoleFilterDropdown()}
       </div>
       <hr/>
+
       <button type="submit">Filter Parties</button>
       <button type="reset" onClick={handleReset}>Reset Filters</button>
       <hr/>

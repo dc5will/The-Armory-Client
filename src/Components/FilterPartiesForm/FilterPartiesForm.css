@@ -1,0 +1,42 @@
+.squads-filters__fieldset {
+  border: none;
+  padding: 0;
+}
+
+.squads-filters__fieldset legend {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #5b6370;
+}
+
+.squads-filters__fieldset input {
+  margin: 15px 5px;
+  width: calc(100% - 10px);
+  border: 1px solid #6fa42c;
+  background-color: transparent;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+  transition: background-color 0.6s, border 0.6s, box-shadow 0.6s;
+  padding: 6px 8px 6px 32px;
+}
+
+
+.solo-input-transitions:focus, .solo-input-transitions:hover {
+  box-shadow: 0 1px 8px 0 #00000080;
+  /* border: 1px solid #565d69; */
+  background-color: #212227;
+}
+
+.input-with-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 14px;
+  color: #b3b3b3;
+  top: 1px;
+}

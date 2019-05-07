@@ -30,10 +30,11 @@ img {
 }
 
 #root{
-  font-family: Rajdhani;
+  font-family: Rajdhani, sans-serif;
   color: white;
 }
 
 body{
   margin: 0;
+  background-color: #212227;
 }
