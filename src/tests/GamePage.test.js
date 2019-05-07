@@ -2,6 +2,7 @@ import React from 'react';
 import GamePage from '../Routes/GamePage/GamePage';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
+import renderer from "react-test-renderer";
 
 describe('GamePage component', () => {
 
@@ -14,4 +15,15 @@ describe('GamePage component', () => {
     );
     ReactDOM.unmountComponentAtNode(div);
   })
+
+  it("renders the UI as expected", () => {
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <GamePage />
+        </MemoryRouter>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 })

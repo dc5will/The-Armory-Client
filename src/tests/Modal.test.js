@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '../Components/Modal/Modal';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
+import renderer from "react-test-renderer";
 
 describe('Modal component', () => {
 
@@ -14,4 +15,15 @@ describe('Modal component', () => {
     );
     ReactDOM.unmountComponentAtNode(div);
   })
+
+  it("renders the UI as expected", () => {
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <Modal />
+        </MemoryRouter>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 })

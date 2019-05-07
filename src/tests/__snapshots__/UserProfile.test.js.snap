@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserProfile component renders the UI as expected 1`] = `
+<main>
+  <div
+    className="profileForm"
+  >
+    <h2>
+      Profile Settings
+    </h2>
+    <form
+      className="profile-form"
+      onSubmit={[Function]}
+    >
+      <p>
+        
+      </p>
+      <div
+        className="input-field"
+      >
+        <p>
+          Choose a new avatar:
+        </p>
+        <img
+          alt="ninja"
+          className="avatars"
+          onClick={[Function]}
+          src="ninja.jpg"
+        />
+        <img
+          alt="pikachu"
+          className="avatars"
+          onClick={[Function]}
+          src="pikachu.png"
+        />
+        <img
+          alt="Soldier 76"
+          className="avatars"
+          onClick={[Function]}
+          src="soldier76.png"
+        />
+        <img
+          alt="Cactuar"
+          className="avatars"
+          onClick={[Function]}
+          src="Cactuar.jpg"
+        />
+        <img
+          alt="dota"
+          className="avatars"
+          onClick={[Function]}
+          src="axe.jpg"
+        />
+        <img
+          alt="TJ"
+          className="avatars"
+          onClick={[Function]}
+          src="TJICON.png"
+        />
+      </div>
+      <div
+        className="input-field"
+      >
+        <label
+          htmlFor="profile-email-input"
+        >
+          Email: 
+        </label>
+        <input
+          id="profile-email-input"
+          onChange={[Function]}
+          type="email"
+          value=""
+        />
+      </div>
+      <div
+        className="input-field"
+      >
+        <label
+          htmlFor="profile-password-input"
+        >
+          New Password: 
+        </label>
+        <input
+          id="profile-password-input"
+          onChange={[Function]}
+          placeholder="change password"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="input-field"
+      >
+        <label
+          htmlFor="profile-password-input"
+        >
+          Confirm New Password:
+           
+        </label>
+        <input
+          id="profile-password-input"
+          onChange={[Function]}
+          placeholder="change password"
+          type="password"
+          value=""
+        />
+      </div>
+      <div
+        className="input-field"
+      >
+        <label
+          htmlFor="profile-password-input"
+        >
+          Current Password: 
+        </label>
+        <input
+          id="profile-password-input"
+          onChange={[Function]}
+          placeholder="current password"
+          required={true}
+          type="password"
+          value=""
+        />
+      </div>
+      <button
+        className="submit-button"
+        type="submit"
+      >
+        Update Profile
+      </button>
+    </form>
+  </div>
+</main>
+`;

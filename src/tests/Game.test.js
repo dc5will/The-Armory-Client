@@ -2,6 +2,7 @@ import React from 'react';
 import Game from '../Components/Game';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
+import renderer from "react-test-renderer";
 
 describe('Game component', () => {
 
@@ -14,4 +15,15 @@ describe('Game component', () => {
     );
     ReactDOM.unmountComponentAtNode(div);
   })
+
+  it.skip("renders the UI as expected", () => {
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <Game />
+        </MemoryRouter>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 })

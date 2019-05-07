@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function Game(props) {
   let data = props.props;
-  console.log(data.title)
+  // console.log(data.title)
   return (
     <div className='game-item-container'>
     <Link to={`/games/${data.id}`}>

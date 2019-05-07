@@ -2,6 +2,7 @@ import React from 'react';
 import FAQ from '../Components/Faqs/FAQ';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
+import renderer from 'react-test-renderer';
 
 describe('FAQ component', () => {
 
@@ -14,4 +15,15 @@ describe('FAQ component', () => {
     );
     ReactDOM.unmountComponentAtNode(div);
   })
+
+  it("renders the UI as expected", () => {
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <FAQ />
+        </MemoryRouter>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 })

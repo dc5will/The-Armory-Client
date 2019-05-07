@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "enzyme": "^3.9.0",
     "enzyme-to-json": "^3.3.5",
     "install": "^0.12.2",
     "jwt-decode": "^2.2.0",
@@ -40,5 +39,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1"
   }
 }

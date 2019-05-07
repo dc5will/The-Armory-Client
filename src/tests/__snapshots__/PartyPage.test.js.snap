@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PartyPage component renders the UI as expected 1`] = `
+<div>
+  <div>
+    Loading
+  </div>
+  <button
+    onClick={[Function]}
+  >
+    Leave party
+  </button>
+  <div>
+    <ul
+      className="chat-log-container"
+    />
+    <form
+      className="chat-form"
+      onSubmit={[Function]}
+    >
+      <input
+        className="chat-input"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <button
+        className="chat-submit-button"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+`;
