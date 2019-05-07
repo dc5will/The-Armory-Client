@@ -89,7 +89,7 @@ export default function CreatePartyForm(props) {
       })
       .catch(err => {
         //UPDATE TO DISPLAY ERROR
-        console.error(err);
+        gameContext.setError(err);
       });
   }
 
