@@ -39,9 +39,11 @@ export default function Dropdown(props) {
 
   if (props.active) {
     return (
-      <button name={props.name} data-value={props.active} type="button" onClick={props.onButtonClick}>
-        {props.options[props.active].name}
-        <span> X</span>
+      <button className="dropdown-result-button" name={props.name} data-value={props.active} type="button" onClick={props.onButtonClick}>
+        {(props.options[props.active].icon_url 
+          ? <span className="drop-image-container"><img className="dropdown-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.options[props.active].icon_url}`} alt=""/>{props.options[props.active].name}</span> 
+          : props.options[props.active].name)}
+        <i class="fas fa-times"/>
       </button>
     );
   }

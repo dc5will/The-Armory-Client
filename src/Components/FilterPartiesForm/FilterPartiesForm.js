@@ -147,6 +147,7 @@ export default function FilterPartyForm() {
         name="roles"
         active={roleFilter2}
         inactive={!roleFilter}
+        gameId={gameContext.id}
         onChange={e => setRoleFilter2(e.value)}
         onButtonClick={e => setRoleFilter2(undefined)}
         placeholder='Select a role...'
@@ -171,18 +172,15 @@ export default function FilterPartyForm() {
         <legend>Requirements</legend>
         {generateRequirementFilterDropdown()}
       </fieldset>
-      <div className="parties-filters">
-        <h4>Roles</h4>
-        <hr/>
+      <fieldset className="squads-filters__fieldset">
+        <legend>Roles</legend>
         {generateRoleFilterDropdown()}
+      </fieldset>
+      <div className="squads-filters-buttons-container">
+        <button className="green-button" type="submit">Filter Squads</button>
+        <button className="grey-button" type="reset" onClick={handleReset}>Reset Filters</button>
       </div>
-      <hr/>
-
-      <button type="submit">Filter Parties</button>
-      <button type="reset" onClick={handleReset}>Reset Filters</button>
-      <hr/>
-      {generateGamemodeCheckboxes()}
-      <hr/>
+      {/* {generateGamemodeCheckboxes()} */}
     </form>
   );
 }

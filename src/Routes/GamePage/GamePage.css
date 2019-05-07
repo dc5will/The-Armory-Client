@@ -79,29 +79,43 @@
   bottom: 0;
 }
 
-.green-button{
+.green-button, .grey-button {
   display: flex;
   justify-content: center;
   align-items: center;
   outline: none;
   border: none;
-  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
   border-radius: 5px;
   box-shadow: 0 1px 8px 0 #00000080;
+  font-family: Rajdhani, sans-serif;
+  font-weight: 600;
+  color: #fff;
+  font-size: 16px;
+}
+
+.green-button{
+  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+}
+
+.grey-button{
+  background-image: linear-gradient(#586166, #586166 67%, #3b4449);
 }
 
 .green-button:hover, .green-button:focus {
-  cursor: pointer;
   background-image: linear-gradient(#6fa42c, #6fa42c 67%, #538810);
 }
 
+.grey-button:hover, .grey-button:focus {
+  background-image: linear-gradient(#60696d, #60696d 67%, #444e52);
+}
+
+.green-button:hover, .grey-button:hover {
+  cursor: pointer;
+}
+
 .create-squad-button{
-  font-family: Rajdhani, sans-serif;
   width: 334px;
   height: 36px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
 }
 
 body {
