@@ -13,7 +13,7 @@ export default function Game(props) {
       <h3>{data.title}</h3>
     </Link>
     {data.tags.map((tag, i) => {
-      return <span key={i}>{tag}</span>;
+      return <span className='small-detail' key={i}>{tag}</span>;
     })}
     <p>Available Parties: {data.party_count}</p>
   </div>

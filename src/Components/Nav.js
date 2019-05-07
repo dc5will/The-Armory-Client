@@ -62,13 +62,13 @@ export default function Nav(props) {
   }
 
   return (
-    <>
-    <div className='nav-container'>
-      {generateNavBar(userContext.user)}
+    <div className='mobile-nav-container'>
+      <div className='nav-container'>
+        {generateNavBar(userContext.user)}
+      </div>
+      <div className='nav-icon-bar'>
+        <img className='logo' src={SAPNG} alt='Squad Armory Logo' onClick={e => props.history.push('/')}/>
+      </div>
     </div>
-    <div className='nav-icon-bar'>
-      <img className='logo' src={SAPNG} alt='Squad Armory Logo'/>
-    </div>
-    </>
   );
 }
