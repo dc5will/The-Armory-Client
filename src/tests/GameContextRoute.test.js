@@ -1,28 +1,26 @@
 import React from 'react';
-import Game from '../Components/Game';
+import GameContextRoute from '../Routes/GamePage/GameContextRoute';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
-// import { render } from 'react-testing-library';
 
-describe('Game component', () => {
+describe('GameContextRoute component', () => {
 
   it.skip('renders without crashing', () => {
-
     const div = document.createElement('div');
     ReactDOM.render(
       <MemoryRouter>
-        <Game />
+        <GameContextRoute />
       </MemoryRouter>, div
     );
     ReactDOM.unmountComponentAtNode(div);
   })
 
-  it.skip("renders the UI as expected", () => {
+  it("renders the UI as expected", () => {
     const tree = renderer
       .create(
         <MemoryRouter>
-          <Game />
+          <GameContextRoute />
         </MemoryRouter>
       )
       .toJSON();
