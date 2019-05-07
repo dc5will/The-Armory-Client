@@ -1,28 +1,26 @@
 import React from 'react';
-import Game from '../Components/Game';
+import Error from '../Components/Error/Error';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
-import renderer from "react-test-renderer";
-import { render } from 'react-testing-library';
+import renderer from 'react-test-renderer';
 
-describe('Game component', () => {
+describe('FAQ component', () => {
 
-  it.only('renders without crashing', () => {
-
+  it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
       <MemoryRouter>
-        <Game />
+        <Error />
       </MemoryRouter>, div
     );
     ReactDOM.unmountComponentAtNode(div);
   })
 
-  it.skip("renders the UI as expected", () => {
+  it("renders the UI as expected", () => {
     const tree = renderer
       .create(
         <MemoryRouter>
-          <Game />
+          <Error />
         </MemoryRouter>
       )
       .toJSON();
