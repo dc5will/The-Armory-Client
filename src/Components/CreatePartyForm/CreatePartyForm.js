@@ -70,29 +70,29 @@ export default function CreatePartyForm(props) {
   function onPartyCreate(e) {
     e.preventDefault();
     const newParty = getActiveValues(e.target);
-    // fetch(
-    //     `${config.API_ENDPOINT}/parties`, 
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         authorization: `Bearer ${TokenService.getAuthToken()}`,
-    //         'content-type': 'application/json'
-    //       },
-    //       body: JSON.stringify(newParty),
-    //     }
-    //   )
-    //   .then(res =>
-    //     (!res.ok)
-    //       ? res.json().then(e => Promise.reject(e))
-    //       : res.json()
-    //   )
-    //   .then((respJson) => {
-    //     props.history.push(`/party/${respJson}`);
-    //   })
-    //   .catch(err => {
-    //     //UPDATE TO DISPLAY ERROR
-    //     gameContext.setError(err);
-    //   });
+    fetch(
+        `${config.API_ENDPOINT}/parties`, 
+        {
+          method: 'POST',
+          headers: {
+            authorization: `Bearer ${TokenService.getAuthToken()}`,
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newParty),
+        }
+      )
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+      .then((respJson) => {
+        props.history.push(`/party/${respJson}`);
+      })
+      .catch(err => {
+        //UPDATE TO DISPLAY ERROR
+        gameContext.setError(err);
+      });
   }
 
   //SPOT HANDLERS
@@ -251,6 +251,7 @@ export default function CreatePartyForm(props) {
           <button
             type="submit"
             className="create-party-button green-button"
+            onClick={onPartyCreate}
           >
             Create Party
           </button>

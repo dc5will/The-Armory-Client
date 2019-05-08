@@ -172,13 +172,18 @@ export default function PartyPage(props) {
       let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        roleStr += role.name + " | ";
+        console.log(user)
+        return(
+          role.name ?
+            roleStr +=role.name + ' ' :
+            roleStr)
       });
       return (
         <li key={i}>
-          {user !== null ? user.username : "Available"}
-          {" - "}
-          {roleStr}{" "}
+          {!user.avatar_url ? '' : <img className='party-avatar' src={user.avatar_url} alt='avatar-img'/>}
+          <p>{user !== null ? user.username : "Available"}</p>
+          <p>{roleStr ? " - " : ''}
+          {roleStr}{" "}</p>
         </li>
       );
     });
