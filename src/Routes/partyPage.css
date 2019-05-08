@@ -38,9 +38,8 @@
   display: flex;
 }
 
-.party-info h1, p{
+.party-info h1, .party-info p{
   text-align: center;
-
 }
 
 .chat-message-container{

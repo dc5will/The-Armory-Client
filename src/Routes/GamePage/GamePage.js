@@ -3,7 +3,7 @@ import config from "../../config";
 import TokenService from "../../services/token-service";
 import GameContext from '../../Contexts/gameContext';
 import helpers from '../../services/helpers';
-import Party from '../../Components/Party/Party';
+import Squad from '../../Components/Squad/Squad';
 import Error from '../../Components/Error/Error';
 import GameInfo from '../../Components/GameInfo/GameInfo';
 
@@ -177,7 +177,7 @@ export default function GamePage(props) {
       return <p>No parties available...</p>;
     }
     return gameContext.parties.map((party, index) => (
-      <Party key={index} index={index} party={party} gameId={props.match.params.gameId}/>
+      <Squad key={index} index={index} party={party} gameId={props.match.params.gameId}/>
     ));
   }
 
