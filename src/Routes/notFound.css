@@ -1,0 +1,17 @@
+.notFound-container{
+  position: relative;
+  text-align: center;
+}
+.notFound-container h1{
+margin-top: 5%;
+}
+
+.NotFound{
+  width: 75%;
+  margin: 5%;
+  box-shadow: 1px 2px 15px 4px #0a0a0aa1;
+}
+
+@media screen and (max-width: 500px){
+
+}
