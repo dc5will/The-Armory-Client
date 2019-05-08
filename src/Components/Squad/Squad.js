@@ -24,7 +24,10 @@ export default function Squad(props) {
   return (
     <li className="squad-container" aria-label='Open Squad Details' tabIndex="0">
       <div className="squad__gamemode-image-container">
-        <img className="squad__gamemode-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.party.gamemode.icon_url}`} alt=""/>
+        {(props.party.gamemode) 
+          ? <img className="squad__gamemode-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.party.gamemode.icon_url}`} alt=""/>
+          : <i className="squad__gamemode-image fas fa-globe squad__gamemode-image-icon"></i>
+        }
       </div>
       <div className="squad__details">
         <div className="squad__details-top">
@@ -39,7 +42,7 @@ export default function Squad(props) {
             <p>{props.party.owner_id.username}</p>
           </div>
         </div>
-        <p><span className="small-detail">{props.party.gamemode.name}</span>{props.party.description}</p>
+        <p>{props.party.gamemode && <span className="small-detail">{props.party.gamemode.name}</span>}{props.party.description || 'No description...'}</p>
       </div>
       <div className="squad__requirements">
         {generateRequirements()}
