@@ -147,19 +147,23 @@ export default function PartyPage(props) {
 
   function displayWarning() {
     return warning ? (
-      <div>
+      <div className='party-warning'>
         <p>Are you sure you want to leave this party?</p>
+        <div className='leave-party'>
         <button onClick={e => handleLeave()}>Confirm</button>
         <button onClick={e => setWarning(!warning)}>Cancel</button>
+        </div>
       </div>
     ) : (
+      <div className='leave-party'>
       <button onClick={e => setWarning(!warning)}>Leave party</button>
+      </div>
     );
   }
 
   function generateReqs(party) {
     return context.party.reqs.map((req, i) => {
-      return <li key={i}>{req.req_name}</li>;
+      return <li key={i}>{req.name}</li>;
     });
   }
 
@@ -168,7 +172,7 @@ export default function PartyPage(props) {
       let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        roleStr += role.role_name + " | ";
+        roleStr += role.name + " | ";
       });
       return (
         <li key={i}>
@@ -182,7 +186,7 @@ export default function PartyPage(props) {
 
   function generateDisplayParty(party) {
     return (
-      <div>
+      <div className='party-info'>
         <h1>{context.party.title}</h1>
         <p>{context.party.description}</p>
         <h3>Spots:</h3>
@@ -195,10 +199,10 @@ export default function PartyPage(props) {
 
   return (
     <div className='party-page-container'>
-      <div>
+      <div className='display-party-info'>
         {context.party.title ? generateDisplayParty(context.party) : "Loading"}
+        {displayWarning()}
       </div>
-      {displayWarning()}
       <PartyChat
         sendChatMessage={sendChatMessage}
         sendChatEdit={sendChatEdit}
