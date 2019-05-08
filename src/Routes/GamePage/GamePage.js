@@ -180,18 +180,6 @@ export default function GamePage(props) {
   }
 
   function generateGamemodeDropdown() {
-    // function onClick(e) {
-    //   const { value } = e.target.dataset;
-    //   gameContext.setGamemodeFilter(value);
-    // }
-
-    // let temp = {0: { name: 'All', icon_url: ''}, ...gameContext.gamemodes}
-    // return Object.entries(temp).map(([key, value]) => {
-    //   if (key == gameContext.gamemodeFilter) {
-    //     return <div className="green-button-flat__selected" key={key}>{value.name}</div>;
-    //   }
-    //   return <button className="green-button-flat" key={key} type="submit" data-value={key} onClick={onClick}>{value.name}</button>;
-    // });
     return <Dropdown
       name="gamemode"
       className='gamemode-dropdown'

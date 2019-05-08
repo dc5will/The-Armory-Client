@@ -1,14 +1,32 @@
 .modal {
+  position: relative;
   font-family: Rajdhani, sans-serif;
   color: white;
-  position: fixed;
-  top: 10%;
-  left: 30%;
-  padding: 12px;
-  background-color: rgba(255, 255, 255, 0.507);
-  overflow-x: auto;
-  max-height: calc(100vh - 210px);
-  width: fit-content;
-  max-width: 50%;
+  background-color: #2c2e34;
+  border: 1px solid #6e6f72;
   border-radius: 5px;
+  z-index: 7;
+  box-shadow: 0 5px 13px 0 #00000080;
+}
+
+.modal-overlay {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #00000086;
+  z-index: 6;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 18px !important;
+  width: 30px;
+  height: 30px;
 }

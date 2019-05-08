@@ -40,7 +40,7 @@ export default function Dropdown(props) {
 
   if (props.active) {
     return (
-      <button className="dropdown-result-button" name={props.name} data-value={props.active} type="button" onClick={props.onButtonClick}>
+      <button aria-label="reset" className="dropdown-result-button" name={props.name} data-value={props.active} type="button" onClick={props.onButtonClick}>
         {(props.options[props.active].icon_url 
           ? <span className="drop-image-container"><img className="dropdown-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.options[props.active].icon_url}`} alt=""/>{props.options[props.active].name}</span> 
           : props.options[props.active].name)}
