@@ -1,12 +1,14 @@
 .modal {
+  font-family: Rajdhani, sans-serif;
+  color: white;
   position: fixed;
   top: 10%;
-  left: 25%;
+  left: 30%;
   padding: 12px;
-  background-color: white;
-  border: 1px solid grey;
+  background-color: rgba(255, 255, 255, 0.507);
   overflow-x: auto;
   max-height: calc(100vh - 210px);
   width: fit-content;
   max-width: 50%;
+  border-radius: 5px;
 }
