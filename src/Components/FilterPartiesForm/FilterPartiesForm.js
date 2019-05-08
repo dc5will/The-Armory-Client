@@ -5,7 +5,7 @@ import './FilterPartiesForm.css'
 
 export default function FilterPartyForm() {
   const gameContext = useContext(GameContext);
-  const { gamemodes, requirements, roles, gamemodeFilter, setFilters, resetFilters, setGamemodeFilter } = gameContext;
+  const { requirements, roles, setFilters, resetFilters } = gameContext;
   const [searchTerm, setSearchTerm] = useState('');
   const [requirementFilter, setRequirementFilter] = useState(undefined);
   const [requirementFilter2, setRequirementFilter2] = useState(undefined);
@@ -48,21 +48,6 @@ export default function FilterPartyForm() {
   function handleSearchChange(e) {
     e.preventDefault();
     setSearchTerm(e.target.value);
-  }
-
-  function generateGamemodeCheckboxes() {
-    function onClick(e) {
-      const { value } = e.target.dataset;
-      setGamemodeFilter(value);
-    }
-
-    let temp = {0: { name: 'All', icon_url: ''}, ...gamemodes}
-    return Object.entries(temp).map(([key, value]) => {
-      if (key == gamemodeFilter) {
-        return <div key={key} className="gamemode-filter-selected">{value.name}</div>;
-      }
-      return <button className="green-button-flat" key={key} type="submit" data-value={key} onClick={onClick}>{value.name}</button>;
-    });
   }
 
   function generateRequirementFilterDropdown() {
@@ -180,7 +165,6 @@ export default function FilterPartyForm() {
         <button className="green-button" type="submit">Filter Squads</button>
         <button className="grey-button" type="reset" onClick={handleReset}>Reset Filters</button>
       </div>
-      {/* {generateGamemodeCheckboxes()} */}
     </form>
   );
 }

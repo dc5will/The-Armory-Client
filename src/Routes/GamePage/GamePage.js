@@ -1,22 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
-import CreatePartyForm from "../../Components/CreatePartyForm/CreatePartyForm";
 import config from "../../config";
 import TokenService from "../../services/token-service";
 import GameContext from '../../Contexts/gameContext';
-import FilterPartiesForm from '../../Components/FilterPartiesForm/FilterPartiesForm';
 import helpers from '../../services/helpers';
 import Party from '../../Components/Party/Party';
 import Error from '../../Components/Error/Error';
+import GameInfo from '../../Components/GameInfo/GameInfo';
 
 import './GamePage.css';
 
 import io from 'socket.io-client';
+import Dropdown from "../../Components/Dropdown/Dropdown";
 let socket;
 
 export default function GamePage(props) {
   const gameContext = useContext(GameContext);
   const [loading, toggleLoading] = useState(true);
-  const [showCPF, toggleCPF] = useState(false);
 
   function getGame() {
     return fetch(`${config.API_ENDPOINT}${props.match.url}`, {
@@ -60,6 +59,8 @@ export default function GamePage(props) {
   }, []);
 
   useEffect(() => {
+    document.addEventListener('scroll', handlePartiesScroll);
+
     socket.on('posted party', async function(data) { 
       let pagesAvailable = data.pages_available;
       let partiesAvailable = data.parties_available;
@@ -103,6 +104,7 @@ export default function GamePage(props) {
     return () => {
       socket.off('posted party');
       socket.off('spot updated');
+      document.removeEventListener('scroll', handlePartiesScroll);
     }
   }, [gameContext.parties]);
 
@@ -160,29 +162,47 @@ export default function GamePage(props) {
   }
 
   function generateParties() {
+    if (gameContext.parties.length < 1) {
+      return <p>No parties available...</p>;
+    }
     return gameContext.parties.map((party, index) => (
       <Party key={index} index={index} party={party} gameId={props.match.params.gameId}/>
     ));
   }
 
-  function toggleCreatePartyForm(e) {
-    e.preventDefault();
-    toggleCPF(!showCPF);
-  }
-
-  async function handlePartiesScroll(e) {
+  async function handlePartiesScroll() {
     //document, NOT window
-    if (e.target.scrollTop/(e.target.scrollHeight - e.target.clientHeight) === 1) {
+    if (document.documentElement.scrollTop/(document.documentElement.scrollHeight - document.documentElement.clientHeight) === 1) {
       if (gameContext.currentPage < gameContext.pagesAvailable - 1) {
         gameContext.incrementCurrentPage(gameContext.getAllParties);
       }
     };
   }
 
-  function generateGameTags() {
-    return gameContext.tags.map((tag, i) => {
-      return <span key={i} className="small-detail">{tag}</span>
-    });
+  function generateGamemodeDropdown() {
+    // function onClick(e) {
+    //   const { value } = e.target.dataset;
+    //   gameContext.setGamemodeFilter(value);
+    // }
+
+    // let temp = {0: { name: 'All', icon_url: ''}, ...gameContext.gamemodes}
+    // return Object.entries(temp).map(([key, value]) => {
+    //   if (key == gameContext.gamemodeFilter) {
+    //     return <div className="green-button-flat__selected" key={key}>{value.name}</div>;
+    //   }
+    //   return <button className="green-button-flat" key={key} type="submit" data-value={key} onClick={onClick}>{value.name}</button>;
+    // });
+    return <Dropdown
+      name="gamemode"
+      className='gamemode-dropdown'
+      active={gameContext.gamemodeFilter}
+      gameId={gameContext.id}
+      onChange={e => gameContext.setGamemodeFilter(e.value)}
+      onButtonClick={e => gameContext.setGamemodeFilter(0)}
+      placeholder='All'
+      startValue={gameContext.gamemodeFilter}
+      options={gameContext.gamemodes}
+    />
   }
 
   if (loading) {
@@ -191,38 +211,32 @@ export default function GamePage(props) {
   return (
     <div className="container">
       {gameContext.error && <Error close={gameContext.clearError} error={gameContext.error}/>}
-      <div className="party-details">
-        <div className="party-details-top">
-          <img className="party-details__image" src={gameContext.imageUrl} alt="game-logo" width="40" />
-          <div className="party-details__main">
-            <h2>{gameContext.title}</h2>
-            {generateGameTags()}
+      <GameInfo history={props.history} roomUrl={props.match.url}/>
+      <div className="squad-list-container">
+        <div className="squads-list__top">
+          <div className="squad-list__top-gamemode-buttons">
+            {generateGamemodeDropdown()}
           </div>
-
-          {/* <p>{gameContext.partiesAvailable}</p> */}
-          <FilterPartiesForm />
+          <ul className="squads-list__top-titles">
+            <li className="squads-list__top-titles__info">Squad Info</li>
+            <li className="squads-list__top-titles__spots">Spots</li>
+            <li className="squads-list__top-titles__owner">Owner</li>
+            <li className="squads-list__top-titles__requirements">Requirements</li>
+          </ul>
         </div>
-        <div className="party-details__create-container">
-          <button className="green-button create-squad-button" type="button" onClick={toggleCreatePartyForm}>Create Party</button>
-        </div>
-      </div>
-      {showCPF && <CreatePartyForm toggleCreatePartyForm={toggleCreatePartyForm} roomUrl={props.match.url} history={props.history}/>}
-      <hr/>
-      {gameContext.partiesLoading 
-        ? (
-            <div className="party-list">
-              Loading...
-            </div>
-          )
-        : (
-            <div className="party-list" onScroll={handlePartiesScroll}>
-              <h3>Current Active Parties</h3>
-              <div className="parties-list">
+        {gameContext.partiesLoading 
+          ? (
+              <div className="squad-list">
+                Loading...
+              </div>
+            )
+          : (
+              <ul className="squad-list">
                 {generateParties()}
-              </div>  
-            </div>
-          )
-      }
+              </ul>
+            )
+        }
+      </div>
     </div>
   );
 }

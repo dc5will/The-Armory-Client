@@ -1,5 +1,7 @@
 import React from 'react';
 import Spot from '../Spot/Spot';
+import './Party.css';
+import config from '../../config';
 
 export default function Squad(props) {
   function generateSpots(party) {
@@ -11,26 +13,35 @@ export default function Squad(props) {
       });
   }
 
+  function generateRequirements() {
+    return props.party.reqs.map((req, i) => {
+      if (req.name) {
+        return <span className="small-detail" key={i}>{req.name}</span>
+      }
+    });
+  }
+
   return (
-    <div key={props.index}>
-    <div className="party-container">
-      <p>
-        <strong>{props.party.title}</strong>
-      </p>
-      {(props.party.gamemode) && <><img src={props.party.gamemode.icon_url} alt=""/><p>{props.party.gamemode.mode_name}</p></>}
-      {props.party.reqs.map((req, i) => {
-        if (req.name) {
-          return <p key={i}>{req.name}</p>
-        }
-      })}
-      <p>{props.party.description}</p>
-      <div className="avatar-container">
-        {/* current dropbox avatar_url doesnt work, but changed to any other url and it works, ex:
-        https://i.ebayimg.com/images/g/PfAAAOSwA3dYIPRN/s-l300.jpg*/}
-        {generateSpots(props.party)}
+    <li className="squad-container" aria-label='Open Squad Details'>
+      <div className="squad__gamemode-image-container">
+        <img className="squad__gamemode-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.party.gamemode.icon_url}`} alt=""/>
       </div>
-      <span>{props.party.spots.roles}</span>
-    </div>
-  </div>
+      <div className="squad__details">
+        <div className="squad__details-top">
+          <h4>{props.party.title}</h4>
+          <ul className="squad__spots-list">
+            {generateSpots(props.party)}
+          </ul>
+          <div className="squad__spots-image-container">
+            <img className="squad__avatar-image" src={props.party.owner_id.avatar_url} alt=""/>
+          </div>
+          <p>{props.party.owner_id.username}</p>
+        </div>
+        <p><span className="small-detail">{props.party.gamemode.name}</span>{props.party.description}</p>
+      </div>
+      <div className="squad__requirements">
+        {generateRequirements()}
+      </div>
+    </li>
   )
 }

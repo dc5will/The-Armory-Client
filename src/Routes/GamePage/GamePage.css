@@ -2,40 +2,35 @@
   box-sizing: border-box;
 }
 
-.parties-list {
-  height: 1000px;
-  overflow: auto;
-}
-
-.party-details {
+.squad-details {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
   background-color: #2c2e35;
   top: 0;
-  left: 100px;
+  left: 90px;
   width: 380px;
   height: 100%;
   border-right: 1px solid #6e6f72;
   border-left: 1px solid #6e6f72;
 }
 
-.party-details-top {
+.squad-details-top {
   padding: 20px;
 }
 
-.party-details__main {
+.squad-details__main {
   padding: 10px;
   margin-bottom: 60px;
 }
 
-.party-details__main h2 {
+.squad-details__main h2 {
   font-size: 32px;
   font-weight: bold;
 }
 
-.party-details__image {
+.squad-details__image {
   position: absolute;
   opacity: 0.6;
   left: 0;
@@ -46,7 +41,7 @@
   overflow: hidden;
 }
 
-.party-details::after {
+.squad-details::after {
   position: absolute;
   top: 0;
   left: 0;
@@ -65,9 +60,10 @@
   border: 1px solid #5b6370;
   padding: 3px 6px;
   margin-right: 10px;
+  color: #fff;
 }
 
-.party-details__create-container {
+.squad-details__create-container {
   display: flex;
   left: 0;
   right: 0;
@@ -118,6 +114,92 @@
   height: 36px;
 }
 
-body {
+.squad-list-container {
+  position: relative;
+  margin-left: 470px;
+}
+
+.green-button-flat, .green-button-flat__selected {
+  font-family: Rajdhani, sans-serif;
+  min-width: 45px;
+  padding: 0 12px;
+  color: #fff;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  height: 30px;
+  margin-bottom: 5px;
+}
+
+.green-button-flat {
+  background-color: #43582d;
+  border: none;
+  outline: none;
+}
+
+.green-button-flat:hover {
+  background-color: #6fa42c;
+  cursor: pointer;
+}
+
+.green-button-flat__selected {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #6e9c25;
+}
+
+.squads-list__top {
+  position: fixed;
+  top: 0;
+  padding-top: 20px;
+  margin: 0 10px;
+  width: calc(100% - 490px);
   background-color: #212227;
+  border-image-source:url('../../images/border-image.png');
+  border-image-width: 0 0 1px 0;
+  border-image-slice: 1;
+  border-image-repeat: repeat;
+  border-bottom: 1px dashed #565d69;
+  z-index: 2;
+}
+
+.squads-list__top-titles {
+  list-style: none;
+  padding: 0;
+  display: flex;
+}
+
+.squads-list__top-titles li {
+  display: inline-flex;
+  justify-content: center;
+  color: #565d69;
+  text-transform: uppercase;
+}
+
+.squads-list__top-titles__info {
+  width: 261px;
+}
+
+.squads-list__top-titles__spots {
+  width: 320px;
+}
+
+.squads-list__top-titles__owner {
+  width: 200px;
+}
+
+.squads-list__top-titles__requirements {
+  text-align: right;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.squad-list__top-gamemode-buttons {
+  width: 250px;
+}
+
+.gamemode-dropdown .r-dropdown__control:hover {
+  background-color: #141416;
 }

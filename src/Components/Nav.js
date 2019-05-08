@@ -35,8 +35,6 @@ export default function Nav(props) {
     });
   }, [update]);
 
-  console.log('nav bar user context: ', userContext);
-  
   function onLogout(){
     TokenService.clearAuthToken();
     props.history.push('/')
@@ -56,7 +54,7 @@ export default function Nav(props) {
               hide={toggle}
               content={<UserProfile update={updatePage} toggle={toggle} />}
             />
-            <button className='nav-logout' onClick={onLogout}>Logout</button>
+            <button className='nav-button green-button-flat' onClick={onLogout}>Logout</button>
         </div>
     )
   }

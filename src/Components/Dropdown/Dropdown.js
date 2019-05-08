@@ -10,7 +10,6 @@ export default function Dropdown(props) {
   }
 
   const options = Object.entries(props.options).map(([key, value]) => {
-    console.log(`${config.IMAGES_ENDPOINT}/${props.gameId}/${value.icon_url}`);
     return { 
       value: key, 
       label: (value.icon_url 
@@ -27,7 +26,9 @@ export default function Dropdown(props) {
 
   let temp = (
     <Select 
+      className={props.className}
       classNamePrefix='r-dropdown'
+      placeholder={props.placeholder}
       styles={customStyles}
       isSearchable={false}
       value={props.startValue}
@@ -43,7 +44,7 @@ export default function Dropdown(props) {
         {(props.options[props.active].icon_url 
           ? <span className="drop-image-container"><img className="dropdown-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.options[props.active].icon_url}`} alt=""/>{props.options[props.active].name}</span> 
           : props.options[props.active].name)}
-        <i class="fas fa-times"/>
+        <i className="fas fa-times"/>
       </button>
     );
   }

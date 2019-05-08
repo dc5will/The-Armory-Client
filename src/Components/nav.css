@@ -26,30 +26,30 @@
 }
 
 .nav-container{
-  width: 90%;
-  height: 5%;
-  float: right;
-  margin-top: 10px;
+  position: fixed;
+  top: 15px;
+  right: 5px;
+  width: 180px;
+  z-index: 3;
+
 }
 .nav-content-container h2{
   margin: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-content-container{
   text-align: right;
 }
 
-.nav-logout{
-  font-family: Rajdhani, sans-serif;
-  border: none;
-  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
-  box-shadow: 0 1px 8px 0 #00000080;
-  color: #fff;
-  border-radius: 3px;
-  margin-bottom: 2px;
-  cursor: pointer;
+.nav-button {
+  float: right;
+  font-size: 14px !important;
+  margin: 0 !important;
 }
-
 
 .avatar-nav-main{
   border: 2px solid #7FAF23;
