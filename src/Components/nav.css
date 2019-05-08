@@ -1,0 +1,132 @@
+.avatar_url {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.avatars {
+  width: 75px;
+  margin: 2px;
+  border-radius: 25%;
+  cursor: pointer;
+}
+
+.avatars:hover{
+  width: 78px;
+  border: 3px solid yellowgreen;
+}
+.avatars:active{
+  width: 78px;
+  border: 4px solid yellowgreen;
+}
+
+.nav-container{
+  width: 90%;
+  height: 5%;
+  float: right;
+  margin-top: 10px;
+}
+.nav-content-container h2{
+  margin: 5px;
+}
+
+.nav-content-container{
+  text-align: right;
+}
+
+.nav-logout{
+  font-family: Rajdhani, sans-serif;
+  border: none;
+  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  box-shadow: 0 1px 8px 0 #00000080;
+  color: #fff;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  cursor: pointer;
+}
+
+
+.avatar-nav-main{
+  border: 2px solid #7FAF23;
+  border-radius: 50%;
+  width: 50px;
+  float: right;
+  margin: 0px 25px 0px 20px;
+  cursor: pointer;
+}
+
+.avatar-nav-main:hover{
+  transition: 0.4s ease;
+  animation: chase 1.5s infinite;
+}
+
+@keyframes chase {
+  0% {
+    -moz-box-shadow: -1px 0px 10px 0px #7FAF23;
+    box-shadow: -1px 0px 10px 0px #7FAF23;
+  }
+  20% {
+      -moz-box-shadow: 0px 1px 10px 0px #7FAF23;
+      box-shadow: 0px 1px 10px 0px #7FAF23;
+  }
+  40% {
+      -moz-box-shadow: 1px 0px 10px 0px #7FAF23;
+      box-shadow: 1px 0px 10px 0px #7FAF23;
+  }
+  60% {
+      -moz-box-shadow: 0px -1px 10px 0px #7FAF23;
+      box-shadow: 0px -1px 10px 0px #7FAF23;
+  }
+  80% {
+      -moz-box-shadow: 0px -1px 10px 0px #7FAF23;
+      box-shadow: -1px -1px 10px 0px #7FAF23;
+  }
+  100% {
+    -moz-box-shadow: -1px 0px 10px 0px #7FAF23;
+    box-shadow: -1px 0px 10px 0px #7FAF23;
+  }
+}
+
+.nav-icon-bar{
+  width: 90px;
+  float:left;
+  height: 100vh;
+  position: fixed;
+  display: inline-table;
+  background: #141416;
+  top: 0;
+
+}
+
+.logo{
+  margin: 15% 10% 0% 10%;
+  width: 80%;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 500px){
+  .nav-icon-bar{
+  position: relative;
+  display: inherit;
+  background: none;
+  height: inherit;
+  }
+  .nav-container {
+    width: 60%;
+  }
+
+  .mobile-nav-container{
+    height: 80px;
+    margin-bottom: 10px;
+    background: #141416;
+  }
+  .nav-content-container{
+    font-size: 12px;
+  }
+
+}
