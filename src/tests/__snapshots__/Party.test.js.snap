@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Party component renders the UI as expected 1`] = `
+<div>
+  <div
+    className="party-container"
+  >
+    <p>
+      <strong />
+    </p>
+    <p>
+      test reqs 1
+    </p>
+    <p>
+      test reqs 2
+    </p>
+    <p />
+    <div
+      className="avatar-container"
+    >
+      <div>
+        <p>
+          Squad Member 
+          0
+           - 
+          false
+        </p>
+        <p>
+          test2
+        </p>
+        <p>
+          test2
+        </p>
+        <button
+          onClick={[Function]}
+          type="button"
+        >
+          Join spot
+        </button>
+      </div>
+      <div>
+        <p>
+          Squad Member 
+          1
+           - 
+          true
+        </p>
+        <p />
+      </div>
+    </div>
+    <span />
+  </div>
+</div>
+`;
