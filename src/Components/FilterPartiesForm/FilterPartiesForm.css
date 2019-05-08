@@ -40,3 +40,16 @@
   color: #b3b3b3;
   top: 1px;
 }
+
+.squads-filters-buttons-container {
+  border-top: 1px solid #5b6370;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.squads-filters-buttons-container button {
+  margin-top: 15px;
+  height: 25px;
+  width: 90%;
+}

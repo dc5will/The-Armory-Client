@@ -6,7 +6,9 @@ import UserContext from '../Contexts/userContext';
 import useModal from "./Modal/useModal";
 import Modal from "./Modal/Modal";
 import UserProfile from "./UserProfile";
-import basicAvatar from '../resources/basicAvatar.png'
+import basicAvatar from '../resources/basicAvatar.png';
+import SAPNG from '../resources/SAPNG.png';
+import './nav.css'
 
 export default function Nav(props) {
   const userContext = useContext(UserContext)
@@ -33,11 +35,9 @@ export default function Nav(props) {
     });
   }, [update]);
 
-  console.log('nav bar user context: ', userContext);
-  
   function onLogout(){
     TokenService.clearAuthToken();
-    props.props.history.push('/')
+    props.history.push('/')
   }
 
   function updatePage(){
@@ -46,23 +46,27 @@ export default function Nav(props) {
 
   function generateNavBar(user){
     return(
-        <div>
-            <img src={user.avatar_url ? user.avatar_url : basicAvatar} alt='avatar profile pic'></img>
+        <div className='nav-content-container'>
+            <img className='avatar-nav-main' src={user.avatar_url ? user.avatar_url : basicAvatar} alt='avatar profile pic' onClick={e => toggle()}></img>
             <h2>{user.username}</h2>
-            <button type='button' onClick={e => toggle()}>Edit Profile</button>
             <Modal
               isShowing={isShowing}
               hide={toggle}
               content={<UserProfile update={updatePage} toggle={toggle} />}
             />
-            <button onClick={onLogout}>Logout</button>
+            <button className='nav-button green-button-flat' onClick={onLogout}>Logout</button>
         </div>
     )
   }
 
   return (
-    <div>
-      {generateNavBar(userContext.user)}
+    <div className='mobile-nav-container'>
+      <div className='nav-container'>
+        {generateNavBar(userContext.user)}
+      </div>
+      <div className='nav-icon-bar'>
+        <img className='logo' src={SAPNG} alt='Squad Armory Logo' onClick={e => props.history.push('/')}/>
+      </div>
     </div>
   );
 }

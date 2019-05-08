@@ -150,7 +150,7 @@ export default function CreatePartyForm(props) {
     let temp = {...gameContext.requirements};
     delete temp[partyRequirement];
 
-    return {0: { name: 'Select a requirement...' }, ...temp}
+    return temp;
   }
 
   function handleReset(e) {
@@ -193,49 +193,46 @@ export default function CreatePartyForm(props) {
             />
           </label>
 
-          <Dropdown
-            label='Party Requirements'
-            active={partyRequirement}
-            onChange={e => setPartyRequirement(e.target.value)}
-            name="requirements"
-            onButtonClick={e => {
-              if (partyRequirement2) {
-                setPartyRequirement(partyRequirement2);
-                setPartyRequirement2(undefined);
-              } else {
-                setPartyRequirement(undefined);
-              }
-            }}
-            startValue={partyRequirement}
-            options={{0: { name: 'Select a requirement...' }, ...gameContext.requirements}}
-          />
-
-          {partyRequirement
-            ? (<Dropdown
-                label='Party Requirements'
-                active={partyRequirement2}
-                onChange={e => setPartyRequirement2(e.target.value)}
-                onButtonClick={() => setPartyRequirement2(undefined)}
-                name="requirements"
-                startValue={partyRequirement2}
-                options={getPartyRequirement2Options()}
-              />)
-            : (<Dropdown
-                inactive={true}
-              />)
-          }
-
-          <Dropdown 
-            id="party-gamemode-dropdown"
-            label="Gamemode"
-            active={partyGamemode}
-            onChange={e => setPartyGamemode(e.target.value)}
-            onButtonClick={() => setPartyGamemode(0)}
-            startValue={partyGamemode}
-            name="gamemode"
-            options={{0: { name: 'Select a gamemode...', icon_url: '' }, ...gameContext.gamemodes}}
-          />
-
+          <fieldset className="create-party-form__filters">
+            <legend>Requirements</legend>
+            <Dropdown
+              active={partyRequirement}
+              name="requirements"
+              onChange={e => setPartyRequirement(e.value)}
+              onButtonClick={e => {
+                if (partyRequirement2) {
+                  setPartyRequirement(partyRequirement2);
+                  setPartyRequirement2(undefined);
+                } else {
+                  setPartyRequirement(undefined);
+                }
+              }}
+              startValue={partyRequirement}
+              options={{...gameContext.requirements}}
+            />
+            <Dropdown
+              active={partyRequirement2}
+              inactive={!partyRequirement}
+              onChange={e => setPartyRequirement2(e.value)}
+              onButtonClick={() => setPartyRequirement2(undefined)}
+              name="requirements"
+              placeholder='Select a requirement...'
+              startValue={partyRequirement2}
+              options={getPartyRequirement2Options()}
+            />
+          </fieldset>
+          <fieldset className="create-party-form__filters">
+            <legend>Gamemode</legend>
+            <Dropdown 
+              active={partyGamemode}
+              onChange={e => setPartyGamemode(e.value)}
+              onButtonClick={() => setPartyGamemode(0)}
+              startValue={partyGamemode}
+              name="gamemode"
+              gameId={gameContext.id}
+              options={{...gameContext.gamemodes}}
+            />
+          </fieldset>
         </div>
 
         <div className='spot-container'>

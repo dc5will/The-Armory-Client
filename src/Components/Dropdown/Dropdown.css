@@ -1,7 +1,33 @@
 .inactive-dropdown {
-  width: 100px;
-  height: 20px;
-  border: 1px solid grey;
+  margin: 15px 5px;
+  width: calc(100% - 10px);
+  border: 1px solid #737478;
+  border-radius: 5px;
+  display: flex;
+  height: 31px;
+}
+
+.dropdown-result-button {
+  outline: none;
+  border: none;
+  margin: 15px 5px;
+  width: calc(100% - 10px);
+  background-color:#6e9c25;
+  border-radius: 5px;
+  display: flex;
+  height: 31px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  padding: 3px 12px;
+}
+
+.dropdown-result-button:hover {
+  box-shadow: 0 1px 8px 0 #00000080;
+  background-color: #6fa42c;
+  cursor: pointer;
 }
 
 .r-dropdown:hover {
@@ -16,6 +42,10 @@ div.r-dropdown__control {
   display: flex;
   height: 31px;
   transition: background-color 0.6s, border 0.6s, box-shadow 0.6s;
+}
+
+div.r-dropdown__control:hover {
+  cursor: pointer;
 }
 
 div.r-dropdown__control:hover, div.r-dropdown__control--is-focused {
@@ -35,19 +65,21 @@ div.r-dropdown__indicators {
 
 .r-dropdown__menu {
   position: absolute;
-  width: calc(100% - 10px);
+  width: 100%;
   box-shadow: 0 1px 8px 0 #00000080;
   border: 1px solid #565d69;
   background-color: #212227;
   top: 40px;
-  left: 5px;
+  border-radius: 5px;
+  padding: 5px 0;
+  z-index: 2;
 }
 
 .r-dropdown__option {
   display: flex;
   align-items: center;
   height: 30px;
-  padding: 2px 4px;
+  padding: 2px 4px 2px 9px;
 }
 
 .drop-image-container {
@@ -61,5 +93,6 @@ div.r-dropdown__indicators {
 }
 
 .r-dropdown__option:hover {
-  background-color: #fff !important;
+  cursor: pointer;
+  background-color: #2c2e35 !important;
 }
