@@ -5,7 +5,7 @@ import TokenService from '../../services/token-service';
 import GameContext from "../../Contexts/gameContext";
 
 export default function Spot(props) {
-  const { setError } = useContext(GameContext);
+  const gameContext = useContext(GameContext);
 
   function handleJoinSpot(e) {
     e.preventDefault();
@@ -25,17 +25,47 @@ export default function Spot(props) {
         }
       })
       .catch(err => {
-        setError(err);
+        gameContext.setError(err);
       });
+  }
+
+  function generateRoleImages() {
+    const { roles } = props.spot;
+    let temp;
+
+    if (roles.length === 1) {
+      if (roles[0].icon_url) {
+        temp = (
+          <img className="squad__spots-full" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${roles[0].icon_url}`} alt=""/>
+        );
+      } else {
+        temp = (<i className="squad__spots-empty fas fa-users"/>);
+      }
+    } else if (roles.length > 1) {
+      temp = (
+        <>
+          <img className="squad__spots-first-half" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${roles[0].icon_url}`} alt=""/>
+          <img className="squad__spots-second-half" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${roles[1].icon_url}`} alt=""/>
+        </>
+      );
+    }
+
+    if (props.spot.filled) {
+      return (
+        <>
+          {temp}
+          <i className=" squad__spots-filled fas fa-check"/>
+        </>
+      );
+    } else {
+      return temp;
+    }
   }
   
   return (
-    <div>
-      <p>Squad Member {props.index} - {`${!!props.spot.filled}`}</p>
-      {props.spot.roles.map((role, i) => {
-        return <p key={i}>{role.name}</p>
-      })}
-      {!props.spot.filled && <button type="button" onClick={handleJoinSpot}>Join spot</button>}
-    </div>
+    <li className="squad__spots-image-container">
+      {generateRoleImages()}
+      {/* {!props.spot.filled && <button type="button" onClick={handleJoinSpot}>Join spot</button>} */}
+    </li>
   );
 }

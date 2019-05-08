@@ -1,0 +1,127 @@
+.avatar_url {
+  width: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.avatars {
+  width: 75px;
+  margin: 2px;
+  border-radius: 25%;
+  cursor: pointer;
+}
+
+.avatars:hover{
+  width: 78px;
+  border: 3px solid yellowgreen;
+}
+.avatars:active{
+  width: 78px;
+  border: 4px solid yellowgreen;
+}
+
+.nav-container{
+  position: fixed;
+  top: 15px;
+  right: 5px;
+  width: 180px;
+  z-index: 3;
+
+}
+.nav-content-container h2{
+  margin: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nav-content-container{
+  text-align: right;
+}
+
+.nav-button {
+  float: right;
+  font-size: 14px !important;
+  margin: 0 !important;
+}
+
+.avatar-nav-main{
+  border: 2px solid #7FAF23;
+  border-radius: 50%;
+  width: 50px;
+  float: right;
+  margin: 0px 25px 0px 20px;
+  cursor: pointer;
+}
+
+.avatar-nav-main:hover{
+  transition: 0.4s ease;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: -1px 0px 10px 0px #7FAF23;
+    box-shadow: 0px 0px 10px 1px #7FAF23;
+  }
+  50% {
+      -moz-box-shadow: 0px 1px 10px 0px #7FAF23;
+      box-shadow: 0px 0px 10px 0px #7FAF23;
+  }
+  100% {
+    -moz-box-shadow: -1px 0px 10px 0px #7FAF23;
+    box-shadow: 0px 0px 10px 1.5px #7FAF23;
+  }
+}
+
+.nav-icon-bar{
+  width: 90px;
+  float:left;
+  height: 100vh;
+  position: fixed;
+  display: inline-table;
+  background: #141416;
+  top: 0;
+
+}
+
+.logo:hover{
+  transition: 0.4s ease;
+  animation: pulse 1.5s infinite
+}
+
+.logo{
+  border-radius: 50%;
+  margin: 15% 10% 0% 10%;
+  width: 80%;
+  cursor: pointer;
+  transition: 1s ease;
+}
+
+@media screen and (max-width: 500px){
+  .nav-icon-bar{
+  position: relative;
+  display: inherit;
+  background: none;
+  height: inherit;
+  }
+  .nav-container {
+    width: 60%;
+  }
+
+  .mobile-nav-container{
+    height: 80px;
+    margin-bottom: 10px;
+    background: #141416;
+  }
+  .nav-content-container{
+    font-size: 12px;
+  }
+
+}

@@ -8,18 +8,11 @@ margin-top:0;
 }
 
 .game-display-container{
+  display: flex;
+  flex-wrap: wrap;
   width: 75%;
   margin: 0 auto;
   text-align: center;
-}
-.game-item-container span {
-border: 1px solid #4C535E;
-border-radius: 3px;
-margin: 0 2px 0 2px;
-font-size: 90%;
-padding: 0 4px 0 4px;
-background-color: #3B3F48;
-
 }
 
 .game-item-container a {
@@ -58,15 +51,16 @@ background-color: #3B3F48;
   padding: 3px 6px 4px 6px;
   border-radius: 5px 5px 0 0;
   background-color: #43582D;
+  font-family: Rajdhani, sans-serif;
+  font-weight: 600;
   color: white;
 }
 .filterGames:hover{
-  background-color: #7FAF23;
-  transition: 0.2s ease;
+  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
 }
 
 .filterGames:focus{
-  background-color: #7FAF23;
+  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
   outline: none;
 }
 
@@ -79,9 +73,9 @@ background-color: #3B3F48;
 .game-search-form{
   display: flex;
   flex-direction: row;
-  border: 1px solid #43582D;
+  border: 1px solid #7FAF23;
   border-radius: 4px;
-  width: 14%;
+  width: 235px;
   margin-left:19%;
   margin-bottom: 20px;
   padding: 2px;
@@ -98,9 +92,28 @@ outline: none;
 }
 
 .games-search-button{
-  border: 1px solid #4C535E;
+  border: none;
   border-radius: 3px;
-  background: #3B3F48;
-  color:#bdbdbd;
+  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  color:#ffffff;
   cursor: pointer;
 }
+
+@media screen and (max-width: 500px){
+    .game-display-container{
+    display: auto;
+    width: auto;
+    padding: 0;
+  }
+  .game-search-form{
+    margin: 0 auto;
+    margin-bottom: 10%;
+  }
+  .filter-tabs {
+    margin: 0 auto;
+  }
+  .game-item-container {
+    margin: 0 auto;
+  }
+}
+

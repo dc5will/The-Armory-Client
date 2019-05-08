@@ -54,7 +54,6 @@ export default function Dashboard(props) {
 
   return (
     <div className="dashboard-container">
-      <Nav props={props} />
       <form className="game-search-form" onSubmit={submitSearch}>
         <input
           id="title-search-input"

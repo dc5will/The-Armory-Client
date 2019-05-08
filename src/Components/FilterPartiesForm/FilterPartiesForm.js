@@ -5,7 +5,7 @@ import './FilterPartiesForm.css'
 
 export default function FilterPartyForm() {
   const gameContext = useContext(GameContext);
-  const { gamemodes, requirements, roles, gamemodeFilter, setFilters, resetFilters, setGamemodeFilter } = gameContext;
+  const { requirements, roles, setFilters, resetFilters } = gameContext;
   const [searchTerm, setSearchTerm] = useState('');
   const [requirementFilter, setRequirementFilter] = useState(undefined);
   const [requirementFilter2, setRequirementFilter2] = useState(undefined);
@@ -48,21 +48,6 @@ export default function FilterPartyForm() {
   function handleSearchChange(e) {
     e.preventDefault();
     setSearchTerm(e.target.value);
-  }
-
-  function generateGamemodeCheckboxes() {
-    function onClick(e) {
-      const { value } = e.target.dataset;
-      setGamemodeFilter(value);
-    }
-
-    let temp = {0: { name: 'All', icon_url: ''}, ...gamemodes}
-    return Object.entries(temp).map(([key, value]) => {
-      if (key == gamemodeFilter) {
-        return <div key={key} className="gamemode-filter-selected">{value.name}</div>;
-      }
-      return <button className="green-button-flat" key={key} type="submit" data-value={key} onClick={onClick}>{value.name}</button>;
-    });
   }
 
   function generateRequirementFilterDropdown() {
@@ -147,6 +132,7 @@ export default function FilterPartyForm() {
         name="roles"
         active={roleFilter2}
         inactive={!roleFilter}
+        gameId={gameContext.id}
         onChange={e => setRoleFilter2(e.value)}
         onButtonClick={e => setRoleFilter2(undefined)}
         placeholder='Select a role...'
@@ -171,18 +157,14 @@ export default function FilterPartyForm() {
         <legend>Requirements</legend>
         {generateRequirementFilterDropdown()}
       </fieldset>
-      <div className="parties-filters">
-        <h4>Roles</h4>
-        <hr/>
+      <fieldset className="squads-filters__fieldset">
+        <legend>Roles</legend>
         {generateRoleFilterDropdown()}
+      </fieldset>
+      <div className="squads-filters-buttons-container">
+        <button className="green-button" type="submit">Filter Squads</button>
+        <button className="grey-button" type="reset" onClick={handleReset}>Reset Filters</button>
       </div>
-      <hr/>
-
-      <button type="submit">Filter Parties</button>
-      <button type="reset" onClick={handleReset}>Reset Filters</button>
-      <hr/>
-      {generateGamemodeCheckboxes()}
-      <hr/>
     </form>
   );
 }
