@@ -4,6 +4,7 @@ import GameContext from '../../Contexts/gameContext';
 import config from "../../config";
 import TokenService from "../../services/token-service";
 import Dropdown from '../Dropdown/Dropdown';
+import './CreatePartyForm.css';
 
 export default function CreatePartyForm(props) {
   const gameContext = useContext(GameContext);
@@ -50,7 +51,7 @@ export default function CreatePartyForm(props) {
     req && reqs.push(req.dataset.value);
     req2 && reqs.push(req2.dataset.value);
 
-    return {
+    const res = {
       room_id: props.roomUrl,
       party: {
         game_id: gameContext.id,
@@ -62,35 +63,36 @@ export default function CreatePartyForm(props) {
       spots,
       requirement: reqs,
     };
+    console.log(res);
   }
 
 
   function onPartyCreate(e) {
     e.preventDefault();
     const newParty = getActiveValues(e.target);
-    fetch(
-        `${config.API_ENDPOINT}/parties`, 
-        {
-          method: 'POST',
-          headers: {
-            authorization: `Bearer ${TokenService.getAuthToken()}`,
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(newParty),
-        }
-      )
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-      .then((respJson) => {
-        props.history.push(`/party/${respJson}`);
-      })
-      .catch(err => {
-        //UPDATE TO DISPLAY ERROR
-        gameContext.setError(err);
-      });
+    // fetch(
+    //     `${config.API_ENDPOINT}/parties`, 
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         authorization: `Bearer ${TokenService.getAuthToken()}`,
+    //         'content-type': 'application/json'
+    //       },
+    //       body: JSON.stringify(newParty),
+    //     }
+    //   )
+    //   .then(res =>
+    //     (!res.ok)
+    //       ? res.json().then(e => Promise.reject(e))
+    //       : res.json()
+    //   )
+    //   .then((respJson) => {
+    //     props.history.push(`/party/${respJson}`);
+    //   })
+    //   .catch(err => {
+    //     //UPDATE TO DISPLAY ERROR
+    //     gameContext.setError(err);
+    //   });
   }
 
   //SPOT HANDLERS
@@ -170,96 +172,104 @@ export default function CreatePartyForm(props) {
   return (
     <form className="create-party-form" onSubmit={onPartyCreate}>
       <h2>Create Party</h2>
+      <fieldset className="create-squad__fieldset">
+        <legend>Details</legend>
+        <input
+          className="create-squad__name-input"
+          aria-label="Party Name"
+          type="text"
+          placeholder="Enter a title..."
+          value={partyName}
+          required
+          onChange={e => setPartyname(e.target.value)}
+        />
+        <textarea
+          className="create-squad__description-input"
+          aria-label="Description"
+          type="text"
+          maxLength='140'
+          placeholder="Enter a description... (limit 140char)"
+          value={partyDescription}
+          onChange={e => setPartyDescription(e.target.value)}
+        />
+      </fieldset>
 
-        <div className="input-field">
-          <label>Party Name
-            <input
-              type="text"
-              placeholder="party"
-              value={partyName}
-              required
-              onChange={e => setPartyname(e.target.value)}
-            />
-          </label>
-
-          <label>Description
-            <textarea
-              id="party-description-input"
-              type="text"
-              maxLength='140'
-              placeholder="limit 140 chars"
-              value={partyDescription}
-              onChange={e => setPartyDescription(e.target.value)}
-            />
-          </label>
-
-          <fieldset className="create-party-form__filters">
-            <legend>Requirements</legend>
-            <Dropdown
-              active={partyRequirement}
-              name="requirements"
-              onChange={e => setPartyRequirement(e.value)}
-              onButtonClick={e => {
-                if (partyRequirement2) {
-                  setPartyRequirement(partyRequirement2);
-                  setPartyRequirement2(undefined);
-                } else {
-                  setPartyRequirement(undefined);
-                }
-              }}
-              startValue={partyRequirement}
-              options={{...gameContext.requirements}}
-            />
-            <Dropdown
-              active={partyRequirement2}
-              inactive={!partyRequirement}
-              onChange={e => setPartyRequirement2(e.value)}
-              onButtonClick={() => setPartyRequirement2(undefined)}
-              name="requirements"
-              placeholder='Select a requirement...'
-              startValue={partyRequirement2}
-              options={getPartyRequirement2Options()}
-            />
-          </fieldset>
-          <fieldset className="create-party-form__filters">
-            <legend>Gamemode</legend>
-            <Dropdown 
-              active={partyGamemode}
-              onChange={e => setPartyGamemode(e.value)}
-              onButtonClick={() => setPartyGamemode(0)}
-              startValue={partyGamemode}
-              name="gamemode"
-              gameId={gameContext.id}
-              options={{...gameContext.gamemodes}}
-            />
-          </fieldset>
-        </div>
-
-        <div className='spot-container'>
-          <div className="spot_input">Owner Spot</div>
+      <div className="create-squad__half-fieldset-container">
+        <fieldset className="create-squad__fieldset create-squad__half-fieldset">
+          <legend>Requirements</legend>
+          <Dropdown
+            active={partyRequirement}
+            name="requirements"
+            onChange={e => setPartyRequirement(e.value)}
+            onButtonClick={e => {
+              if (partyRequirement2) {
+                setPartyRequirement(partyRequirement2);
+                setPartyRequirement2(undefined);
+              } else {
+                setPartyRequirement(undefined);
+              }
+            }}
+            startValue={partyRequirement}
+            options={{...gameContext.requirements}}
+          />
+          <Dropdown
+            active={partyRequirement2}
+            inactive={!partyRequirement}
+            onChange={e => setPartyRequirement2(e.value)}
+            onButtonClick={() => setPartyRequirement2(undefined)}
+            name="requirements"
+            placeholder='Select a requirement...'
+            startValue={partyRequirement2}
+            options={getPartyRequirement2Options()}
+          />
+        </fieldset>
+        <fieldset className="create-squad__fieldset create-squad__half-fieldset">
+          <legend>Gamemode</legend>
+          <Dropdown 
+            active={partyGamemode}
+            onChange={e => setPartyGamemode(e.value)}
+            onButtonClick={() => setPartyGamemode(0)}
+            startValue={partyGamemode}
+            name="gamemode"
+            gameId={gameContext.id}
+            options={{...gameContext.gamemodes}}
+          />
+        </fieldset>
+      </div>
+      <fieldset className="create-squad__fieldset">
+        <legend>Spots</legend>
+        <ul className='spot-container'>
+          <li className="spot-input__owner spot-input__image-container">
+            <i className="spot-input__spot-empty fas fa-users"/>
+            <i className="spot-input__spots-filled fas fa-check"/>
+          </li>
           {generateSpotInputs()}
+        </ul>
+      </fieldset>
+      <div className="create-squad__button-container">
+        <div className="create-squad__button-subcontainer">
+          <button
+            type="submit"
+            className="create-party-button green-button"
+          >
+            Create Party
+          </button>
+          <button
+            type="reset"
+            className="create-party-reset-button grey-button"
+            onClick={handleReset}
+          >
+            Reset
+          </button>
         </div>
-        
-        <button
-          type="reset"
-          className="create-party-reset-button"
-          onClick={handleReset}
-        >
-          Reset
-        </button>
-        <button
-          type="submit"
-          className="create-party-button"
-        >
-          Create Party
-        </button>
         <button
           aria-label="cancel"
-          className="create-party-cancel-button"
+          className="create-party-cancel-button grey-button"
           onClick={props.toggleCreatePartyForm}
         >
           Cancel
         </button>
+      </div>
     </form>
   );
 }

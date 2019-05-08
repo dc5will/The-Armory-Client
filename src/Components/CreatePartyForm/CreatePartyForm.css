@@ -1,0 +1,89 @@
+.create-party-form h2 {
+  background-image: linear-gradient(#363740, #2c2e34);
+  margin: 0 -20px 10px;
+  padding: 5px 0 10px 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-size: 18px;
+}
+
+.create-party-form {
+  width: 800px;
+  padding:  0 20px;
+}
+
+.create-squad__fieldset {
+  border: none;
+  padding: 0;
+}
+
+.create-squad__fieldset legend {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #5b6370;
+}
+
+.create-squad__half-fieldset-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.create-squad__half-fieldset {
+  display: inline-block;
+  width: 50%;
+}
+
+.create-squad__name-input, .create-squad__description-input {
+  border-radius: 5px;
+  border: 1px solid #6c6d71;
+  background-color: #4c515e;
+  color: #fff;
+  margin: 15px 5px;
+  transition: background-color 0.6s, border 0.6s, box-shadow 0.6s;
+  padding: 6px 8px 6px 8px;
+  box-shadow: 0 1px 8px 0 #00000080;
+}
+
+.create-squad__name-input:hover, 
+.create-squad__description-input:hover,
+.create-squad__name-input:focus, 
+.create-squad__description-input:focus {
+  border: 1px solid #8f9094;
+  background-color: #3e434e;
+}
+
+.create-squad__name-input {
+  width: 200px;
+}
+
+.create-squad__description-input {
+  font-family: Rajdhani, sans-serif;
+  width: calc(100% - 10px);
+  font-size: 14px;
+  resize: none;
+}
+
+.create-squad__button-container {
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 20px;
+}
+
+.create-squad__button-subcontainer {
+  display: flex;
+}
+
+.create-party-button, .create-party-cancel-button, .create-party-reset-button {
+  height: 30px;
+}
+
+.create-party-button {
+  margin-right: 20px;
+  width: 250px;
+}
+
+.create-party-reset-button, .create-party-cancel-button {
+  width: 200px
+}
