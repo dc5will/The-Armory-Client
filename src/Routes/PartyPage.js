@@ -180,8 +180,7 @@ export default function PartyPage(props) {
       });
       return (
         <li key={i}>
-          {!user.avatar_url ? '' : <img className='party-avatar' src={user.avatar_url} alt='avatar-img'/>}
-          <p>{user !== null ? user.username : "Available"}</p>
+          {user !== null ? user.username : "Available"}
           <p>{roleStr ? " - " : ''}
           {roleStr}{" "}</p>
         </li>
