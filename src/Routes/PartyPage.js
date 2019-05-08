@@ -5,6 +5,7 @@ import config from "../config";
 import PartyContext from "../Contexts/partyContext";
 import io from "socket.io-client";
 import PartyChat from "../Components/PartyChat/PartyChat";
+import './partyPage.css'
 let socket;
 
 export default function PartyPage(props) {
@@ -43,6 +44,17 @@ export default function PartyPage(props) {
   useEffect(() => {
     getChatLog()
   }, []);
+
+  useEffect(() => {
+    disableBack()
+  },[])
+
+  function disableBack(){
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () {
+        window.history.go(1);
+    };
+  }
 
   function getChatLog(){
     return fetch(`${config.API_ENDPOINT}/parties/messages/${props.match.params.partyId}`)
@@ -182,7 +194,7 @@ export default function PartyPage(props) {
   }
 
   return (
-    <div>
+    <div className='party-page-container'>
       <div>
         {context.party.title ? generateDisplayParty(context.party) : "Loading"}
       </div>
