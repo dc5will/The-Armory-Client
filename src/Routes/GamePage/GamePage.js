@@ -45,6 +45,17 @@ export default function GamePage(props) {
   }
 
   useEffect(() => {
+    browserBack()
+  },[])
+
+  function browserBack(){
+    window.history.pushState(null, null, '/');
+    window.onpopstate = function () {
+        window.history.go(1);
+    };
+  }
+
+  useEffect(() => {
     // populate party listing from API
     populateContext();
     // get game stuff

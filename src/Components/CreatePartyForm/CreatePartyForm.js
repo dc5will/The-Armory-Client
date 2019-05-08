@@ -251,6 +251,7 @@ export default function CreatePartyForm(props) {
           <button
             type="submit"
             className="create-party-button green-button"
+            onClick={onPartyCreate}
           >
             Create Party
           </button>

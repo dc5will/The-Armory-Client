@@ -22,6 +22,7 @@ export default function Squad(props) {
   }
 
   return (
+    config.IMAGES_ENDPOINT ? 'loading' :
     <li className="squad-container" aria-label='Open Squad Details' tabIndex="0">
       <div className="squad__gamemode-image-container">
         <img className="squad__gamemode-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.party.gamemode.icon_url}`} alt=""/>
