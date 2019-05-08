@@ -48,13 +48,12 @@ export default function CreatePartyForm(props) {
         }
       );
     });
-    let gamemode = target.querySelector('button[name=gamemode]');
-    gamemode ? (gamemode = gamemode.dataset.value) : (gamemode = 0);
+    let gamemode = 0;
+    partyGamemode && (gamemode = partyGamemode)
 
-    const [req, req2] = target.querySelectorAll('button[name=requirements]');
     const reqs = [];
-    req && reqs.push(req.dataset.value);
-    req2 && reqs.push(req2.dataset.value);
+    partyRequirement && reqs.push(partyRequirement);
+    partyRequirement2 && reqs.push(partyRequirement2);
 
     return {
       room_id: props.roomUrl,
@@ -74,29 +73,30 @@ export default function CreatePartyForm(props) {
   function onPartyCreate(e) {
     e.preventDefault();
     const newParty = getActiveValues(e.target);
-    fetch(
-        `${config.API_ENDPOINT}/parties`, 
-        {
-          method: 'POST',
-          headers: {
-            authorization: `Bearer ${TokenService.getAuthToken()}`,
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(newParty),
-        }
-      )
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-      .then((respJson) => {
-        props.history.push(`/party/${respJson}`);
-      })
-      .catch(err => {
-        //UPDATE TO DISPLAY ERROR
-        gameContext.setError(err);
-      });
+    console.log(newParty);
+    // fetch(
+    //     `${config.API_ENDPOINT}/parties`, 
+    //     {
+    //       method: 'POST',
+    //       headers: {
+    //         authorization: `Bearer ${TokenService.getAuthToken()}`,
+    //         'content-type': 'application/json'
+    //       },
+    //       body: JSON.stringify(newParty),
+    //     }
+    //   )
+    //   .then(res =>
+    //     (!res.ok)
+    //       ? res.json().then(e => Promise.reject(e))
+    //       : res.json()
+    //   )
+    //   .then((respJson) => {
+    //     props.history.push(`/party/${respJson}`);
+    //   })
+    //   .catch(err => {
+    //     //UPDATE TO DISPLAY ERROR
+    //     gameContext.setError(err);
+    //   });
   }
 
   //SPOT HANDLERS
