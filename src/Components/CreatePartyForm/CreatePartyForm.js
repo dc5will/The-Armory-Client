@@ -4,7 +4,10 @@ import GameContext from '../../Contexts/gameContext';
 import config from "../../config";
 import TokenService from "../../services/token-service";
 import Dropdown from '../Dropdown/Dropdown';
+import SpotInputFieldset from './SpotInput/SpotInputFieldset';
 import './CreatePartyForm.css';
+import useModal from '../Modal/useModal';
+import Modal from "../Modal/Modal";
 
 export default function CreatePartyForm(props) {
   const gameContext = useContext(GameContext);
@@ -17,6 +20,8 @@ export default function CreatePartyForm(props) {
   //spots
   const [spotMenuShown, setSpotMenuShown] = useState(undefined);
   const [spotsObj, setSpotsObj] = useState({});
+
+  const { isShowing, toggle } = useModal();
 
   useEffect(() => {
     let temp = {};
@@ -51,7 +56,7 @@ export default function CreatePartyForm(props) {
     req && reqs.push(req.dataset.value);
     req2 && reqs.push(req2.dataset.value);
 
-    const res = {
+    return {
       room_id: props.roomUrl,
       party: {
         game_id: gameContext.id,
@@ -63,43 +68,41 @@ export default function CreatePartyForm(props) {
       spots,
       requirement: reqs,
     };
-    console.log(res);
   }
 
 
   function onPartyCreate(e) {
     e.preventDefault();
     const newParty = getActiveValues(e.target);
-    // fetch(
-    //     `${config.API_ENDPOINT}/parties`, 
-    //     {
-    //       method: 'POST',
-    //       headers: {
-    //         authorization: `Bearer ${TokenService.getAuthToken()}`,
-    //         'content-type': 'application/json'
-    //       },
-    //       body: JSON.stringify(newParty),
-    //     }
-    //   )
-    //   .then(res =>
-    //     (!res.ok)
-    //       ? res.json().then(e => Promise.reject(e))
-    //       : res.json()
-    //   )
-    //   .then((respJson) => {
-    //     props.history.push(`/party/${respJson}`);
-    //   })
-    //   .catch(err => {
-    //     //UPDATE TO DISPLAY ERROR
-    //     gameContext.setError(err);
-    //   });
+    fetch(
+        `${config.API_ENDPOINT}/parties`, 
+        {
+          method: 'POST',
+          headers: {
+            authorization: `Bearer ${TokenService.getAuthToken()}`,
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(newParty),
+        }
+      )
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+      .then((respJson) => {
+        props.history.push(`/party/${respJson}`);
+      })
+      .catch(err => {
+        //UPDATE TO DISPLAY ERROR
+        gameContext.setError(err);
+      });
   }
 
   //SPOT HANDLERS
   function toggleSpotOptionsMenu(index) {
-    (spotMenuShown === index)
-      ? setSpotMenuShown(undefined)
-      : setSpotMenuShown(index);
+    setSpotMenuShown(index);
+    toggle();
   }
 
   function toggleOmitSpot(index) {
@@ -133,11 +136,8 @@ export default function CreatePartyForm(props) {
           key={key}
           index={key}
           omitted={value.omitted}
-          toggleOmitSpot={toggleOmitSpot}
-          toggleSpotOptionsMenu={toggleSpotOptionsMenu}
-          showOptions={key === spotMenuShown}
           roles={value.roles}
-          handleSpotSubmit={handleSpotSubmit}
+          toggleSpotOptionsMenu={toggleSpotOptionsMenu}
         />
       );
       (value.omitted)
@@ -171,7 +171,7 @@ export default function CreatePartyForm(props) {
 
   return (
     <form className="create-party-form" onSubmit={onPartyCreate}>
-      <h2>Create Party</h2>
+      <h2 className="modal-header">Create Party</h2>
       <fieldset className="create-squad__fieldset">
         <legend>Details</legend>
         <input
@@ -270,6 +270,24 @@ export default function CreatePartyForm(props) {
           Cancel
         </button>
       </div>
+      <Modal
+        isShowing={isShowing}
+        noDisableScrolling={true}
+        hide={toggle}
+        content={
+          (spotMenuShown)
+          ? <SpotInputFieldset
+              index={spotMenuShown}
+              omitted={spotsObj[spotMenuShown].omitted}
+              toggleOmitSpot={toggleOmitSpot}
+              toggleSpotOptionsMenu={toggleSpotOptionsMenu}
+              roles={spotsObj[spotMenuShown].roles}
+              handleSpotSubmit={handleSpotSubmit}
+            />
+          : null
+        }
+      />
+
     </form>
   );
 }

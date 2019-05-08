@@ -39,13 +39,9 @@ export default function SpotInput(props) {
 
   function handleSpotSubmit(e) {
     e.preventDefault();
-    let target = e.target.parentElement.querySelectorAll('button[name=roles]');
-
-    let [tar, tar2] = target;
     let temp = [];
-    (tar) && temp.push(tar.dataset.value);
-    (tar2) && temp.push(tar2.dataset.value);
-
+    (role) && temp.push(role);
+    (role2) && temp.push(role2);
     props.handleSpotSubmit(props.index, temp);
     props.toggleSpotOptionsMenu(props.index);
   }
@@ -60,14 +56,12 @@ export default function SpotInput(props) {
 
   return (
     <fieldset className="show_input_options">
-      <h4>Squad Member {props.index}</h4>
-
-      {!props.omitted && <button type="button" onClick={handleOmitSpot}>Omit</button>}
-
+      <h2 className="modal-header">Squad Member {props.index}</h2>
       <Dropdown
         name='roles'
         onChange={e => setRole(e.value)}
         onButtonClick={handleRole1Reset}
+        placeholder="Select a role..."
         active={role}
         gameId={id}
         startValue={role}
@@ -78,14 +72,19 @@ export default function SpotInput(props) {
         active={role2}
         inactive={!role}
         gameId={id}
+        placeholder="Select a role..."
         onChange={e => setRole2(e.value)}
         onButtonClick={() => setRole2(undefined)}
         startValue={role2}
         options={getRole2Options()}
       />
-
-      <button type="submit" onClick={handleSpotSubmit}>Confirm</button>
-      <button type="reset" onClick={handleCancel}>Cancel</button>
+      <div className="create-squad__button-container">
+        <div className="create-squad__button-subcontainer">
+          <button className="green-button spot-input__field-button spot-input__field-button-first" type="submit" onClick={handleSpotSubmit}>Confirm</button>
+          <button className="grey-button spot-input__field-button" type="reset" onClick={handleCancel}>Cancel</button>
+        </div>
+        {!props.omitted && <button className="green-button spot-input__field-button" type="button" onClick={handleOmitSpot}>Omit</button>}
+      </div>
     </fieldset>
   );
 }
