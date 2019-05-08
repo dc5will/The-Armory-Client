@@ -5,7 +5,7 @@ import TokenService from '../services/token-service';
 import UserContext from '../Contexts/userContext';
 import useModal from './Modal/useModal';
 import Modal from './Modal/Modal';
-import TOS from './TosPage';
+import TOS from './ToSPage/TosPage';
 
 export default function RegisterForm(props) {
   const context = useContext(UserContext);
