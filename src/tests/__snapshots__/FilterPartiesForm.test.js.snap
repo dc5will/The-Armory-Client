@@ -51,7 +51,7 @@ exports[`FilterPartiesForm component renders the UI as expected 1`] = `
             <div
               className="css-151xaom-placeholder r-dropdown__placeholder"
             >
-              Select...
+              Select a requirement...
             </div>
             <input
               className="css-gj7qu5-dummyInput"
@@ -98,13 +98,12 @@ exports[`FilterPartiesForm component renders the UI as expected 1`] = `
       className="inactive-dropdown"
     />
   </fieldset>
-  <div
-    className="parties-filters"
+  <fieldset
+    className="squads-filters__fieldset"
   >
-    <h4>
+    <legend>
       Roles
-    </h4>
-    <hr />
+    </legend>
     <div
       className="dropdown"
     >
@@ -123,7 +122,7 @@ exports[`FilterPartiesForm component renders the UI as expected 1`] = `
             <div
               className="css-151xaom-placeholder r-dropdown__placeholder"
             >
-              Select...
+              Select a role...
             </div>
             <input
               className="css-gj7qu5-dummyInput"
@@ -169,25 +168,23 @@ exports[`FilterPartiesForm component renders the UI as expected 1`] = `
     <div
       className="inactive-dropdown"
     />
-  </div>
-  <hr />
-  <button
-    type="submit"
-  >
-    Filter Parties
-  </button>
-  <button
-    onClick={[Function]}
-    type="reset"
-  >
-    Reset Filters
-  </button>
-  <hr />
+  </fieldset>
   <div
-    className="gamemode-filter-selected"
+    className="squads-filters-buttons-container"
   >
-    All
+    <button
+      className="green-button"
+      type="submit"
+    >
+      Filter Squads
+    </button>
+    <button
+      className="grey-button"
+      onClick={[Function]}
+      type="reset"
+    >
+      Reset Filters
+    </button>
   </div>
-  <hr />
 </form>
 `;

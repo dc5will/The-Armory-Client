@@ -8,35 +8,43 @@ exports[`CreatePartyForm component renders the UI as expected 1`] = `
   <h2>
     Create Party
   </h2>
-  <div
-    className="input-field"
+  <fieldset
+    className="create-squad__fieldset"
   >
-    <label>
-      Party Name
-      <input
-        onChange={[Function]}
-        placeholder="party"
-        required={true}
-        type="text"
-        value=""
-      />
-    </label>
-    <label>
-      Description
-      <textarea
-        id="party-description-input"
-        maxLength="140"
-        onChange={[Function]}
-        placeholder="limit 140 chars"
-        type="text"
-        value=""
-      />
-    </label>
-    <div
-      className="dropdown"
+    <legend>
+      Details
+    </legend>
+    <input
+      aria-label="Party Name"
+      className="create-squad__name-input"
+      onChange={[Function]}
+      placeholder="Enter a title..."
+      required={true}
+      type="text"
+      value=""
+    />
+    <textarea
+      aria-label="Description"
+      className="create-squad__description-input"
+      maxLength="140"
+      onChange={[Function]}
+      placeholder="Enter a description... (limit 140char)"
+      type="text"
+      value=""
+    />
+  </fieldset>
+  <div
+    className="create-squad__half-fieldset-container"
+  >
+    <fieldset
+      className="create-squad__fieldset create-squad__half-fieldset"
     >
-      <label>
-        Party Requirements
+      <legend>
+        Requirements
+      </legend>
+      <div
+        className="dropdown"
+      >
         <div
           className="css-1pcexqc-container"
           onKeyDown={[Function]}
@@ -94,16 +102,20 @@ exports[`CreatePartyForm component renders the UI as expected 1`] = `
             </div>
           </div>
         </div>
-      </label>
-    </div>
-    <div
-      className="inactive-dropdown"
-    />
-    <div
-      className="dropdown"
+      </div>
+      <div
+        className="inactive-dropdown"
+      />
+    </fieldset>
+    <fieldset
+      className="create-squad__fieldset create-squad__half-fieldset"
     >
-      <label>
+      <legend>
         Gamemode
+      </legend>
+      <div
+        className="dropdown"
+      >
         <div
           className="css-1pcexqc-container"
           onKeyDown={[Function]}
@@ -161,36 +173,56 @@ exports[`CreatePartyForm component renders the UI as expected 1`] = `
             </div>
           </div>
         </div>
-      </label>
-    </div>
+      </div>
+    </fieldset>
   </div>
+  <fieldset
+    className="create-squad__fieldset"
+  >
+    <legend>
+      Spots
+    </legend>
+    <ul
+      className="spot-container"
+    >
+      <li
+        className="spot-input__owner spot-input__image-container"
+      >
+        <i
+          className="spot-input__spot-empty fas fa-users"
+        />
+        <i
+          className="spot-input__spots-filled fas fa-check"
+        />
+      </li>
+    </ul>
+  </fieldset>
   <div
-    className="spot-container"
+    className="create-squad__button-container"
   >
     <div
-      className="spot_input"
+      className="create-squad__button-subcontainer"
     >
-      Owner Spot
+      <button
+        className="create-party-button green-button"
+        type="submit"
+      >
+        Create Party
+      </button>
+      <button
+        className="create-party-reset-button grey-button"
+        onClick={[Function]}
+        type="reset"
+      >
+        Reset
+      </button>
     </div>
+    <button
+      aria-label="cancel"
+      className="create-party-cancel-button grey-button"
+    >
+      Cancel
+    </button>
   </div>
-  <button
-    className="create-party-reset-button"
-    onClick={[Function]}
-    type="reset"
-  >
-    Reset
-  </button>
-  <button
-    className="create-party-button"
-    type="submit"
-  >
-    Create Party
-  </button>
-  <button
-    aria-label="cancel"
-    className="create-party-cancel-button"
-  >
-    Cancel
-  </button>
 </form>
 `;

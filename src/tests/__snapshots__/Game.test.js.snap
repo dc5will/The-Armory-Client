@@ -20,10 +20,14 @@ exports[`Game component renders the UI as expected 1`] = `
       Overwatch
     </h3>
   </a>
-  <span>
+  <span
+    className="small-detail"
+  >
     Shooter
   </span>
-  <span>
+  <span
+    className="small-detail"
+  >
     FPS
   </span>
   <p>

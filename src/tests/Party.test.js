@@ -53,7 +53,7 @@ spots: [
 ]
 };
 
-describe("Party component", () => {
+describe.skip("Party component", () => {
   console.log(props.party)
   it("renders without crashing", () => {
     shallow(<Party party={props} />);

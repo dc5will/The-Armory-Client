@@ -4,26 +4,6 @@ exports[`Dashboard component renders the UI as expected 1`] = `
 <div
   className="dashboard-container"
 >
-  <div>
-    <div>
-      <img
-        alt="avatar profile pic"
-        src="basicAvatar.png"
-      />
-      <h2 />
-      <button
-        onClick={[Function]}
-        type="button"
-      >
-        Edit Profile
-      </button>
-      <button
-        onClick={[Function]}
-      >
-        Logout
-      </button>
-    </div>
-  </div>
   <form
     className="game-search-form"
     onSubmit={[Function]}
