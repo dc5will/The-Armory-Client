@@ -1,29 +1,30 @@
-import React from 'react';
-import Error from '../Components/Error/Error';
-import ReactDOM from 'react-dom';
-import { MemoryRouter } from 'react-router-dom';
-import renderer from 'react-test-renderer';
+import React from "react";
+import Error from "../Components/Error/Error";
+import { MemoryRouter } from "react-router-dom";
+import toJson from "enzyme-to-json";
+import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
-describe('FAQ component', () => {
+describe.only("Error component", () => {
+  const props = {
+    error: "Test Error message"
+  };
 
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(
+  it("renders without crashing", () => {
+    shallow(
       <MemoryRouter>
         <Error />
-      </MemoryRouter>, div
+      </MemoryRouter>
     );
-    ReactDOM.unmountComponentAtNode(div);
-  })
+  });
+
+  it("renders default form", () => {
+    const wrapper = shallow(<Error />);
+    expect(toJson(wrapper)).toMatchSnapshot();
+  });
 
   it("renders the UI as expected", () => {
-    const tree = renderer
-      .create(
-        <MemoryRouter>
-          <Error />
-        </MemoryRouter>
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const wrapper = shallow(<Error {...props} />);
+    expect(toJson(wrapper)).toMatchSnapshot();
   });
-})
+});

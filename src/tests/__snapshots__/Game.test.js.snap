@@ -17,18 +17,18 @@ exports[`Game component renders the UI as expected 1`] = `
       />
     </div>
     <h3>
-      Overwatch
+      Test Game
     </h3>
   </a>
   <span
     className="small-detail"
   >
-    Shooter
+    Test tag1
   </span>
   <span
     className="small-detail"
   >
-    FPS
+    test tag2
   </span>
   <p>
     Available Parties: 

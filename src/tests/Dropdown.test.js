@@ -3,7 +3,7 @@ import Dropdown from '../Components/Dropdown/Dropdown';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
+import { shallow, } from "enzyme";
 
 describe.skip('Dropdown component', () => {
 

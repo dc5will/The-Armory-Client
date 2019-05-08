@@ -1,10 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FAQ component renders the UI as expected 1`] = `
+exports[`Error component renders default form 1`] = `
 <div
   className="error-container"
 >
   <p />
+  <button
+    type="button"
+  >
+    X
+  </button>
+</div>
+`;
+
+exports[`Error component renders the UI as expected 1`] = `
+<div
+  className="error-container"
+>
+  <p>
+    Test Error message
+  </p>
   <button
     type="button"
   >
