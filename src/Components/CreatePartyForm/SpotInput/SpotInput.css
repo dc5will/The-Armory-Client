@@ -1,19 +1,110 @@
-.spot_input {
-  position: relative;
-  width: 150px;
-  height: 150px;
-  background-color: #f7f7f7;
+.spot-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
 }
 
-.spot_input.spot_omitted {
+.spot-input {
+  position: relative;
+  display: inline-block;
+}
+
+.spot-input:hover {
+  cursor: pointer;
+}
+
+
+
+.spot_omitted {
   background-color: #000000;
 }
 
-.show_input_options{
+.show-input_options{
   position: absolute;
   left: 150%;
   top: 0;
   background-color: #f7f7f7;
   width: 100px;
   height: 200px;
+}
+
+.spot-input__spot-empty {
+  background-color: #565d69;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spot-input__image-container {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px 0 #00000080;
+  border: 1px solid #909193;
+  font-size: 22px;
+}
+
+.spot-input__spot-full {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  clip-path: inset(10px 10px 10px 10px);
+  width: 80px;
+  height: 80px;
+}
+
+.spot-input__spot-first-half {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  clip-path: inset(10px 40px 10px 10px);
+  width: 80px;
+  height: 80px;
+}
+
+.spot-input__spot-second-half {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  clip-path: inset(10px 10px 10px 40px);
+  width: 80px;
+  height: 80px;
+}
+
+.spot-input__roles-text {
+  position: absolute;
+  top: calc(100% + 10px);
+  background-color: #000000ce;
+  padding: 4px 14px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.spot-input__spots-filled, .spot-input__spots-omitted {
+  width: 60px;
+  height: 60px;
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  top: 0;
+  left: 0;
+}
+
+.spot-input__spots-filled {
+  background-color: #2c2e35b9;
+}
+
+.spot-input__spots-omitted {
+  background-color: #17181ab9;
+}
+
+.spot-input__owner {
+  display: inline-block;
 }
