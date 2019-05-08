@@ -5,7 +5,7 @@
   border: 1px solid transparent;
 }
 
-.squad-container:hover {
+.squad-container:hover, .squad-container:focus {
   background-color: #3b3e48 !important;
   border-radius: 0;
   border: 1px solid #6e6f72;
@@ -157,4 +157,19 @@
   position: absolute;
   top: -9px;
   left: -10px;
+}
+
+.squad__owner {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  padding-bottom: 5px;
+}
+
+.squad__owner p {
+  color: #fff;
+}
+
+.squad__owner div {
+  margin-right: 10px;
 }

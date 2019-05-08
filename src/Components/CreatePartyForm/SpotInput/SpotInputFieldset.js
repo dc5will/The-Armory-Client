@@ -4,7 +4,7 @@ import './SpotInput.css';
 import Dropdown from '../../Dropdown/Dropdown';
 
 export default function SpotInput(props) {
-  const { roles } = useContext(GameContext);
+  const { roles, id } = useContext(GameContext);
 
   const [role, setRole] = useState('');
   const [role2, setRole2] = useState('');
@@ -14,10 +14,8 @@ export default function SpotInput(props) {
     props.roles[1] && setRole2(props.roles[1]);
   }, []);
 
-  let baseOptions = {0: { name: 'Select a role...' }, ...roles}
-
   function getRole2Options() {
-    let temp = {...baseOptions};
+    let temp = {...roles};
     delete temp[role];
 
     return temp;
@@ -68,17 +66,19 @@ export default function SpotInput(props) {
 
       <Dropdown
         name='roles'
-        onChange={e => setRole(e.target.value)}
+        onChange={e => setRole(e.value)}
         onButtonClick={handleRole1Reset}
         active={role}
+        gameId={id}
         startValue={role}
-        options={baseOptions}
+        options={{...roles}}
       />
       <Dropdown 
         name='roles'
         active={role2}
         inactive={!role}
-        onChange={e => setRole2(e.target.value)}
+        gameId={id}
+        onChange={e => setRole2(e.value)}
         onButtonClick={() => setRole2(undefined)}
         startValue={role2}
         options={getRole2Options()}

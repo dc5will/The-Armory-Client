@@ -23,7 +23,7 @@ export default function Squad(props) {
 
   return (
     config.IMAGES_ENDPOINT ? 'loading' :
-    <li className="squad-container" aria-label='Open Squad Details'>
+    <li className="squad-container" aria-label='Open Squad Details' tabIndex="0">
       <div className="squad__gamemode-image-container">
         <img className="squad__gamemode-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.party.gamemode.icon_url}`} alt=""/>
       </div>
@@ -33,10 +33,12 @@ export default function Squad(props) {
           <ul className="squad__spots-list">
             {generateSpots(props.party)}
           </ul>
-          <div className="squad__spots-image-container">
-            <img className="squad__avatar-image" src={props.party.owner_id.avatar_url} alt=""/>
+          <div className="squad__owner">
+            <div className="squad__spots-image-container">
+              <img className="squad__avatar-image" src={props.party.owner_id.avatar_url} alt=""/>
+            </div>
+            <p>{props.party.owner_id.username}</p>
           </div>
-          <p>{props.party.owner_id.username}</p>
         </div>
         <p><span className="small-detail">{props.party.gamemode.name}</span>{props.party.description}</p>
       </div>
