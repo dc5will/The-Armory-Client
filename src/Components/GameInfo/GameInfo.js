@@ -28,8 +28,6 @@ export default function GameInfo(props) {
           <h2>{gameContext.title}</h2>
           {generateGameTags()}
         </div>
-
-        {/* <p>{gameContext.partiesAvailable}</p> */}
         <FilterPartiesForm />
       </div>
       <div className="squad-details__create-container">
