@@ -13,8 +13,6 @@
   cursor: pointer;
 }
 
-
-
 .spot_omitted {
   background-color: #000000;
 }
@@ -46,6 +44,11 @@
   box-shadow: 0 1px 8px 0 #00000080;
   border: 1px solid #909193;
   font-size: 22px;
+}
+
+.spot-input__image-container:hover {
+  border: 1px solid #a4a5a8;
+  box-shadow: 0 5px 13px 0 #00000080;
 }
 
 .spot-input__spot-full {
