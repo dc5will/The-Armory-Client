@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game component renders the UI as expected 1`] = `
+<div
+  className="game-item-container"
+>
+  <a
+    href="/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed"
+    onClick={[Function]}
+  >
+    <div
+      className="game-img"
+    >
+      <img
+        alt="Game Cover"
+        src="https://res.cloudinary.com/squadarmory/image/upload/v1557172650/overwatch_epjgky.png"
+      />
+    </div>
+    <h3>
+      Overwatch
+    </h3>
+  </a>
+  <span>
+    Shooter
+  </span>
+  <span>
+    FPS
+  </span>
+  <p>
+    Available Parties: 
+  </p>
+</div>
+`;

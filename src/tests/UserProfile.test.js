@@ -7,7 +7,7 @@ import { shallow } from "enzyme";
 
 describe('UserProfile component', () => {
 
-  it.skip('renders without crashing', () => {
+  it('renders without crashing', () => {
     shallow(<UserProfile/>)
     // const div = document.createElement('div');
     // ReactDOM.render(
