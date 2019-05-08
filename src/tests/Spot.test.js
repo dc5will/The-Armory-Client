@@ -6,8 +6,7 @@ import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
 describe.skip('Spot component', () => {
-
-  it('renders without crashing', () => {
+    it('renders without crashing', () => {
     shallow(<Spot/>)
     // const div = document.createElement('div');
     // ReactDOM.render(

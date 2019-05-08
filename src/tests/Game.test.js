@@ -14,11 +14,9 @@ const data = {
 };
 
 describe("Game component", () => {
-  // TypeError: Cannot read property 'id' of undefined
+  // const game = shallow(<Game props={data} />);
   it("renders without crashing", () => {
-    console.log(data.id);
     shallow(<Game props={data} />);
-
   });
 
   it("renders the UI as expected", () => {
