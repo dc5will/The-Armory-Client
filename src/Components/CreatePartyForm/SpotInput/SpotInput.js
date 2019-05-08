@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import './SpotInput.css';
-import SpotInputFieldset from './SpotInputFieldset';
 import config from '../../../config';
 import GameContext from "../../../Contexts/gameContext";
 
@@ -54,28 +53,16 @@ export default function SpotInput(props) {
   }
 
   return (
-    <li className="spot-input">
-      <div 
-        className='spot-input__image-container'
-        aria-label="spot button" tabIndex="0" 
-        onClick={() => props.toggleSpotOptionsMenu(props.index)}
-        onMouseEnter={(e) => handleMouseEnter()}
-        onMouseLeave={(e) => handleMouseLeave()}
-      >
-        {generateRoleImages()}
-        {props.omitted && <i className="spot-input__spots-omitted fas fa-times"/>}
-      </div>
+    <li 
+      className="spot-input spot-input__image-container"
+      aria-label="spot button" tabIndex="0" 
+      onClick={() => props.toggleSpotOptionsMenu(props.index)}
+      onMouseEnter={(e) => handleMouseEnter()}
+      onMouseLeave={(e) => handleMouseLeave()}
+    >
+      {generateRoleImages()}
+      {props.omitted && <i className="spot-input__spots-omitted fas fa-times"/>}
       {showRoles && <span className="spot-input__roles-text">{generateRoleText()}</span>}
-      {props.showOptions && 
-        <SpotInputFieldset
-          index={props.index}
-          omitted={props.omitted}
-          toggleOmitSpot={props.toggleOmitSpot}
-          toggleSpotOptionsMenu={props.toggleSpotOptionsMenu}
-          roles={props.roles}
-          handleSpotSubmit={props.handleSpotSubmit}
-        />
-      }
     </li>
   );
 }
