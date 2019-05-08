@@ -5,23 +5,22 @@ import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
-const data = {
-  roles: ['filled']
-}
 
-describe.only("SpotInput component", () => {
-  it.skip("renders without crashing", () => {
-    shallow(<SpotInput props={data} />);
-    // const div = document.createElement('div');
-    // ReactDOM.render(
-    //   <MemoryRouter>
-    //     <SpotInput />
-    //   </MemoryRouter>, div
-    // );
-    // ReactDOM.unmountComponentAtNode(div);
+describe.skip("SpotInput component", () => {
+  it("renders without crashing", () => {
+    shallow(<SpotInput 
+      // key={key}
+      // index={key}
+      // omitted={value.omitted}
+      // toggleOmitSpot={toggleOmitSpot}
+      // toggleSpotOptionsMenu={toggleSpotOptionsMenu}
+      // showOptions={key === spotMenuShown}
+      // roles={value.roles}
+      // handleSpotSubmit={handleSpotSubmit}
+    />);
   });
 
-  it.skip("renders the UI as expected", () => {
+  it("renders the UI as expected", () => {
     const tree = renderer
       .create(
         <MemoryRouter>

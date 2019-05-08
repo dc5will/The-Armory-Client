@@ -4,7 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
-const party = {
+const props = {
   party: {
     id: "fb1d3c63-6a72-4013-be82-5b523c1dd1cd",
     game_id: "aa0e8ce9-1a71-42e7-804d-6838556fa6ed",
@@ -54,16 +54,16 @@ spots: [
 };
 
 describe("Party component", () => {
-  console.log(party.party)
+  console.log(props.party)
   it("renders without crashing", () => {
-    shallow(<Party party={party} />);
+    shallow(<Party party={props} />);
   });
 
   it("renders the UI as expected", () => {
     const tree = renderer
       .create(
         <MemoryRouter>
-          <Party party={party} />
+          <Party party={props} />
         </MemoryRouter>
       )
       .toJSON();
