@@ -44,7 +44,7 @@ export default function PartyPage(props) {
       window.removeEventListener('beforeunload', (e) => {
         return 'Leaving this page will result in you leaving the squad. Continue?';
       });
-      handleLeave()
+      leave()
     };
   }, []);
 
@@ -159,17 +159,9 @@ export default function PartyPage(props) {
   // so this function confirms the exit of the party
 
   function displayWarning() {
-    return warning ? (
-      <div className='party-warning'>
-        <p>Are you sure you want to leave this party?</p>
-        <div className='leave-party'>
-        <button onClick={e => handleLeave()}>Confirm</button>
-        <button onClick={e => setWarning(!warning)}>Cancel</button>
-        </div>
-      </div>
-    ) : (
+    return(
       <div className='leave-party'>
-      <button onClick={e => setWarning(!warning)}>Leave party</button>
+      <button onClick={e => handleLeave()}>Leave party</button>
       </div>
     );
   }
