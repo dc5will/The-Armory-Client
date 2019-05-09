@@ -1,54 +1,93 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Party component renders the UI as expected 1`] = `
-<div>
+<li
+  aria-label="Open Squad Details"
+  className="squad-container"
+  tabIndex="0"
+>
   <div
-    className="party-container"
+    className="squad__gamemode-image-container"
   >
-    <p>
-      <strong />
-    </p>
-    <p>
-      test reqs 1
-    </p>
-    <p>
-      test reqs 2
-    </p>
-    <p />
+    <img
+      alt=""
+      className="squad__gamemode-image"
+      src="http://localhost:8000/images/undefined/Gamemode-Quickplay.png"
+    />
+  </div>
+  <div
+    className="squad__details"
+  >
     <div
-      className="avatar-container"
+      className="squad__details-top"
     >
-      <div>
-        <p>
-          Squad Member 
-          0
-           - 
-          false
-        </p>
-        <p>
-          test2
-        </p>
-        <p>
-          test2
-        </p>
-        <button
-          onClick={[Function]}
-          type="button"
+      <h4>
+        Test Title
+      </h4>
+      <ul
+        className="squad__spots-list"
+      >
+        <li
+          className="squad__spots-image-container"
         >
-          Join spot
-        </button>
-      </div>
-      <div>
-        <p>
-          Squad Member 
-          1
-           - 
-          true
-        </p>
+          <img
+            alt=""
+            className="squad__spots-first-half"
+            src="http://localhost:8000/images/undefined/Icon-Genji.png"
+          />
+          <img
+            alt=""
+            className="squad__spots-second-half"
+            src="http://localhost:8000/images/undefined/Icon-Support.png"
+          />
+        </li>
+        <li
+          className="squad__spots-image-container"
+        >
+          <i
+            className="squad__spots-empty fas fa-users"
+          />
+          <i
+            className=" squad__spots-filled fas fa-check"
+          />
+        </li>
+      </ul>
+      <div
+        className="squad__owner"
+      >
+        <div
+          className="squad__spots-image-container"
+        >
+          <img
+            alt=""
+            className="squad__avatar-image"
+          />
+        </div>
         <p />
       </div>
     </div>
-    <span />
+    <p>
+      <span
+        className="small-detail"
+      >
+        Quick Play
+      </span>
+      This is a description of test party.
+    </p>
   </div>
-</div>
+  <div
+    className="squad__requirements"
+  >
+    <span
+      className="small-detail"
+    >
+      Diamond
+    </span>
+    <span
+      className="small-detail"
+    >
+      Bronze
+    </span>
+  </div>
+</li>
 `;

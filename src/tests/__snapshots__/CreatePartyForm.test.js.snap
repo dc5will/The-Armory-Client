@@ -5,7 +5,9 @@ exports[`CreatePartyForm component renders the UI as expected 1`] = `
   className="create-party-form"
   onSubmit={[Function]}
 >
-  <h2>
+  <h2
+    className="modal-header"
+  >
     Create Party
   </h2>
   <fieldset
