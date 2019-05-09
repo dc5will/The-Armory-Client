@@ -3,6 +3,7 @@ import UserContext from "../../Contexts/userContext";
 import TokenService from "../../services/token-service";
 import config from '../../config';
 import AuthApiService from "../../services/auth-api-service";
+import './UserProfile.css';
 
 export default function UserProfile(props) {
   const [email, setEmail] = useState("");
@@ -81,7 +82,7 @@ export default function UserProfile(props) {
   }
 
   function generateUserIconImages() {
-    const imageNames = ['ninja', 'pikachu', 'soldier76', 'Cactuar', 'axe', 'TJICON'];
+    const imageNames = ['Default-Avatar', 'ninja', 'pikachu', 'soldier76', 'Cactuar', 'axe', 'TJICON'];
     return imageNames.map(name => (
       <li>
         <img
@@ -97,7 +98,7 @@ export default function UserProfile(props) {
   }
 
   return (
-    <div className="profileForm">
+    <div className="user-profile-container">
       <h2 className="modal-header">Profile Settings</h2>
       <form className="profile-form" onSubmit={e => authorizeChanges(e)}>
         <p>{error}</p>

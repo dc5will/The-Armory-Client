@@ -45,7 +45,7 @@ export default function Nav(props) {
   function generateNavBar(user){
     return(
         <div className='nav-content-container'>
-          <img className='avatar-nav-main' src={user.avatar_url ? user.avatar_url : `${config.IMAGES_ENDPOINT}/user-icons/basicAvatar.png`} alt='avatar profile pic' onClick={e => toggle()}></img>
+          <img className='avatar-nav-main' src={`${config.IMAGES_ENDPOINT}/user-icons/${user.avatar_url}`} alt='avatar profile pic' onClick={e => toggle()}></img>
           <h2>{user.username}</h2>
           <Modal
             isShowing={isShowing}
