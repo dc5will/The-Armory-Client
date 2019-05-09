@@ -97,69 +97,67 @@ export default function UserProfile(props) {
   }
 
   return (
-    <main>
-      <div className="profileForm">
-        <h2>Profile Settings</h2>
-        <form className="profile-form" onSubmit={e => authorizeChanges(e)}>
-          <p>{error}</p>
+    <div className="profileForm">
+      <h2 className="modal-header">Profile Settings</h2>
+      <form className="profile-form" onSubmit={e => authorizeChanges(e)}>
+        <p>{error}</p>
 
-          <ul className="input-field">
-            <p>Choose a new avatar:</p>
-            {generateUserIconImages()}
-          </ul>
+        <ul className="input-field">
+          <p>Choose a new avatar:</p>
+          {generateUserIconImages()}
+        </ul>
 
-          <div className="input-field">
-            <label htmlFor="profile-email-input">Email: </label>
-            <input
-              id="profile-email-input"
-              type="email"
-              placeholder={curr.email}
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
+        <div className="input-field">
+          <label htmlFor="profile-email-input">Email: </label>
+          <input
+            id="profile-email-input"
+            type="email"
+            placeholder={curr.email}
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </div>
 
-          <div className="input-field">
-            <label htmlFor="profile-password-input">New Password: </label>
-            <input
-              id="profile-password-input"
-              type="password"
-              placeholder="change password"
-              value={newPass}
-              onChange={e => setNewPass(e.target.value)}
-            />
-          </div>
+        <div className="input-field">
+          <label htmlFor="profile-password-input">New Password: </label>
+          <input
+            id="profile-password-input"
+            type="password"
+            placeholder="change password"
+            value={newPass}
+            onChange={e => setNewPass(e.target.value)}
+          />
+        </div>
 
-          <div className="input-field">
-            <label htmlFor="profile-password-input">
-              Confirm New Password:{" "}
-            </label>
-            <input
-              id="profile-password-input"
-              type="password"
-              placeholder="change password"
-              value={confirmPass}
-              onChange={e => setConfirmPass(e.target.value)}
-            />
-          </div>
+        <div className="input-field">
+          <label htmlFor="profile-password-input">
+            Confirm New Password:{" "}
+          </label>
+          <input
+            id="profile-password-input"
+            type="password"
+            placeholder="change password"
+            value={confirmPass}
+            onChange={e => setConfirmPass(e.target.value)}
+          />
+        </div>
 
-          <div className="input-field">
-            <label htmlFor="profile-password-input">Current Password: </label>
-            <input
-              id="profile-password-input"
-              type="password"
-              placeholder="current password"
-              required
-              value={currentPass}
-              onChange={e => setCurrentPass(e.target.value)}
-            />
-          </div>
+        <div className="input-field">
+          <label htmlFor="profile-password-input">Current Password: </label>
+          <input
+            id="profile-password-input"
+            type="password"
+            placeholder="current password"
+            required
+            value={currentPass}
+            onChange={e => setCurrentPass(e.target.value)}
+          />
+        </div>
 
-          <button type="submit" className="submit-button">
-            Update Profile
-          </button>
-        </form>
-      </div>
-    </main>
+        <button type="submit" className="submit-button">
+          Update Profile
+        </button>
+      </form>
+    </div>
   );
 }

@@ -36,9 +36,14 @@ export default function PartyPage(props) {
     });
 
     //block navigation
-    window.onbeforeunload = () => true;
+    window.addEventListener('beforeunload', (e) => {
+      return 'Leaving this page will result in you leaving the squad. Continue?';
+    });
 
     return () => {
+      window.removeEventListener('beforeunload', (e) => {
+        return 'Leaving this page will result in you leaving the squad. Continue?';
+      });
       leave();
     };
   }, []);
@@ -192,7 +197,6 @@ export default function PartyPage(props) {
 
   function expandParty(){
     setExpand(!expand)
-    console.log(expand);
   }
 
   function generateDisplayParty(party) {
