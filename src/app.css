@@ -13,3 +13,47 @@ body{
 .no-scroll {
   overflow: hidden;
 }
+
+.error-container {
+  position: fixed;
+  top: 30px;
+  background-color: #697176;
+  border: 1px solid #9ca1a4;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  padding: 10px 20px;
+  width: 80%;
+  text-align: center;
+  z-index: 10;
+  left: 10%;
+  box-shadow: 0 1px 8px 0 #00000080;
+}
+
+.error-container button {
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: rgb(207, 207, 207);
+  font-size: 20px;
+  transition: color 0.5s, font-size 0.5s;
+}
+
+.error-container button:hover {
+  cursor: pointer;
+}
+
+.error-container button:hover, .error-container button:focus {
+  font-size: 22px;
+  color: #fff;
+}
+
+.error-container p {
+  margin: 0;
+}
