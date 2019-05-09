@@ -40,6 +40,9 @@ export default function PartyPage(props) {
     };
   }, []);
 
+  useEffect(() => {
+    confirmPartyMember()
+  }, [])
 
   useEffect(() => {
     getChatLog()
@@ -121,6 +124,18 @@ export default function PartyPage(props) {
 
         context.setParty(respJson);
       });
+  
+    }
+  function confirmPartyMember() {
+    return fetch(
+      `${config.API_ENDPOINT}/parties/auth/${props.match.params.partyId}`, 
+      {
+        headers: {
+          authorization: `Bearer ${TokenService.getAuthToken()}`
+        }
+      }
+    )
+      .then(res => (!res.ok ? props.history.push('/') : res.json()))
   }
 
   function leave() {
