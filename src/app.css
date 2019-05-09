@@ -57,3 +57,7 @@ body{
 .error-container p {
   margin: 0;
 }
+
+input {
+  font-family: Rajdhani, sans-serif;
+}

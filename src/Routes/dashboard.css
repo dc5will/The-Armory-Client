@@ -1,47 +1,34 @@
-.game-item-container h3{
-margin-top:0;
+.dashboard-container {
+  margin-left: 90px;
+  margin-top: 166px;
 }
 
-.game-item-container{
-  display: inline-block;
-  margin: 10px;
-}
-
-.game-display-container{
-  display: flex;
-  flex-wrap: wrap;
-  width: 75%;
-  margin: 0 auto;
-  text-align: center;
-}
-
-.game-item-container a {
-  text-decoration: none;
-  color: white;
-}
-.game-item-container a:hover {
-  text-decoration-line: underline;
-}
-
-.game-item-container img {
-  width: 200px;
-  box-shadow: 0 5px 13px 0 #00000080;
-  border-radius: 2px;
-  transition: 0.15s ease;
-}
-.game-item-container img:hover {
-  width: 210px;
-  transition: 0.15s ease;
-  box-shadow: 0 5px 26px 0 #000000B3;
-
-}
-
-.game-img{
-  display: flex;
-  align-items: center;
+.game-search__tab, .game-search__fake-tab {
+  display: inline-flex;
   justify-content: center;
-  width: 250px;
-  height: 250px;
+  align-items: center;
+  margin: 0 14px -1px 0;
+  padding: 4px 14px;
+  border-radius: 5px 5px 0 0;
+  font-family: Rajdhani, sans-serif;
+  font-weight: normal;
+  color: #fff;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.game-search__tab {
+  background-color: #43582D;
+}
+
+.game-search__fake-tab {
+  background-color: #6e9c25;
+}
+
+.game-search__tab:hover {
+  cursor: pointer;
+  background-color: #6fa42c;
 }
 
 .filterGames{
@@ -55,6 +42,7 @@ margin-top:0;
   font-weight: 600;
   color: white;
 }
+
 .filterGames:hover{
   background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
 }
@@ -66,19 +54,20 @@ margin-top:0;
 
 .filter-tabs{
   border-bottom: 1px solid #43582D;
-  margin-left:19%;
-  width: 70%;
 }
 
 .game-search-form{
+  position: fixed;
+  top: 0;
+  padding-top: 20px !important;
+  background-color: #212227;
   display: flex;
-  flex-direction: row;
-  border: 1px solid #7FAF23;
+  flex-direction: column;
   border-radius: 4px;
-  width: 235px;
-  margin-left:19%;
-  margin-bottom: 20px;
+  width: calc(100% - 130px);
+  margin: 0 20px;
   padding: 2px;
+  border-bottom: 4px solid #212227;
 }
 .game-search-form input:focus{
 outline: none;
@@ -89,31 +78,111 @@ outline: none;
   flex-grow: 2;
   border: none;
   color: white;
+  font-size: 16px !important;
 }
 
 .games-search-button{
+  position: relative;
+  left: -1px;
   border: none;
-  border-radius: 3px;
+  margin: 5px 0 20px;
+  padding: 0 10px;
+  font-family: Rajdhani, sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  height: 30px;
+  border-radius:  0 5px 5px 0;
   background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  z-index: 1;
   color:#ffffff;
+}
+
+.games-search-button:hover {
   cursor: pointer;
 }
 
-@media screen and (max-width: 500px){
-    .game-display-container{
-    display: auto;
-    width: auto;
-    padding: 0;
+.game-search-fieldset {
+  border: none;
+  padding: 0;
+}
+
+.game-search-fieldset legend {
+  font-size: 14px;
+  display: block;
+  width: 100%;
+}
+
+.game-search-fieldset input {
+  margin: 5px 0 20px;
+  border: 1px solid #6fa42c;
+  background-color: transparent;
+  border-radius: 5px 0 0 5px;
+  color: #fff;
+  height: 30px;
+  width: 250px;
+  font-size: 14px;
+  transition: background-color 0.6s, border 0.6s, box-shadow 0.6s;
+  padding: 6px 8px 6px 32px;
+}
+
+.game-search__relative-fieldset-icon {
+  position: absolute;
+    left: 9px !important;
+    color: #b3b3b3;
+    top: 1px;
+}
+
+.game-display-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 auto;
+  width: 80%;
+  list-style: none;
+  padding: 0;
+}
+
+@media screen and (max-width: 900px){
+  .game-display-container{
+    width: 100%;
+    justify-content: center;
   }
-  .game-search-form{
-    margin: 0 auto;
-    margin-bottom: 10%;
+
+  .dashboard-container {
+    margin-left: 0;
   }
-  .filter-tabs {
-    margin: 0 auto;
+
+  .game-search-form {
+    width: 100%;
+    padding: 0 10px;
+    margin: 0;
+    top: 90px;
   }
-  .game-item-container {
-    margin: 0 auto;
+
+  .games-form-top {
+    top: 0;
+  }  
+
+  .game-search-fieldset input {
+    width: calc(100% - 65px);
+    max-width: 250px;
   }
+
+  .game-search-fieldset legend {
+    display: none;
+  }
+
+  .game-search-form {
+    padding-top: 10px !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .game-search__tab, .game-search__fake-tab {
+    font-size: 12px;
+    margin-right: 5px;
+  }
+
 }
 
