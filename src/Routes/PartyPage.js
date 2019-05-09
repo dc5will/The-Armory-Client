@@ -20,7 +20,6 @@ export default function PartyPage(props) {
 
     socket.on("update party", function(party) {
       context.setParty(party);
-      console.log(party);
     });
 
     socket.on("update chat", function(messageData) {
