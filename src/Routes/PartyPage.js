@@ -44,7 +44,7 @@ export default function PartyPage(props) {
       window.removeEventListener('beforeunload', (e) => {
         return 'Leaving this page will result in you leaving the squad. Continue?';
       });
-      leave();
+      handleLeave()
     };
   }, []);
 
@@ -56,16 +56,6 @@ export default function PartyPage(props) {
     getChatLog()
   }, []);
 
-  useEffect(() => {
-    disableBack()
-  },[])
-
-  function disableBack(){
-    window.history.pushState(null, null, window.location.href);
-    window.onpopstate = function () {
-        window.history.go(1);
-    };
-  }
 
   function getChatLog(){
     return fetch(`${config.API_ENDPOINT}/parties/messages/${props.match.params.partyId}`)
@@ -162,7 +152,7 @@ export default function PartyPage(props) {
     // clears party chat context when user leaves a party and joins a new one
     context.setPartyChat([]);
 
-    props.history.replace(`/games/${context.party.game_id}`);
+    props.history.replace(`/`);
   }
 
   // Couldnt get prompt to work in a functional component
