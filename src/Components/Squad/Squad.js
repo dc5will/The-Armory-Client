@@ -3,6 +3,7 @@ import Spot from '../Spot/Spot';
 import './Squad.css';
 import config from '../../config';
 
+
 export default function Squad(props) {
   function generateSpots(party) {
     return party.spots
@@ -22,7 +23,7 @@ export default function Squad(props) {
   }
 
   return (
-    <li className="squad-container" aria-label='Open Squad Details' tabIndex="0">
+    <li className="squad-container" aria-label='Open Squad Details' tabIndex="0" onClick={() => props.onClick(props.index)}>
       <div className="squad__gamemode-image-container">
         {(props.party.gamemode) 
           ? <img className="squad__gamemode-image" src={`${config.IMAGES_ENDPOINT}/${props.gameId}/${props.party.gamemode.icon_url}`} alt=""/>

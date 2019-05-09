@@ -70,11 +70,15 @@ export default function CreatePartyForm(props) {
   }
 
 
-  function onPartyCreate(e) {
+  async function onPartyCreate(e) {
     e.preventDefault();
     const newParty = getActiveValues(e.target);
+<<<<<<< HEAD
     console.log(newParty);
     fetch(
+=======
+    await fetch(
+>>>>>>> 7f32c2be3f4d39d10b9f4215962d1977248fc910
         `${config.API_ENDPOINT}/parties`, 
         {
           method: 'POST',
@@ -91,6 +95,10 @@ export default function CreatePartyForm(props) {
           : res.json()
       )
       .then((respJson) => {
+<<<<<<< HEAD
+=======
+        console.log(respJson);
+>>>>>>> 7f32c2be3f4d39d10b9f4215962d1977248fc910
         props.history.push(`/party/${respJson}`);
       })
       .catch(err => {
