@@ -82,7 +82,7 @@
 
 .nav-icon-bar{
   width: 90px;
-  float:left;
+  left: 0;
   height: 100vh;
   position: fixed;
   display: inline-table;
@@ -101,21 +101,22 @@
   margin: 15% 10% 0% 10%;
   width: 80%;
   cursor: pointer;
-  transition: 1s ease;
 }
 
-@media screen and (max-width: 500px){
+@media screen and (max-width: 900px){
   .nav-icon-bar{
   position: relative;
   display: inherit;
   background: none;
   height: inherit;
   }
-  .nav-container {
-    width: 60%;
-  }
 
   .mobile-nav-container{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
     height: 80px;
     margin-bottom: 10px;
     background: #141416;
@@ -124,4 +125,25 @@
     font-size: 12px;
   }
 
+  .nav-container {
+    position: static;
+  }
+
+  .avatar-nav-main {
+    margin: 0 10px;
+  }
+
+  .nav-icon-bar {
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo {
+    margin: 0;
+    height: 60px;
+    width: 60px;
+  }
 }

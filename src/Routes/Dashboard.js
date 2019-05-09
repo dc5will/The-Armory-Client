@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import GamesContext from "../Contexts/gamesContext";
 import Nav from "../Components/Nav";
-import Game from "../Components/Game";
+import Game from "../Components/Game/Game";
 import GamesApiService from "../services/games-api-service";
 import './dashboard.css'
 
@@ -9,6 +9,7 @@ export default function Dashboard(props) {
   const games = useContext(GamesContext);
   const staticData = games.gamesList;
   const [filter, setFilter] = useState("All");
+  const formRef = useRef(null);
 
   useEffect(() => {
     GamesApiService.getGames().then(data => {
@@ -16,18 +17,33 @@ export default function Dashboard(props) {
     });
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('scroll', moveFormToTop);
+    return () => {
+      document.removeEventListener('scroll', moveFormToTop);
+    }
+  }, [formRef]);
+
+  function moveFormToTop() {
+    if (document.documentElement.clientWidth <= 900) {
+      if (document.documentElement.scrollTop <= 90) {
+        formRef.current.classList.remove('games-form-top')
+      } else {
+        formRef.current.classList.add('games-form-top')
+      }
+    }
+  }
+
   const submitSearch = e => {
     e.preventDefault();
     const { search } = e.target;
     const params = { query: search.value };
-    console.log("query: search.value =", params);
     GamesApiService.getGamesByTitle(params).then(data => {
       games.setGamesList(data);
     });
   };
 
   function displayGamesList(staticData) {
-    console.log("staticData =", staticData);
     if (staticData.length === 0) {
       return (
         <span className="game-search-no-result">
@@ -52,36 +68,43 @@ export default function Dashboard(props) {
     });
   }
 
+  function generateFilterTabs() {
+    const filters = ['All', 'Shooter', 'MOBA', 'MMORPG'];
+    return filters.map((fltr, i) => {
+      if (fltr === filter) {
+        return <div key={i} className="game-search__fake-tab">{fltr}</div>
+      } else {
+        return <button key={i} type="button" className="game-search__tab" onClick={e => setFilter(fltr)}>
+          {fltr}
+        </button>
+      }
+    });
+  }
+
   return (
     <div className="dashboard-container">
-      <form className="game-search-form" onSubmit={submitSearch}>
-        <input
-          id="title-search-input"
-          type="text"
-          name="search"
-          placeholder="Enter game title"
-        />
-        <button type="submit" className="games-search-button">
-          Search
-        </button>
+      <form className="game-search-form" onSubmit={submitSearch} ref={formRef}>
+        <fieldset className="game-search-fieldset">
+          <legend>Search</legend>
+          <label className="input-with-icon">
+            <i className="fas fa-search game-search__relative-fieldset-icon"></i>
+            <input
+              id="title-search-input"
+              type="text"
+              name="search"
+              placeholder="Enter game title..."
+              className="solo-input-transitions"
+            />
+          </label>
+          <button id="games-search-button" type="submit" className="games-search-button">
+            Search
+          </button>
+        </fieldset>
+        <div className='filter-tabs'>
+          {generateFilterTabs()}
+        </div>
       </form>
-      {/* {displayGamesList(staticData)} */}
-      <div className='filter-tabs'>
-      <button className="filterGames" autoFocus onClick={e => setFilter("All")}>
-        All
-      </button>
-      <button className="filterGames" onClick={e => setFilter("Shooter")}>
-        Shooter
-      </button>
-      <button className="filterGames" onClick={e => setFilter("MOBA")}>
-        MOBA
-      </button>
-      <button className="filterGames" onClick={e => setFilter("MMORPG")}>
-        MMORPG
-      </button>
-      </div>
-      <ul className='game-display-container'>
-      <br/>
+      <ul className="game-display-container">
         {filter === "All"
           ? displayGamesList(staticData)
           : filterGames(staticData, filter)}

@@ -1,0 +1,73 @@
+.game-item-container h3{
+  margin: 0;
+  display: inline-block;
+  margin: 0 auto;
+  border: 2px solid transparent;
+}
+  
+.game-item-container{
+  display: inline-block;
+  margin: 5px 20px;
+}
+
+.game-item-container a {
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  text-decoration: none;
+  color: white;
+}
+
+.game-item-container a:hover h3 {
+  border-bottom: 2px solid #fff;
+}
+
+.game-item-container img {
+  width: 200px;
+  box-shadow: 0 5px 13px 0 #00000080;
+  border-radius: 2px;
+  transition: 0.15s ease;
+}
+
+.game-item-container a:hover img {
+  width: 206px;
+  transition: 0.15s ease;
+  box-shadow: 0 5px 26px 0 #000000B3;
+}
+
+.game-img{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 220px;
+}
+
+.game-item-container span, .game-item-container p {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.game-item-container p {
+  margin-top: 3px;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.game-tags-container {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  flex-wrap: wrap;
+}
+
+.game-tags-container span {
+  margin: 0 5px 5px !important;
+}
+  
+@media screen and (max-width: 500px){
+  .game-item-container {
+    margin: 0 auto;
+  }
+}

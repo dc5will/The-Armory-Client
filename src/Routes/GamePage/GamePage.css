@@ -34,10 +34,10 @@
   position: absolute;
   opacity: 0.6;
   left: 0;
-  top: 0;
+  top: -109px;
   z-index: -1;
   width: 100%;
-  clip-path: inset(0 0 220px 0);
+  clip-path: inset(109px 0 109px 0);
   overflow: hidden;
 }
 

@@ -21,15 +21,10 @@ export class UserProvider extends Component {
     this.state = state;
   }
   setUser = user => {
-    console.log(user)
-    this.setState({user}, ()=>{
-      console.log(this.state.user)
-    })
+    this.setState({user});
   }
   setTosCheck = tosCheck => {
-    this.setState({tosCheck}, ()=>{
-      console.log(this.state.tosCheck)
-    })
+    this.setState({tosCheck});
   }
 
   render(){
