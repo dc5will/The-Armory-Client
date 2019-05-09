@@ -60,8 +60,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #999;
-  font-size: 24px;
+  background-color: #565d69;
+  font-size: 50px;
 }
 
 .squad__details {
@@ -93,11 +93,10 @@
 
 .squad__spots-full {
   position: absolute;
-  top: -11px;
-  left: -11px;
-  width: 54px;
-  height: 60px;
-  clip-path: inset(11px 11px 11px 11px);
+  top: -7px;
+  left: -7px;
+  width: 44px;
+  height: 50px;
 }
 
 .squad__spots-filled, .squad__spots-empty{
@@ -132,21 +131,21 @@
   position: absolute;
   display: inline-block;
   font-size: 0;
-  width: 52px;
-  height: 60px;
-  top: -9px;
+  width: 44px;
+  height: 50px;
+  top: -7px;
 }
 
 .squad__spots-first-half {
-  clip-path: inset(11px 26px 11px 9px);
-  top: -11px;
-  left: -9px;
+  clip-path: inset(6px 22px 6px 6px);
+  top: -7px;
+  left: -7px;
 }
 
 .squad__spots-second-half {
-  clip-path: inset(11px 9px 11px 26px);
-  top: -11px;
-  right: -9px;
+  clip-path: inset(6px 6px 6px 22px);
+  top: -7px;
+  right: -7px;
 }
 
 .squad__gamemode-image-container {

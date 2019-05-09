@@ -11,11 +11,16 @@ import './GamePage.css';
 
 import io from 'socket.io-client';
 import Dropdown from "../../Components/Dropdown/Dropdown";
+import useModal from "../../Components/Modal/useModal";
+import Modal from "../../Components/Modal/Modal";
+import ActiveSquad from '../../Components/ActiveSquad/ActiveSquad';
 let socket;
 
 export default function GamePage(props) {
   const gameContext = useContext(GameContext);
   const [loading, toggleLoading] = useState(true);
+  const [activeSquad, setActiveSquad] = useState(undefined);
+  const { isShowing, toggle } = useModal();
 
   function getGame() {
     return fetch(`${config.API_ENDPOINT}${props.match.url}`, {
@@ -172,12 +177,18 @@ export default function GamePage(props) {
     return relevant;
   }
 
+  function handleSquadOnClick(index) {
+    console.log(index);
+    console.log(gameContext.parties[index]);
+    setActiveSquad(index);
+  }
+
   function generateParties() {
     if (gameContext.parties.length < 1) {
       return <p>No parties available...</p>;
     }
     return gameContext.parties.map((party, index) => (
-      <Squad key={index} index={index} party={party} gameId={props.match.params.gameId}/>
+      <Squad key={index} index={index} party={party} gameId={props.match.params.gameId} onClick={handleSquadOnClick}/>
     ));
   }
 
@@ -233,8 +244,17 @@ export default function GamePage(props) {
               <ul className="squad-list">
                 {generateParties()}
               </ul>
+            )}
+        <Modal
+          isShowing={activeSquad || activeSquad===0}
+          hide={() => setActiveSquad(undefined)}
+          content={
+            (gameContext.parties[activeSquad] 
+              ? <ActiveSquad party={gameContext.parties[activeSquad]} hide={() => setActiveSquad(undefined)} history={props.history}/>
+              : null
             )
-        }
+          }
+        />
       </div>
     </div>
   );

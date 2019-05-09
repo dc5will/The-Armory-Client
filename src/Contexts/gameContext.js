@@ -69,7 +69,7 @@ export class GameProvider extends Component {
   }
 
   setError = error => {
-    this.setState({ error: error.error || error.message });
+    this.setState({ error: error.message || error.error });
   }
 
   clearError = () => {

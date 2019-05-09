@@ -1,0 +1,119 @@
+.active-squad-container {
+  width: 500px;
+  padding: 0 20px;
+}
+
+.active-squad__details {
+  display: flex;
+}
+
+.active-squad__details-text-container {
+  padding-top: 10px;
+}
+
+.active-squad__details-text-container p, .active-squad__details-text-container span {
+  margin: 10px 0;
+}
+
+.active-squad__details-text-container span {
+  margin-right: 10px;
+}
+
+.active-squad__details-text-container p {
+  width: 360px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: break-word;
+  max-height: 60px;
+}
+
+.active-squad__section-header {
+  font-size: 14px;
+  display: block;
+  font-weight: normal;
+  border-bottom: 1px solid #5b6370;
+  margin: 10px 0;
+}
+
+.active-squad__owner {
+  display: flex;
+  align-items: center;
+  width: 200px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+}
+
+.active-squad__owner div {
+  margin-right: 10px;
+}
+
+.active-squad__fake-checkbox, .active-squad__checkbox {
+  box-sizing: content-box;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 1px 8px 0 #00000080;
+  border: 1px solid #909193;
+}
+
+.active-squad__checkbox-container {
+  width: 60px;
+  height: 50px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active-squad__checkbox {
+  background-color: #000;
+  display: inline-block;
+}
+
+.active-squad__checkbox:hover {
+  cursor: pointer;
+}
+
+.active-squad__active-checkbox {
+  border: 4px solid #6fa42c;
+}
+
+.active-squad__spots {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.active-squad__spots-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 0;
+}
+
+.active-squad__spots-full, .active-squad__spots-first-half, .active-squad__spots-second-half {
+  position: absolute;
+  left: -10px;
+  top: -10px;
+  width: 60px;
+  height: 60px;
+}
+
+.active-squad__spots-first-half {
+  clip-path: inset(10px 30px 10px 10px);
+}
+
+.active-squad__spots-second-half {
+  clip-path: inset(10px 10px 10px 30px);
+}
+
+.active-squad__submit-button {
+  width: 45%;
+  height: 30px;
+}
+
+.active-squad__cancel-button {
+  width: 30%;
+  height: 30px;
+}
