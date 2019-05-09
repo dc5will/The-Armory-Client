@@ -11,6 +11,7 @@ let socket;
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
   const [warning, setWarning] = useState(null);
+  const [expand, setExpand] = useState(false)
 
   useEffect(() => {
     getPartyById();
@@ -20,7 +21,6 @@ export default function PartyPage(props) {
 
     socket.on("update party", function(party) {
       context.setParty(party);
-      console.log(party);
     });
 
     socket.on("update chat", function(messageData) {
@@ -163,7 +163,7 @@ export default function PartyPage(props) {
 
   function generateReqs(party) {
     return context.party.reqs.map((req, i) => {
-      return <li key={i}>{req.name}</li>;
+      return <li key={i} className='party-reqs'>{req.name}</li>;
     });
   }
 
@@ -172,7 +172,6 @@ export default function PartyPage(props) {
       let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        console.log(user)
         return(
           role.name ?
             roleStr +=role.name + ' ' :
@@ -188,24 +187,34 @@ export default function PartyPage(props) {
     });
   }
 
+  function expandParty(){
+    setExpand(!expand)
+    console.log(expand);
+  }
+
   function generateDisplayParty(party) {
     return (
+      <>
       <div className='party-info'>
         <h1>{context.party.title}</h1>
         <p>{context.party.description}</p>
+      </div>
+      <div className = {!expand ? 'party-props' : 'hidden'}>
         <h3>Spots:</h3>
         <ul>{generateRoles(party)}</ul>
         <h3>Requirements:</h3>
-        <ul>{generateReqs(party)}</ul>
+        <ul className='reqs-container'>{generateReqs(party)}</ul>
+        {displayWarning()}
       </div>
+      </>
     );
   }
-
+  
   return (
     <div className='party-page-container'>
       <div className='display-party-info'>
-        {context.party.title ? generateDisplayParty(context.party) : "Loading"}
-        {displayWarning()}
+          {context.party.title ? generateDisplayParty(context.party) : "Loading"}
+        <button className='expand-party-info' onClick={e => expandParty()}>{!expand ? '˄' : '˅' }</button>
       </div>
       <PartyChat
         sendChatMessage={sendChatMessage}

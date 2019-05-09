@@ -2,8 +2,51 @@
   width: 50%;
   margin: 0 auto;
 }
+.faq-container h1{
+  text-align: center;
+}
 
 li{
   list-style-type: none;
   font-weight: bolder;
+}
+
+.faq-container button{
+  display: flex;
+  margin: 0 auto;
+  height: 35%;
+  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 1px 8px 0 #00000080;
+  font-family: Rajdhani, sans-serif;
+  font-weight: 600;
+  color: #fff;
+  font-size: 16px;
+  width: 20%;
+  justify-content: center;
+  align-content: center;
+  cursor: pointer;
+}
+.faq-container a{
+  color: white;
+  cursor: pointer;
+}
+.faq-footer{
+  text-align: center;
+}
+
+@media screen and (max-width: 500px){
+  .faq-container{
+    width: 90%;
+    text-align: center;
+  }
+  .faq-container ul{
+    padding: 0;
+  }
+  .faq-container button{
+    margin-bottom: 10px;
+  }
+
 }
