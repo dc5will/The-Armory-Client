@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import RegistrationForm from './RegistrationForm';
 import LoginForm from './LoginForm';
 import './splashPage.css';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 export default function SplashPage(props) {
   const [toggle, setToggle] = useState(false);

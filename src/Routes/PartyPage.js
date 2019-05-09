@@ -35,6 +35,9 @@ export default function PartyPage(props) {
       context.setParty(party);
     });
 
+    //block navigation
+    window.onbeforeunload = () => true;
+
     return () => {
       leave();
     };
@@ -211,16 +214,22 @@ export default function PartyPage(props) {
   }
   
   return (
-    <div className='party-page-container'>
-      <div className='display-party-info'>
-          {context.party.title ? generateDisplayParty(context.party) : "Loading"}
-        <button className='expand-party-info' onClick={e => expandParty()}>{!expand ? '˄' : '˅' }</button>
-      </div>
-      <PartyChat
-        sendChatMessage={sendChatMessage}
-        sendChatEdit={sendChatEdit}
-        deleteChatMessage={deleteChatMessage}
+    <>
+      <Prompt
+        when={true}
+        message="Leaving this page will result in you leaving the squad. Continue?"
       />
-    </div>
+      <div className='party-page-container'>
+        <div className='display-party-info'>
+            {context.party.title ? generateDisplayParty(context.party) : "Loading"}
+          <button className='expand-party-info' onClick={e => expandParty()}>{!expand ? '˄' : '˅' }</button>
+        </div>
+        <PartyChat
+          sendChatMessage={sendChatMessage}
+          sendChatEdit={sendChatEdit}
+          deleteChatMessage={deleteChatMessage}
+        />
+      </div>
+    </>
   );
 }
