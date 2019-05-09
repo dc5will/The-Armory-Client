@@ -2,6 +2,7 @@ import React from 'react';
 import Spot from '../Spot/Spot';
 import './Squad.css';
 import config from '../../config';
+import RejoinSquadButton from '../RejoinSquadButton/RejoinSquadButton';
 
 
 export default function Squad(props) {
@@ -48,6 +49,7 @@ export default function Squad(props) {
       <div className="squad__requirements">
         {generateRequirements()}
       </div>
+      <RejoinSquadButton />
     </li>
   )
 }
