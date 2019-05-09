@@ -3,9 +3,9 @@ import LoginForm from '../Components/LoginForm';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
+import { shallow } from 'enzyme'
 
-describe('LoginForm component', () => {
-
+describe.only('LoginForm component', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
@@ -14,6 +14,15 @@ describe('LoginForm component', () => {
       </MemoryRouter>, div
     );
     ReactDOM.unmountComponentAtNode(div);
+  })
+
+  it('renders login with valid email and password', () => {
+    const testEmail = 'testUser';
+    const testPass = 'Password1234!'
+    const wrapper = shallow(<LoginForm />);
+    wrapper.find('#email-input').simulate('change', {target: {name: 'email-input', value: testEmail}});
+    wrapper.find('#password-input').simulate('change', {target: {name: 'password-input', value: testPass}});
+    wrapper.find('button').simulate('click');
   })
 
   it("renders the UI as expected", () => {

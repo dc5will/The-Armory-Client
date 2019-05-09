@@ -5,7 +5,6 @@ import renderer from "react-test-renderer";
 import { MemoryRouter } from 'react-router-dom';
 
 describe('Nav component', () => {
-
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
@@ -15,6 +14,7 @@ describe('Nav component', () => {
     );
     ReactDOM.unmountComponentAtNode(div);
   })
+
 
   it("renders the UI as expected", () => {
     const tree = renderer
