@@ -118,7 +118,6 @@ export default function PartyChat(props) {
   }
 
   function generateMessage(message) {
-    console.log(message);
     if (editId !== message.id) {
       return (
         <>
