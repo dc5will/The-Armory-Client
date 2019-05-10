@@ -31,7 +31,7 @@ export default function LoginForm(props) {
             type='text'
             name="email-input"
             id="email-input"
-            placeholder="example@email.com..."
+            placeholder="demo@email.com"
             onChange={e => setEmail(e.target.value)}
           />
          </label>
@@ -41,7 +41,7 @@ export default function LoginForm(props) {
             type="password"
             name="password-input"
             id="password-input"
-            placeholder="password..."
+            placeholder="Demo1234!"
             onChange={e => setPassword(e.target.value)}
           />
          </label>
