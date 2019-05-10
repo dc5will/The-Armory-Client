@@ -1,6 +1,7 @@
 <p align="center">
     <h2>Squad Armory</h2> 
     <span>An app for gamers to find friends to play with in their favorite online multiplayer game.</span>
+    <br/>
     <a href="https://squad-armory.now.sh">Live Version</a>
     </p>
 
