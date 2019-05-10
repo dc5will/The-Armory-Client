@@ -5,6 +5,7 @@ import config from "../config";
 import PartyContext from "../Contexts/partyContext";
 import io from "socket.io-client";
 import PartyChat from "../Components/PartyChat/PartyChat";
+import './partyPage.css'
 let socket;
 
 export default function PartyPage(props) {
@@ -43,6 +44,17 @@ export default function PartyPage(props) {
   useEffect(() => {
     getChatLog()
   }, []);
+
+  useEffect(() => {
+    disableBack()
+  },[])
+
+  function disableBack(){
+    window.history.pushState(null, null, window.location.href);
+    window.onpopstate = function () {
+        window.history.go(1);
+    };
+  }
 
   function getChatLog(){
     return fetch(`${config.API_ENDPOINT}/parties/messages/${props.match.params.partyId}`)
@@ -135,19 +147,23 @@ export default function PartyPage(props) {
 
   function displayWarning() {
     return warning ? (
-      <div>
+      <div className='party-warning'>
         <p>Are you sure you want to leave this party?</p>
+        <div className='leave-party'>
         <button onClick={e => handleLeave()}>Confirm</button>
         <button onClick={e => setWarning(!warning)}>Cancel</button>
+        </div>
       </div>
     ) : (
+      <div className='leave-party'>
       <button onClick={e => setWarning(!warning)}>Leave party</button>
+      </div>
     );
   }
 
   function generateReqs(party) {
     return context.party.reqs.map((req, i) => {
-      return <li key={i}>{req.req_name}</li>;
+      return <li key={i}>{req.name}</li>;
     });
   }
 
@@ -156,13 +172,17 @@ export default function PartyPage(props) {
       let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        roleStr += role.role_name + " | ";
+        console.log(user)
+        return(
+          role.name ?
+            roleStr +=role.name + ' ' :
+            roleStr)
       });
       return (
         <li key={i}>
           {user !== null ? user.username : "Available"}
-          {" - "}
-          {roleStr}{" "}
+          <p>{roleStr ? " - " : ''}
+          {roleStr}{" "}</p>
         </li>
       );
     });
@@ -170,7 +190,7 @@ export default function PartyPage(props) {
 
   function generateDisplayParty(party) {
     return (
-      <div>
+      <div className='party-info'>
         <h1>{context.party.title}</h1>
         <p>{context.party.description}</p>
         <h3>Spots:</h3>
@@ -182,11 +202,11 @@ export default function PartyPage(props) {
   }
 
   return (
-    <div>
-      <div>
+    <div className='party-page-container'>
+      <div className='display-party-info'>
         {context.party.title ? generateDisplayParty(context.party) : "Loading"}
+        {displayWarning()}
       </div>
-      {displayWarning()}
       <PartyChat
         sendChatMessage={sendChatMessage}
         sendChatEdit={sendChatEdit}

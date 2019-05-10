@@ -48,13 +48,12 @@ export default function CreatePartyForm(props) {
         }
       );
     });
-    let gamemode = target.querySelector('button[name=gamemode]');
-    gamemode ? (gamemode = gamemode.dataset.value) : (gamemode = 0);
+    let gamemode = 0;
+    partyGamemode && (gamemode = partyGamemode)
 
-    const [req, req2] = target.querySelectorAll('button[name=requirements]');
     const reqs = [];
-    req && reqs.push(req.dataset.value);
-    req2 && reqs.push(req2.dataset.value);
+    partyRequirement && reqs.push(partyRequirement);
+    partyRequirement2 && reqs.push(partyRequirement2);
 
     return {
       room_id: props.roomUrl,
@@ -71,10 +70,10 @@ export default function CreatePartyForm(props) {
   }
 
 
-  function onPartyCreate(e) {
+  async function onPartyCreate(e) {
     e.preventDefault();
     const newParty = getActiveValues(e.target);
-    fetch(
+    await fetch(
         `${config.API_ENDPOINT}/parties`, 
         {
           method: 'POST',
@@ -91,6 +90,7 @@ export default function CreatePartyForm(props) {
           : res.json()
       )
       .then((respJson) => {
+        console.log(respJson);
         props.history.push(`/party/${respJson}`);
       })
       .catch(err => {
@@ -251,6 +251,7 @@ export default function CreatePartyForm(props) {
           <button
             type="submit"
             className="create-party-button green-button"
+            onClick={onPartyCreate}
           >
             Create Party
           </button>

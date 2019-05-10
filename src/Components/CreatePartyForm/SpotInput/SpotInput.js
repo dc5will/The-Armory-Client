@@ -5,7 +5,6 @@ import GameContext from "../../../Contexts/gameContext";
 
 export default function SpotInput(props) {
   const { roles, id } = useContext(GameContext);
-  const [showRoles, toggleShowRoles] = useState(false);
 
   function generateRoleImages() {
     const spotRoles = props.roles;
@@ -44,25 +43,14 @@ export default function SpotInput(props) {
     }
   }
 
-  function handleMouseEnter(e) {
-    toggleShowRoles(true);
-  }
-
-  function handleMouseLeave(e) {
-    toggleShowRoles(false);
-  }
-
   return (
     <li 
       className="spot-input spot-input__image-container"
       aria-label="spot button" tabIndex="0" 
       onClick={() => props.toggleSpotOptionsMenu(props.index)}
-      onMouseEnter={(e) => handleMouseEnter()}
-      onMouseLeave={(e) => handleMouseLeave()}
     >
       {generateRoleImages()}
       {props.omitted && <i className="spot-input__spots-omitted fas fa-times"/>}
-      {showRoles && <span className="spot-input__roles-text">{generateRoleText()}</span>}
     </li>
   );
 }

@@ -37,6 +37,8 @@ export default function PartyChat(props) {
 
   function generateChat() {
     return (
+      
+      <div className='chat-bar'>
       <ul className="chat-log-container">
         {context.partyChat.map(message => {
           return (
@@ -51,6 +53,9 @@ export default function PartyChat(props) {
           );
         })}
       </ul>
+        {generateForm()}
+        </div>
+        
     );
   }
 
@@ -171,9 +176,8 @@ export default function PartyChat(props) {
   }
 
   return (
-    <div>
+    <div className='chat-main-container'>
       {generateChat()}
-      {generateForm()}
     </div>
   );
 }
