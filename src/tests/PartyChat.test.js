@@ -3,7 +3,7 @@ import PartyChat from '../Components/PartyChat/PartyChat';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 describe('PartyChat component', () => {
   const wrapper = mount(<PartyChat />)

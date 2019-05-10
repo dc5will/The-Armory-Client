@@ -2,7 +2,6 @@ import React from "react";
 import Error from "../Components/Error/Error";
 import { MemoryRouter } from "react-router-dom";
 import toJson from "enzyme-to-json";
-import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
 describe.only("Error component", () => {

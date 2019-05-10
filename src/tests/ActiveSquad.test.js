@@ -2,7 +2,7 @@ import React from "react";
 import ActiveSquad from "../Components/ActiveSquad/ActiveSquad";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
-import { mount, shallow } from "enzyme";
+import { mount } from "enzyme";
 
 const props = {
   index: 1,
