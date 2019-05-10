@@ -35,8 +35,7 @@ export default function GamePage(props) {
       )
       .then(game => {
         gameContext.setGame(game);
-      })
-      .catch(err => console.error(err));
+      });
   }
 
   async function populateContext() {
