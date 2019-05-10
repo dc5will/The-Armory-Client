@@ -25,6 +25,17 @@ describe.only('LoginForm component', () => {
     wrapper.find('button').simulate('click');
   })
 
+  it('when login form is submitted the event is cancelled', () => {
+    const wrapper = shallow(<LoginForm />);
+    let prevented = false;
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {
+        prevented = true;
+      }
+    });
+    expect(prevented).toBe(true);
+  })
+
   it("renders the UI as expected", () => {
     const tree = renderer
       .create(

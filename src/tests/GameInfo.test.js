@@ -6,4 +6,5 @@ describe("GameInfo component", () => {
   it("renders without crashing", () => {
     shallow(<GameInfo />);
   });
+  
 });

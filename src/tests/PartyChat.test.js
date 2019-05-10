@@ -3,7 +3,7 @@ import PartyChat from '../Components/PartyChat/PartyChat';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
-import { mount } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 
 describe('PartyChat component', () => {
   const wrapper = mount(<PartyChat />)
@@ -25,6 +25,7 @@ describe('PartyChat component', () => {
   it('renders chat submit button on form', () => {
     expect(wrapper.find(".chat-submit-button")).toBeDefined();
   })
+
 
   it("renders the UI as expected", () => {
     const tree = renderer

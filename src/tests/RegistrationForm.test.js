@@ -28,6 +28,17 @@ describe("RegistrationForm component", () => {
     wrapper.find('.submit-button').simulate('click');
   })
 
+  it('when registration form is submitted the event is cancelled', () => {
+    const wrapper = shallow(<RegistrationForm />);
+    let prevented = false;
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {
+        prevented = true;
+      }
+    });
+    expect(prevented).toBe(true);
+  })
+
   it("renders the UI as expected", () => {
     const tree = renderer
       .create(

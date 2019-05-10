@@ -2,7 +2,7 @@ import React from "react";
 import ActiveSquad from "../Components/ActiveSquad/ActiveSquad";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
-import { mount } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 const props = {
   index: 1,
@@ -46,6 +46,17 @@ const props = {
 };
 
 describe("Game component", () => {
+  // remove unique key warning message
+  let savedError;
+  beforeEach(() => {
+    savedError = console.error;
+    console.error = jest.fn();
+  })
+
+  afterEach(() => {
+    console.error = savedError;
+  })
+
   it("renders without crashing", () => {
     mount(<ActiveSquad party={props} />);
   });

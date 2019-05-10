@@ -3,6 +3,7 @@ import CreatePartyForm from '../Components/CreatePartyForm/CreatePartyForm'
 import ReactDOM from 'react-dom';
 import renderer from "react-test-renderer";
 import { MemoryRouter } from 'react-router-dom';
+import { shallow } from "enzyme";
 
 describe('CreatePartyForm component', () => {
 
@@ -14,6 +15,17 @@ describe('CreatePartyForm component', () => {
       </MemoryRouter>, div
     );
     ReactDOM.unmountComponentAtNode(div);
+  })
+  
+  it('when create party form is submitted the event is cancelled', () => {
+    const wrapper = shallow(<CreatePartyForm />);
+    let prevented = false;
+    wrapper.find('form').simulate('submit', {
+      preventDefault: () => {
+        prevented = true;
+      }
+    });
+    expect(prevented).toBe(true);
   })
 
   it("renders the UI as expected", () => {
