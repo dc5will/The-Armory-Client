@@ -22,6 +22,8 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 ## Upcoming Features
 
 **Voice chat**: Users can opt in to use voice chat upon joining a squad
+
+
 **Private squads**: Creators of squads can require applications for potential new squadmates
 
 ## Tech Stack
