@@ -80,9 +80,9 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           tabIndex="0"
         >
           <img
-            alt="Cactuar.png"
+            alt="cactuar.png"
             className="user-profile__avatar-image"
-            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/Cactuar.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/cactuar.png"
           />
         </li>
         <li
