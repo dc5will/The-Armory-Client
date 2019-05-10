@@ -10,8 +10,14 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 ## Features
 
 **Join a squad**: Users can find squads that match their gaming preferences and join available spots
+
+
 **Create a squad**: Users can create a squad with as much specificity as they want when looking for squadmates
+
+
 **Chat with squadmates**: Everyone in a squad can chat with each other in real time
+
+
 
 ## Upcoming Features
 
