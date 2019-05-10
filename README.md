@@ -1,68 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<p align="center">
+    <h2>Squad Armory</h2> 
+    <span>An app for gamers to find friends to play with in their favorite online multiplayer game.</span>
+    <br/>
+    <a href="https://squad-armory.now.sh">Live Version</a>
+    </p>
 
-## Available Scripts
+![Desktop page](./public/README-images/Desktop.png)
+![Squad list](./public/README-images/SquadList.png)
 
-In the project directory, you can run:
+## Why
 
-### `npm start`
+Finding friends to play online video games with is hard. Sometimes life gets in the way and schedules don't line up. Or maybe you just don't have any friends to begin with. Don't fret because that's where Squad Armory comes in! Find your favorite game and join a squad that's looking exactly for whatever role you play. Can't find one that's right for you? Create your own squad and find your perfect teammates! Whether you're looking for something more casual or more competitive, you can be as general or as specific as you'd like when creating a squad. Chat with your new squadmates within the app and plan out your gaming session. Squad up and join Squad Armory!
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+**Join a squad**: Users can find squads that match their gaming preferences and join available spots
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Create a squad**: Users can create a squad with as much specificity as they want when looking for squadmates
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Chat with squadmates**: Everyone in a squad can chat with each other in real time
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Upcoming Features
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Voice chat**: Users can opt in to use voice chat upon joining a squad
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Private squads**: Creators of squads can require applications for potential new squadmates
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Tech Stack
 
-## Learn More
+- [Create React App](https://github.com/facebook/create-react-app)
+- [React](https://github.com/facebook/react)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [Socket.io](https://socket.io)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [Node](https://github.com/nodejs/node)
+- [Express](https://github.com/expressjs/express)
+- [Nodemailer](https://nodemailer.com)
+- [Supertest](https://www.npmjs.com/package/supertest)
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)
+- [Enzyme](https://airbnb.io/enzyme/)
 
-### Code Splitting
+- [Server repository](https://github.com/thinkful-ei-armadillo/The-Armory-Server/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## API
 
-### Analyzing the Bundle Size
+```
+/api
+.
+├── /auth
+│   └── POST
+│       ├── /token
+├── /games
+│   └── GET /
+│   |   ├── /:id
+│   |   └── /:gameId/parties
+├── /party
+│   └── GET
+│       ├── /:partyId
+│       ├── /auth/:partyId
+│       ├── /messages/:partyId
+│   └── POST
+│       └── /
+├── /user
+│   └── GET
+│       └── /:userId
+│   └── POST
+│       └── /
+│   └── PATCH
+│       └── /:userId
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Team
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Project Manager Andrew Bituin
+- Product Manage Alex Reich
+- Design Lead Jake Derhalli
+- Testing Lead William Wong
