@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Squad component renders the UI as expected 1`] = `
+<li
+  aria-label="Open Squad Details"
+  className="squad-container"
+  onClick={[Function]}
+  tabIndex="0"
+>
+  <div
+    className="squad__gamemode-image-container"
+  >
+    <img
+      alt=""
+      className="squad__gamemode-image"
+      src="http://localhost:8000/images/undefined/Gamemode-Quickplay.png"
+    />
+  </div>
+  <div
+    className="squad__details"
+  >
+    <div
+      className="squad__details-top"
+    >
+      <h4>
+        Test Title
+      </h4>
+      <ul
+        className="squad__spots-list"
+      >
+        <li
+          className="squad__spots-image-container"
+        >
+          <img
+            alt=""
+            className="squad__spots-first-half"
+            src="http://localhost:8000/images/undefined/Icon-Genji.png"
+          />
+          <img
+            alt=""
+            className="squad__spots-second-half"
+            src="http://localhost:8000/images/undefined/Icon-Support.png"
+          />
+        </li>
+        <li
+          className="squad__spots-image-container"
+        >
+          <i
+            className="squad__spots-empty fas fa-users"
+          />
+          <i
+            className=" squad__spots-filled fas fa-check"
+          />
+        </li>
+      </ul>
+      <div
+        className="squad__owner"
+      >
+        <div
+          className="squad__spots-image-container"
+        >
+          <img
+            alt=""
+            className="squad__avatar-image"
+            src="http://localhost:8000/images/user-icons/undefined"
+          />
+        </div>
+        <p />
+      </div>
+    </div>
+    <div
+      className="squad__details-bottom"
+    >
+      <span
+        className="small-detail"
+      >
+        Quick Play
+      </span>
+      <p
+        className="squad__description"
+      >
+        This is a description of test Squad.
+      </p>
+    </div>
+  </div>
+  <div
+    className="squad__requirements"
+  >
+    <span
+      className="small-detail"
+    >
+      Diamond
+    </span>
+    <span
+      className="small-detail"
+    >
+      Bronze
+    </span>
+  </div>
+</li>
+`;

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Dashboard component renders the UI as expected 1`] = `
+<div
+  className="dashboard-container"
+>
+  <form
+    className="game-search-form"
+    onSubmit={[Function]}
+  >
+    <fieldset
+      className="game-search-fieldset"
+    >
+      <legend>
+        Search
+      </legend>
+      <label
+        className="input-with-icon"
+      >
+        <i
+          className="fas fa-search game-search__relative-fieldset-icon"
+        />
+        <input
+          aria-label="title-search-input"
+          className="solo-input-transitions"
+          id="title-search-input"
+          name="search"
+          placeholder="Enter game title..."
+          type="text"
+        />
+      </label>
+      <button
+        className="games-search-button"
+        id="games-search-button"
+        type="submit"
+      >
+        Search
+      </button>
+    </fieldset>
+    <div
+      className="filter-tabs"
+    >
+      <div
+        className="game-search__fake-tab"
+      >
+        All
+      </div>
+      <button
+        className="game-search__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        Shooter
+      </button>
+      <button
+        className="game-search__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        MOBA
+      </button>
+      <button
+        className="game-search__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        MMORPG
+      </button>
+    </div>
+  </form>
+  <ul
+    className="game-display-container"
+  >
+    <span
+      className="game-search-no-result"
+    >
+      Game not found, please try again!
+    </span>
+  </ul>
+</div>
+`;

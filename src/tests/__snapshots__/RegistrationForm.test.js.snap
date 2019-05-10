@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RegistrationForm component renders the UI as expected 1`] = `
+<form
+  className="registration-form login-reg-form"
+  onSubmit={[Function]}
+>
+  
+  <h2
+    className="registration-header"
+  >
+    Register
+  </h2>
+  <div
+    className="registration-input-container"
+  >
+    <label>
+      Email 
+      <input
+        className=""
+        id="registration-email-input"
+        onChange={[Function]}
+        placeholder="example@email.com..."
+        required={true}
+        type="email"
+        value=""
+      />
+    </label>
+    <label>
+      Username 
+      <input
+        className=""
+        onChange={[Function]}
+        placeholder="username..."
+        required={true}
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Password 
+      <input
+        className=""
+        onChange={[Function]}
+        placeholder="password..."
+        required={true}
+        type="password"
+        value=""
+      />
+    </label>
+  </div>
+  <div
+    className="registration-form__tos-details"
+  >
+    <p>
+      By registering you agree to our 
+      <button
+        className="tos-button"
+        onClick={[Function]}
+        type="button"
+      >
+        Terms of Service
+      </button>
+      .
+    </p>
+  </div>
+  <button
+    className="green-button login-reg-form__submit-button"
+    type="submit"
+  >
+    Register
+  </button>
+</form>
+`;
