@@ -19,6 +19,7 @@ export default function Squad(props) {
       if (req.name) {
         return <span className="small-detail" key={i}>{req.name}</span>
       }
+      return null;
     });
   }
 
@@ -38,12 +39,15 @@ export default function Squad(props) {
           </ul>
           <div className="squad__owner">
             <div className="squad__spots-image-container">
-              <img className="squad__avatar-image" src={props.party.owner_id.avatar_url} alt=""/>
+              <img className="squad__avatar-image" src={`${config.IMAGES_ENDPOINT}/user-icons/${props.party.owner_id.avatar_url}`} alt=""/>
             </div>
             <p>{props.party.owner_id.username}</p>
           </div>
         </div>
-        <p>{props.party.gamemode && <span className="small-detail">{props.party.gamemode.name}</span>}{props.party.description || 'No description...'}</p>
+        <div className="squad__details-bottom">
+          {props.party.gamemode && <span className="small-detail">{props.party.gamemode.name}</span>}
+          <p className="squad__description">{props.party.description || 'No description...'}</p>
+        </div>
       </div>
       <div className="squad__requirements">
         {generateRequirements()}

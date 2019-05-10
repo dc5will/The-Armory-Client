@@ -12,7 +12,7 @@ export default function SpotInput(props) {
   useEffect(() => {
     props.roles[0] && setRole(props.roles[0]);
     props.roles[1] && setRole2(props.roles[1]);
-  }, []);
+  }, [props.roles]);
 
   function getRole2Options() {
     let temp = {...roles};

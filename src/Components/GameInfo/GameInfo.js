@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import GameContext from '../../Contexts/gameContext';
 import FilterPartiesForm from '../FilterPartiesForm/FilterPartiesForm';
 import CreatePartyForm from "../CreatePartyForm/CreatePartyForm";
 import Modal from '../Modal/Modal';
 import useModal from '../Modal/useModal';
+import config from '../../config';
 
 export default function GameInfo(props) {
   const gameContext = useContext(GameContext);
@@ -21,9 +22,9 @@ export default function GameInfo(props) {
   }
 
   return (  
-    <div className="squad-details">
+    <div id="game-info" className="squad-details">
       <div className="squad-details-top">
-        <img className="squad-details__image" src={gameContext.imageUrl} alt="game-logo" width="40" />
+        <img className="squad-details__image" src={`${config.IMAGES_ENDPOINT}/${gameContext.id}/Main-Image.png`} alt="game-logo" width="40" />
         <div className="squad-details__main">
           <h2>{gameContext.title}</h2>
           {generateGameTags()}

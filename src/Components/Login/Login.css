@@ -1,0 +1,30 @@
+.login-req-prompt {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  padding: 40px;
+  animation: fade-in 1s;
+}
+
+.login-prompt {
+  right: 50px;
+  left: 50%;
+}
+
+.login-req-prompt button {
+  width: 60%;
+  height: 30px;
+}
+
+.login-form__inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60%;
+  width: 100%;
+}

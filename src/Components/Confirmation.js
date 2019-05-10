@@ -14,8 +14,6 @@ export default function Confirmation(props) {
         );
       }
 
-      //eventually we would want to route to 404 if res is not ok
-
   useEffect(() => {
     confirm();
   }, []);
