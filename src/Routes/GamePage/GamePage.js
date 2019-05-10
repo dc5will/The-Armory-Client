@@ -65,7 +65,7 @@ export default function GamePage(props) {
     populateContext();
     // get game stuff
     // connect to socket io for this game
-    socket = io('http://localhost:8000');
+    socket = io('https://limitless-brushlands-45977.herokuapp.com');
     socket.emit('join room', props.match.url);
 
     return () => {

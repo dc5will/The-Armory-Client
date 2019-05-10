@@ -16,7 +16,7 @@ export default function PartyPage(props) {
   useEffect(() => {
     getPartyById();
 
-    socket = io("http://localhost:8000");
+    socket = io("https://limitless-brushlands-45977.herokuapp.com");
     socket.emit("join room", props.match.url);
 
     socket.on("update party", function(party) {
