@@ -90,7 +90,6 @@ export default function CreatePartyForm(props) {
           : res.json()
       )
       .then((respJson) => {
-        console.log(respJson);
         props.history.push(`/party/${respJson}`);
       })
       .catch(err => {

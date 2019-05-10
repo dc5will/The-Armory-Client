@@ -83,7 +83,7 @@ export default function UserProfile(props) {
   }
 
   function generateUserIconImages() {
-    const imageNames = ['Default-Avatar.png', 'ninja.png', 'pikachu.png', 'soldier76.png', 'Cactuar.png', 'axe.png', 'TJICON.png'];
+    const imageNames = ['Default-Avatar.png', 'ninja.png', 'pikachu.png', 'soldier76.png', 'cactuar.png', 'axe.png', 'TJICON.png'];
     
     return imageNames.map((name, i) => {
       if (context.user.avatar_url === name) {

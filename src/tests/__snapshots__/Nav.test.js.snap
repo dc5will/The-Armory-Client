@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav component renders the UI as expected 1`] = `
+<main>
+  <div
+    className="splash-container"
+  >
+    <img
+      alt="Squad Armory Logo"
+      className="splash-logo"
+      onClick={[Function]}
+      src="https://limitless-brushlands-45977.herokuapp.com/images/logo.png"
+    />
+    <div
+      className="splash-description"
+    >
+      <h1>
+        Squad Up! With Squad Armory.
+      </h1>
+      <p>
+        Find friends to play with in your favorite online multiplayer game!
+      </p>
+    </div>
+    <div
+      className="splash-size"
+    >
+      <div
+        className="login-reg-container"
+      >
+        <div
+          className="form-transition-background  registration-active"
+        />
+        <form
+          className="registration-form login-reg-form"
+          onSubmit={[Function]}
+        >
+          
+          <h2
+            className="registration-header"
+          >
+            Register
+          </h2>
+          <div
+            className="registration-input-container"
+          >
+            <label>
+              Email 
+              <input
+                className=""
+                id="registration-email-input"
+                onChange={[Function]}
+                placeholder="example@email.com..."
+                required={true}
+                type="email"
+                value=""
+              />
+            </label>
+            <label>
+              Username 
+              <input
+                className=""
+                onChange={[Function]}
+                placeholder="username..."
+                required={true}
+                type="text"
+                value=""
+              />
+            </label>
+            <label>
+              Password 
+              <input
+                className=""
+                onChange={[Function]}
+                placeholder="password..."
+                required={true}
+                type="password"
+                value=""
+              />
+            </label>
+          </div>
+          <div
+            className="registration-form__tos-details"
+          >
+            <p>
+              By registering you agree to our 
+              <button
+                className="tos-button"
+                onClick={[Function]}
+                type="button"
+              >
+                Terms of Service
+              </button>
+              .
+            </p>
+          </div>
+          <button
+            className="green-button login-reg-form__submit-button"
+            type="submit"
+          >
+            Register
+          </button>
+        </form>
+        <div
+          className="login-req-prompt login-prompt"
+        >
+          <h2>
+            Already have an account?
+          </h2>
+          <button
+            className="grey-button"
+            onClick={[Function]}
+            type="button"
+          >
+            Log in
+          </button>
+        </div>
+      </div>
+    </div>
+    <a
+      href="/faqs"
+      onClick={[Function]}
+    >
+      What is Squad Armory?
+    </a>
+  </div>
+</main>
+`;

@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound component renders the UI as expected 1`] = `
+<div
+  className="notFound-container"
+>
+  <h1>
+    404 Not Found
+  </h1>
+  <h3>
+    What page were you looking for?
+  </h3>
+  <img
+    alt="Jared from Silicon Valley"
+    className="NotFound"
+    src="https://limitless-brushlands-45977.herokuapp.com/images/whichone.gif"
+  />
+</div>
+`;

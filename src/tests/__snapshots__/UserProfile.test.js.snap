@@ -1,0 +1,186 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserProfile component renders the UI as expected 1`] = `
+<div
+  className="user-profile-container"
+>
+  <h2
+    className="modal-header"
+  >
+    Profile Settings
+  </h2>
+  <form
+    className="profile-form"
+    onSubmit={[Function]}
+  >
+    <p>
+      
+    </p>
+    <fieldset
+      className="create-squad__fieldset"
+    >
+      <legend>
+        Choose a new avatar:
+      </legend>
+      <ul
+        className="user-profile__input-field"
+      >
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="Default-Avatar.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/Default-Avatar.png"
+          />
+        </li>
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="ninja.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/ninja.png"
+          />
+        </li>
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="pikachu.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/pikachu.png"
+          />
+        </li>
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="soldier76.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/soldier76.png"
+          />
+        </li>
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="cactuar.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/cactuar.png"
+          />
+        </li>
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="axe.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/axe.png"
+          />
+        </li>
+        <li
+          aria-label="checkbox"
+          className="user-profile__avatar-container"
+          onClick={[Function]}
+          tabIndex="0"
+        >
+          <img
+            alt="TJICON.png"
+            className="user-profile__avatar-image"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/TJICON.png"
+          />
+        </li>
+      </ul>
+    </fieldset>
+    <fieldset
+      className="create-squad__fieldset"
+    >
+      <legend>
+        Enter a new email:
+      </legend>
+      <input
+        aria-label="profile-email-input"
+        className="create-squad__name-input"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </fieldset>
+    <fieldset
+      className="flex-fieldset-column create-squad__fieldset"
+    >
+      <legend>
+        Enter a new password:
+      </legend>
+      <input
+        aria-label="profile-new-password-input"
+        className="create-squad__name-input"
+        onChange={[Function]}
+        placeholder="New password..."
+        type="password"
+        value=""
+      />
+      <input
+        aria-label="profile-new-c-password-input"
+        className="create-squad__name-input"
+        onChange={[Function]}
+        placeholder="Confirm new password..."
+        type="password"
+        value=""
+      />
+    </fieldset>
+    <fieldset
+      className="flex-fieldset-column create-squad__fieldset"
+    >
+      <legend>
+        Confirm your password:
+      </legend>
+      <input
+        aria-label="profile-password-input"
+        className="create-squad__name-input"
+        onChange={[Function]}
+        placeholder="Current password..."
+        required={true}
+        type="password"
+        value=""
+      />
+    </fieldset>
+    <div
+      className="modal-button-holder create-squad__button-container"
+    >
+      <button
+        className="user-profile__submit-button green-button"
+        type="submit"
+      >
+        Update Profile
+      </button>
+      <button
+        aria-label="cancel"
+        className="user-profile__cancel-button grey-button"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+`;

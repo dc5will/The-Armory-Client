@@ -19,7 +19,6 @@ export default function RegisterForm(props) {
   const [invalidUsername, setInvalidUsername] = useState(undefined);
 
   function onRegister(e) {
-    console.log('clicked')
     e.preventDefault();
     AuthApiService.postUser({ email, username, password })
       .then(res => {

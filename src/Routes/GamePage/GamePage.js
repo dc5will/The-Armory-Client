@@ -35,8 +35,7 @@ export default function GamePage(props) {
       )
       .then(game => {
         gameContext.setGame(game);
-      })
-      .catch(err => console.error(err));
+      });
   }
 
   async function populateContext() {
@@ -49,13 +48,24 @@ export default function GamePage(props) {
     }
   }
 
+  //throws an error - fix later
+  // useEffect(() => {
+  //   browserBack()
+  // },[])
+
+  // function browserBack(){
+  //   window.history.pushState(null, null, '/');
+  //   window.onpopstate = function () {
+  //       window.history.go(1);
+  //   };
+  // }
 
   useEffect(() => {
     // populate party listing from API
     populateContext();
     // get game stuff
     // connect to socket io for this game
-    socket = io('http://localhost:8000');
+    socket = io('https://limitless-brushlands-45977.herokuapp.com');
     socket.emit('join room', props.match.url);
 
     return () => {

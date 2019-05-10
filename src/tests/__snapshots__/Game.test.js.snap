@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game component renders the UI as expected 1`] = `
+<li
+  className="game-item-container"
+>
+  <a
+    href="/games/aa0e8ce9-1a71-42e7-804d-6838556fa6ed"
+    onClick={[Function]}
+  >
+    <div
+      className="game-img"
+    >
+      <img
+        alt="Game Cover"
+        src="https://limitless-brushlands-45977.herokuapp.com/images/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/Main-Image.png"
+      />
+    </div>
+    <h2
+      className="game-title"
+    >
+      Test Game
+    </h2>
+  </a>
+  <p>
+     
+    Squads
+  </p>
+  <div
+    className="game-tags-container"
+  >
+    <span
+      className="small-detail"
+    >
+      Test tag1
+    </span>
+    <span
+      className="small-detail"
+    >
+      test tag2
+    </span>
+  </div>
+</li>
+`;
