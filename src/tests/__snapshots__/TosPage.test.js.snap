@@ -97,20 +97,14 @@ exports[`TosPage component renders the UI as expected 1`] = `
         These terms and conditions are governed by and construed in accordance with the laws of United States and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.
       </p>
     </div>
-  </div>
-  <div
-    className="tosPage__button-container"
-  >
     <p>
-      I am over the age of 13 and agree to the terms of service
+      By agreeing you state that you are over the age of 13.
     </p>
     <button
-      onClick={[Function]}
+      className="green-button"
+      type="button"
     >
-      I agree
-    </button>
-    <button>
-      I disagree
+      Close
     </button>
   </div>
 </div>

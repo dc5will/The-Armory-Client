@@ -8,52 +8,69 @@ exports[`Dashboard component renders the UI as expected 1`] = `
     className="game-search-form"
     onSubmit={[Function]}
   >
-    <input
-      id="title-search-input"
-      name="search"
-      placeholder="Enter game title"
-      type="text"
-    />
-    <button
-      className="games-search-button"
-      type="submit"
+    <fieldset
+      className="game-search-fieldset"
     >
-      Search
-    </button>
+      <legend>
+        Search
+      </legend>
+      <label
+        className="input-with-icon"
+      >
+        <i
+          className="fas fa-search game-search__relative-fieldset-icon"
+        />
+        <input
+          aria-label="title-search-input"
+          className="solo-input-transitions"
+          id="title-search-input"
+          name="search"
+          placeholder="Enter game title..."
+          type="text"
+        />
+      </label>
+      <button
+        className="games-search-button"
+        id="games-search-button"
+        type="submit"
+      >
+        Search
+      </button>
+    </fieldset>
+    <div
+      className="filter-tabs"
+    >
+      <div
+        className="game-search__fake-tab"
+      >
+        All
+      </div>
+      <button
+        className="game-search__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        Shooter
+      </button>
+      <button
+        className="game-search__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        MOBA
+      </button>
+      <button
+        className="game-search__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        MMORPG
+      </button>
+    </div>
   </form>
-  <div
-    className="filter-tabs"
-  >
-    <button
-      autoFocus={true}
-      className="filterGames"
-      onClick={[Function]}
-    >
-      All
-    </button>
-    <button
-      className="filterGames"
-      onClick={[Function]}
-    >
-      Shooter
-    </button>
-    <button
-      className="filterGames"
-      onClick={[Function]}
-    >
-      MOBA
-    </button>
-    <button
-      className="filterGames"
-      onClick={[Function]}
-    >
-      MMORPG
-    </button>
-  </div>
   <ul
     className="game-display-container"
   >
-    <br />
     <span
       className="game-search-no-result"
     >

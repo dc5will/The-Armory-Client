@@ -36,6 +36,10 @@
   box-shadow: 0 1px 8px 0 #00000080;
 }
 
+.create-squad__name-input::placeholder, .create-squad__description-input::placeholder {
+  color: rgb(180, 180, 180);
+}
+
 .create-squad__name-input:hover, 
 .create-squad__description-input:hover,
 .create-squad__name-input:focus, 
@@ -94,4 +98,26 @@
 
 .spot-input__field-button-first {
   margin-right: 10px;
+}
+
+@media screen and (max-width: 900px) {
+  .create-party-form {
+    width: 100%;
+  }
+
+  .spot-container {
+    flex-wrap: wrap;
+  }
+
+  .spot-container li {
+    margin-bottom: 10px;
+  }
+
+  .create-party-reset-button, .create-party-cancel-button {
+    width: 70px;
+  }
+
+  .create-party-button {
+    width: 110px;
+  }
 }

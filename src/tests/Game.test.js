@@ -1,5 +1,5 @@
 import React from "react";
-import Game from "../Components/Game";
+import Game from "../Components/Game/Game";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";

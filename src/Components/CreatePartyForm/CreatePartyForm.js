@@ -246,7 +246,7 @@ export default function CreatePartyForm(props) {
           {generateSpotInputs()}
         </ul>
       </fieldset>
-      <div className="create-squad__button-container">
+      <div className="modal-button-holder create-squad__button-container">
         <div className="create-squad__button-subcontainer">
           <button
             type="submit"

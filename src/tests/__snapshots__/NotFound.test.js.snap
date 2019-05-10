@@ -13,7 +13,7 @@ exports[`NotFound component renders the UI as expected 1`] = `
   <img
     alt="Jared from Silicon Valley"
     className="NotFound"
-    src="whichone.gif"
+    src="http://localhost:8000/images/whichone.gif"
   />
 </div>
 `;

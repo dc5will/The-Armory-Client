@@ -5,126 +5,123 @@ exports[`Nav component renders the UI as expected 1`] = `
   <div
     className="splash-container"
   >
+    <img
+      alt="Squad Armory Logo"
+      className="splash-logo"
+      onClick={[Function]}
+      src="http://localhost:8000/images/logo.png"
+    />
+    <div
+      className="splash-description"
+    >
+      <h1>
+        Squad Up! With Squad Armory.
+      </h1>
+      <p>
+        Find friends to play with in your favorite online multiplayer game!
+      </p>
+    </div>
     <div
       className="splash-size"
     >
       <div
-        className="creds-container"
+        className="login-reg-container"
       >
-        <main>
-          <div
-            className="registrationForm"
+        <div
+          className="form-transition-background  registration-active"
+        />
+        <form
+          className="registration-form login-reg-form"
+          onSubmit={[Function]}
+        >
+          
+          <h2
+            className="registration-header"
           >
-            <h2>
-              Register
-            </h2>
-            <p>
-              
-            </p>
-            <form
-              className="registration-form"
-              onSubmit={[Function]}
-            >
-              <div
-                className="input-field"
-              >
-                <label
-                  htmlFor="registration-name-input"
-                >
-                  Username: 
-                </label>
-                <input
-                  id="registration-name-input"
-                  onChange={[Function]}
-                  placeholder="username"
-                  required={true}
-                  type="text"
-                  value=""
-                />
-              </div>
-              <div
-                className="input-field"
-              >
-                <label
-                  htmlFor="registration-email-input"
-                >
-                  Email: 
-                </label>
-                <input
-                  id="registration-email-input"
-                  onChange={[Function]}
-                  placeholder="example@email.com"
-                  required={true}
-                  type="email"
-                  value=""
-                />
-              </div>
-              <div
-                className="input-field"
-              >
-                <label
-                  htmlFor="registration-password-input"
-                >
-                  Password: 
-                </label>
-                <input
-                  id="registration-password-input"
-                  onChange={[Function]}
-                  placeholder="password"
-                  required={true}
-                  type="password"
-                  value=""
-                />
-              </div>
-              <div>
-                <p>
-                  Please agree to our Terms of service to register.
-                </p>
-                <button
-                  className="tos-button"
-                  onClick={[Function]}
-                  type="button"
-                >
-                  Terms of service
-                </button>
-              </div>
-              <button
-                className="submit-button"
-                type="submit"
-              >
-                Register
-              </button>
-            </form>
+            Register
+          </h2>
+          <div
+            className="registration-input-container"
+          >
+            <label>
+              Email 
+              <input
+                className=""
+                id="registration-email-input"
+                onChange={[Function]}
+                placeholder="example@email.com..."
+                required={true}
+                type="email"
+                value=""
+              />
+            </label>
+            <label>
+              Username 
+              <input
+                className=""
+                onChange={[Function]}
+                placeholder="username..."
+                required={true}
+                type="text"
+                value=""
+              />
+            </label>
+            <label>
+              Password 
+              <input
+                className=""
+                onChange={[Function]}
+                placeholder="password..."
+                required={true}
+                type="password"
+                value=""
+              />
+            </label>
           </div>
-        </main>
+          <div
+            className="registration-form__tos-details"
+          >
+            <p>
+              By registering you agree to our 
+              <button
+                className="tos-button"
+                onClick={[Function]}
+                type="button"
+              >
+                Terms of Service
+              </button>
+              .
+            </p>
+          </div>
+          <button
+            className="green-button login-reg-form__submit-button"
+            type="submit"
+          >
+            Register
+          </button>
+        </form>
         <div
-          className="navigator"
-        />
-      </div>
-      <div
-        className="hidden"
-      >
-        <div
-          className="disable"
-        />
-      </div>
-      <div
-        className="navigator"
-      >
-        <button
-          onClick={[Function]}
+          className="login-req-prompt login-prompt"
         >
-          Already a member?
-        </button>
-        <p />
-        <a
-          href="/faqs"
-          onClick={[Function]}
-        >
-          What is Squad Armory?
-        </a>
+          <h2>
+            Already have an account?
+          </h2>
+          <button
+            className="grey-button"
+            onClick={[Function]}
+            type="button"
+          >
+            Log in
+          </button>
+        </div>
       </div>
     </div>
+    <a
+      href="/faqs"
+      onClick={[Function]}
+    >
+      What is Squad Armory?
+    </a>
   </div>
 </main>
 `;

@@ -36,16 +36,34 @@
   font-size: 18px;
   font-weight: 600;
   margin: 0 10px 0 0;
-
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
 }
 
-.squad-list p {
+.squad-list p, .squad-list span, .squad__description {
   margin: 0;
   font-weight: normal;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.squad-list span {
+  margin-right: 10px;
+}
+
+.squad__description {
+  position: relative;
   color: #b3b3b3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80%;
+}
+
+.squad__details-bottom {
+  display: flex;
+  align-items: center;
 }
 
 .squad__gamemode-image {
@@ -66,9 +84,9 @@
 
 .squad__details {
   display: flex;
-  width: 100%;
   flex-direction: column;
   justify-content: center;
+  width: calc(100% - 200px);
 }
 
 .squad__details-top {
@@ -152,21 +170,21 @@
   display: flex;
   align-items: center;
   padding: 0 10px;
+  width: 80px;
 }
 
 .squad__requirements {
   display: flex;
   align-items: center;
   font-weight: normal;
+  width: 140px;
 }
 
 .squad__avatar-image {
   position: absolute;
-  top: -11px;
-  left: -11px;
-  width: 54px;
-  height: 60px;
-  clip-path: inset(11px 11px 11px 11px);
+  left: -4px;
+  width: 38px;
+  height: 38px;
 }
 
 .squad__owner {

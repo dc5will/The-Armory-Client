@@ -11,6 +11,7 @@ let socket;
 export default function PartyPage(props) {
   const context = useContext(PartyContext);
   const [warning, setWarning] = useState(null);
+  const [expand, setExpand] = useState(false)
 
   useEffect(() => {
     getPartyById();
@@ -20,7 +21,6 @@ export default function PartyPage(props) {
 
     socket.on("update party", function(party) {
       context.setParty(party);
-      console.log(party);
     });
 
     socket.on("update chat", function(messageData) {
@@ -35,26 +35,27 @@ export default function PartyPage(props) {
       context.setParty(party);
     });
 
+    //block navigation
+    window.addEventListener('beforeunload', (e) => {
+      return 'Leaving this page will result in you leaving the squad. Continue?';
+    });
+
     return () => {
-      leave();
+      window.removeEventListener('beforeunload', (e) => {
+        return 'Leaving this page will result in you leaving the squad. Continue?';
+      });
+      leave()
     };
   }, []);
 
+  useEffect(() => {
+    confirmPartyMember()
+  }, [])
 
   useEffect(() => {
     getChatLog()
   }, []);
 
-  useEffect(() => {
-    disableBack()
-  },[])
-
-  function disableBack(){
-    window.history.pushState(null, null, window.location.href);
-    window.onpopstate = function () {
-        window.history.go(1);
-    };
-  }
 
   function getChatLog(){
     return fetch(`${config.API_ENDPOINT}/parties/messages/${props.match.params.partyId}`)
@@ -121,6 +122,18 @@ export default function PartyPage(props) {
 
         context.setParty(respJson);
       });
+  
+    }
+  function confirmPartyMember() {
+    return fetch(
+      `${config.API_ENDPOINT}/parties/auth/${props.match.params.partyId}`, 
+      {
+        headers: {
+          authorization: `Bearer ${TokenService.getAuthToken()}`
+        }
+      }
+    )
+      .then(res => (!res.ok ? props.history.push('/') : res.json()))
   }
 
   function leave() {
@@ -139,31 +152,23 @@ export default function PartyPage(props) {
     // clears party chat context when user leaves a party and joins a new one
     context.setPartyChat([]);
 
-    props.history.replace(`/games/${context.party.game_id}`);
+    props.history.replace(`/`);
   }
 
   // Couldnt get prompt to work in a functional component
   // so this function confirms the exit of the party
 
   function displayWarning() {
-    return warning ? (
-      <div className='party-warning'>
-        <p>Are you sure you want to leave this party?</p>
-        <div className='leave-party'>
-        <button onClick={e => handleLeave()}>Confirm</button>
-        <button onClick={e => setWarning(!warning)}>Cancel</button>
-        </div>
-      </div>
-    ) : (
+    return(
       <div className='leave-party'>
-      <button onClick={e => setWarning(!warning)}>Leave party</button>
+      <button onClick={e => handleLeave()}>Leave party</button>
       </div>
     );
   }
 
   function generateReqs(party) {
     return context.party.reqs.map((req, i) => {
-      return <li key={i}>{req.name}</li>;
+      return <li key={i} className='party-reqs'>{req.name}</li>;
     });
   }
 
@@ -172,7 +177,6 @@ export default function PartyPage(props) {
       let roleStr = "";
       const user = spot.filled;
       spot.roles.forEach(role => {
-        console.log(user)
         return(
           role.name ?
             roleStr +=role.name + ' ' :
@@ -188,30 +192,45 @@ export default function PartyPage(props) {
     });
   }
 
+  function expandParty(){
+    setExpand(!expand)
+  }
+
   function generateDisplayParty(party) {
     return (
+      <>
       <div className='party-info'>
         <h1>{context.party.title}</h1>
         <p>{context.party.description}</p>
+      </div>
+      <div className = {!expand ? 'party-props' : 'hidden'}>
         <h3>Spots:</h3>
         <ul>{generateRoles(party)}</ul>
         <h3>Requirements:</h3>
-        <ul>{generateReqs(party)}</ul>
-      </div>
-    );
-  }
-
-  return (
-    <div className='party-page-container'>
-      <div className='display-party-info'>
-        {context.party.title ? generateDisplayParty(context.party) : "Loading"}
+        <ul className='reqs-container'>{generateReqs(party)}</ul>
         {displayWarning()}
       </div>
-      <PartyChat
-        sendChatMessage={sendChatMessage}
-        sendChatEdit={sendChatEdit}
-        deleteChatMessage={deleteChatMessage}
+      </>
+    );
+  }
+  
+  return (
+    <>
+      <Prompt
+        when={true}
+        message="Leaving this page will result in you leaving the squad. Continue?"
       />
-    </div>
+      <div className='party-page-container'>
+        <div className='display-party-info'>
+            {context.party.title ? generateDisplayParty(context.party) : "Loading"}
+          <button className='expand-party-info' onClick={e => expandParty()}>{!expand ? '˄' : '˅' }</button>
+        </div>
+        <PartyChat
+          sendChatMessage={sendChatMessage}
+          sendChatEdit={sendChatEdit}
+          deleteChatMessage={deleteChatMessage}
+        />
+      </div>
+    </>
   );
 }

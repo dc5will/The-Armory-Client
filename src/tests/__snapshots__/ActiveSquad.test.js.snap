@@ -63,6 +63,7 @@ exports[`Game component renders the UI as expected 1`] = `
       <img
         alt=""
         className="squad__avatar-image"
+        src="http://localhost:8000/images/user-icons/undefined"
       />
     </div>
     <p />

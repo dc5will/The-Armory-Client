@@ -1,90 +1,74 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RegistrationForm component renders the UI as expected 1`] = `
-<main>
-  <div
-    className="registrationForm"
+<form
+  className="registration-form login-reg-form"
+  onSubmit={[Function]}
+>
+  
+  <h2
+    className="registration-header"
   >
-    <h2>
-      Register
-    </h2>
-    <p>
-      
-    </p>
-    <form
-      className="registration-form"
-      onSubmit={[Function]}
-    >
-      <div
-        className="input-field"
-      >
-        <label
-          htmlFor="registration-name-input"
-        >
-          Username: 
-        </label>
-        <input
-          id="registration-name-input"
-          onChange={[Function]}
-          placeholder="username"
-          required={true}
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="input-field"
-      >
-        <label
-          htmlFor="registration-email-input"
-        >
-          Email: 
-        </label>
-        <input
-          id="registration-email-input"
-          onChange={[Function]}
-          placeholder="example@email.com"
-          required={true}
-          type="email"
-          value=""
-        />
-      </div>
-      <div
-        className="input-field"
-      >
-        <label
-          htmlFor="registration-password-input"
-        >
-          Password: 
-        </label>
-        <input
-          id="registration-password-input"
-          onChange={[Function]}
-          placeholder="password"
-          required={true}
-          type="password"
-          value=""
-        />
-      </div>
-      <div>
-        <p>
-          Please agree to our Terms of service to register.
-        </p>
-        <button
-          className="tos-button"
-          onClick={[Function]}
-          type="button"
-        >
-          Terms of service
-        </button>
-      </div>
-      <button
-        className="submit-button"
-        type="submit"
-      >
-        Register
-      </button>
-    </form>
+    Register
+  </h2>
+  <div
+    className="registration-input-container"
+  >
+    <label>
+      Email 
+      <input
+        className=""
+        id="registration-email-input"
+        onChange={[Function]}
+        placeholder="example@email.com..."
+        required={true}
+        type="email"
+        value=""
+      />
+    </label>
+    <label>
+      Username 
+      <input
+        className=""
+        onChange={[Function]}
+        placeholder="username..."
+        required={true}
+        type="text"
+        value=""
+      />
+    </label>
+    <label>
+      Password 
+      <input
+        className=""
+        onChange={[Function]}
+        placeholder="password..."
+        required={true}
+        type="password"
+        value=""
+      />
+    </label>
   </div>
-</main>
+  <div
+    className="registration-form__tos-details"
+  >
+    <p>
+      By registering you agree to our 
+      <button
+        className="tos-button"
+        onClick={[Function]}
+        type="button"
+      >
+        Terms of Service
+      </button>
+      .
+    </p>
+  </div>
+  <button
+    className="green-button login-reg-form__submit-button"
+    type="submit"
+  >
+    Register
+  </button>
+</form>
 `;

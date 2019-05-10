@@ -1,15 +1,11 @@
 import React, { useContext } from 'react';
 import UserContext from '../../Contexts/userContext';
 import './ToSPage.css';
+import { tsPropertySignature } from '@babel/types';
 
 
 export default function TOS({ hide }) {
   const context = useContext(UserContext);
-
-  function agreeToTos() {
-    context.setTosCheck(true)
-    hide()
-  }
 
   return (
     <div className="tosPage__container">
@@ -105,12 +101,8 @@ export default function TOS({ hide }) {
     and you irrevocably submit to the exclusive jurisdiction of the courts in that State or location.</p>
         </div>
 
-
-      </div>
-      <div className="tosPage__button-container">
-        <p>I am over the age of 13 and agree to the terms of service</p>
-        <button onClick={agreeToTos}>I agree</button>
-        <button onClick={hide}>I disagree</button>
+        <p>By agreeing you state that you are over the age of 13.</p>
+      <button type="button" className="green-button" onClick={hide}>Close</button>
       </div>
     </div>
   );

@@ -8,15 +8,12 @@ exports[`PartyPage component renders the UI as expected 1`] = `
     className="display-party-info"
   >
     Loading
-    <div
-      className="leave-party"
+    <button
+      className="expand-party-info"
+      onClick={[Function]}
     >
-      <button
-        onClick={[Function]}
-      >
-        Leave party
-      </button>
-    </div>
+      ˄
+    </button>
   </div>
   <div
     className="chat-main-container"
@@ -32,6 +29,7 @@ exports[`PartyPage component renders the UI as expected 1`] = `
         onSubmit={[Function]}
       >
         <input
+          aria-label="chat-input"
           className="chat-input"
           onChange={[Function]}
           type="text"

@@ -62,19 +62,26 @@ exports[`Squad component renders the UI as expected 1`] = `
           <img
             alt=""
             className="squad__avatar-image"
+            src="http://localhost:8000/images/user-icons/undefined"
           />
         </div>
         <p />
       </div>
     </div>
-    <p>
+    <div
+      className="squad__details-bottom"
+    >
       <span
         className="small-detail"
       >
         Quick Play
       </span>
-      This is a description of test Squad.
-    </p>
+      <p
+        className="squad__description"
+      >
+        This is a description of test Squad.
+      </p>
+    </div>
   </div>
   <div
     className="squad__requirements"

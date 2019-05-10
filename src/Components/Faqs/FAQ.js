@@ -26,11 +26,13 @@ export default function FAQ (props) {
         <p>You shouldn't. Squad Armory isn't trying to replace the need for such services. 
           In fact, the party chat was put in place so that you could share usernames and decide on a venue for your in game chat. 
           We are simpily here to make finding friends easy.</p>
-
+        <div className='faq-footer'>
         <li>Need to ask a question?</li>
         <a href={`mailto:${email}`}>Contact Us</a>
+        </div>
+        <p/>
+        <button onClick={e => props.history.push('/')}>Back</button>
       </ul>
-        <button onClick={e => props.history.goBack()}>Back</button>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import './SpotInput.css';
 import config from '../../../config';
 import GameContext from "../../../Contexts/gameContext";
@@ -27,20 +27,6 @@ export default function SpotInput(props) {
       );
     }
     return temp;
-  }
-
-  function generateRoleText() {
-    const spotRoles = props.roles;
-    if (props.omitted) {
-      return 'Omitted';
-    } else if (spotRoles.length > 0) {
-      let temp = '';
-      temp += roles[spotRoles[0]].name;
-      spotRoles[1] && (temp += ' / ' + roles[spotRoles[1]].name);
-      return temp;
-    } else {
-      return 'Open';
-    }
   }
 
   return (

@@ -15,6 +15,7 @@ exports[`PartyChat component renders the UI as expected 1`] = `
       onSubmit={[Function]}
     >
       <input
+        aria-label="chat-input"
         className="chat-input"
         onChange={[Function]}
         type="text"

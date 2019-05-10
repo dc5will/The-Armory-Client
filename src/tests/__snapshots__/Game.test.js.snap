@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Game component renders the UI as expected 1`] = `
-<div
+<li
   className="game-item-container"
 >
   <a
@@ -13,25 +13,32 @@ exports[`Game component renders the UI as expected 1`] = `
     >
       <img
         alt="Game Cover"
-        src="https://res.cloudinary.com/squadarmory/image/upload/v1557172650/overwatch_epjgky.png"
+        src="http://localhost:8000/images/aa0e8ce9-1a71-42e7-804d-6838556fa6ed/Main-Image.png"
       />
     </div>
-    <h3>
+    <h2
+      className="game-title"
+    >
       Test Game
-    </h3>
+    </h2>
   </a>
-  <span
-    className="small-detail"
-  >
-    Test tag1
-  </span>
-  <span
-    className="small-detail"
-  >
-    test tag2
-  </span>
   <p>
-    Available Parties: 
+     
+    Squads
   </p>
-</div>
+  <div
+    className="game-tags-container"
+  >
+    <span
+      className="small-detail"
+    >
+      Test tag1
+    </span>
+    <span
+      className="small-detail"
+    >
+      test tag2
+    </span>
+  </div>
+</li>
 `;

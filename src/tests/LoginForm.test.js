@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from '../Components/LoginForm';
+import LoginForm from '../Components/Login/LoginForm';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";

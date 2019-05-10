@@ -200,7 +200,7 @@ exports[`CreatePartyForm component renders the UI as expected 1`] = `
     </ul>
   </fieldset>
   <div
-    className="create-squad__button-container"
+    className="modal-button-holder create-squad__button-container"
   >
     <div
       className="create-squad__button-subcontainer"

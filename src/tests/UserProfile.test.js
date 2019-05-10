@@ -1,5 +1,5 @@
 import React from 'react';
-import UserProfile from '../Components/UserProfile';
+import UserProfile from '../Components/UserProfile/UserProfile';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";

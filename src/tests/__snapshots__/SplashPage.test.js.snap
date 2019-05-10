@@ -32,19 +32,24 @@ exports[`SplashPage component renders the UI as expected 1`] = `
     <p>
       You shouldn't. Squad Armory isn't trying to replace the need for such services. In fact, the party chat was put in place so that you could share usernames and decide on a venue for your in game chat. We are simpily here to make finding friends easy.
     </p>
-    <li>
-      Need to ask a question?
-    </li>
-    <a
-      href="mailto:armorysquad@gmail.com"
+    <div
+      className="faq-footer"
     >
-      Contact Us
-    </a>
+      <li>
+        Need to ask a question?
+      </li>
+      <a
+        href="mailto:armorysquad@gmail.com"
+      >
+        Contact Us
+      </a>
+    </div>
+    <p />
+    <button
+      onClick={[Function]}
+    >
+      Back
+    </button>
   </ul>
-  <button
-    onClick={[Function]}
-  >
-    Back
-  </button>
 </div>
 `;
