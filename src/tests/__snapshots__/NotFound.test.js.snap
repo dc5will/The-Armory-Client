@@ -13,7 +13,7 @@ exports[`NotFound component renders the UI as expected 1`] = `
   <img
     alt="Jared from Silicon Valley"
     className="NotFound"
-    src="http://localhost:8000/images/whichone.gif"
+    src="https://limitless-brushlands-45977.herokuapp.com/images/whichone.gif"
   />
 </div>
 `;

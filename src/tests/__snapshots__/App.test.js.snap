@@ -9,7 +9,7 @@ exports[`renders the UI as expected 1`] = `
       alt="Squad Armory Logo"
       className="splash-logo"
       onClick={[Function]}
-      src="http://localhost:8000/images/logo.png"
+      src="https://limitless-brushlands-45977.herokuapp.com/images/logo.png"
     />
     <div
       className="splash-description"

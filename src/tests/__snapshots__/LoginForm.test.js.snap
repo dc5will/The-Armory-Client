@@ -13,6 +13,11 @@ exports[`LoginForm component renders the UI as expected 1`] = `
   <div
     className="login-form__inputs-container registration-input-container"
   >
+    <div
+      className="login-error"
+    >
+      
+    </div>
     <label
       htmlFor="email-input"
     >
@@ -21,7 +26,7 @@ exports[`LoginForm component renders the UI as expected 1`] = `
         id="email-input"
         name="email-input"
         onChange={[Function]}
-        placeholder="example@email.com..."
+        placeholder="demo@email.com"
         required={true}
         type="text"
       />
@@ -34,7 +39,7 @@ exports[`LoginForm component renders the UI as expected 1`] = `
         id="password-input"
         name="password-input"
         onChange={[Function]}
-        placeholder="password..."
+        placeholder="Demo1234!"
         required={true}
         type="password"
       />

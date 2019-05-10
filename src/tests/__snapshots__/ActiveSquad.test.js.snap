@@ -23,7 +23,7 @@ exports[`Game component renders the UI as expected 1`] = `
       <img
         alt=""
         className="squad__gamemode-image"
-        src="http://localhost:8000/images/[object Object]/Gamemode-Quickplay.png"
+        src="https://limitless-brushlands-45977.herokuapp.com/images/[object Object]/Gamemode-Quickplay.png"
       />
     </div>
     <div
@@ -63,7 +63,7 @@ exports[`Game component renders the UI as expected 1`] = `
       <img
         alt=""
         className="squad__avatar-image"
-        src="http://localhost:8000/images/user-icons/undefined"
+        src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/undefined"
       />
     </div>
     <p />
@@ -89,12 +89,12 @@ exports[`Game component renders the UI as expected 1`] = `
           <img
             alt=""
             className="active-squad__spots-first-half"
-            src="http://localhost:8000/images/[object Object]/Icon-Genji.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/[object Object]/Icon-Genji.png"
           />
           <img
             alt=""
             className="active-squad__spots-second-half"
-            src="http://localhost:8000/images/[object Object]/Icon-Support.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/[object Object]/Icon-Support.png"
           />
           <i
             className="squad__spots-filled fas fa-check"

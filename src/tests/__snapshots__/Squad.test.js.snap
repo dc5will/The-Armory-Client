@@ -13,7 +13,7 @@ exports[`Squad component renders the UI as expected 1`] = `
     <img
       alt=""
       className="squad__gamemode-image"
-      src="http://localhost:8000/images/undefined/Gamemode-Quickplay.png"
+      src="https://limitless-brushlands-45977.herokuapp.com/images/undefined/Gamemode-Quickplay.png"
     />
   </div>
   <div
@@ -34,12 +34,12 @@ exports[`Squad component renders the UI as expected 1`] = `
           <img
             alt=""
             className="squad__spots-first-half"
-            src="http://localhost:8000/images/undefined/Icon-Genji.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/undefined/Icon-Genji.png"
           />
           <img
             alt=""
             className="squad__spots-second-half"
-            src="http://localhost:8000/images/undefined/Icon-Support.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/undefined/Icon-Support.png"
           />
         </li>
         <li
@@ -62,7 +62,7 @@ exports[`Squad component renders the UI as expected 1`] = `
           <img
             alt=""
             className="squad__avatar-image"
-            src="http://localhost:8000/images/user-icons/undefined"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/undefined"
           />
         </div>
         <p />

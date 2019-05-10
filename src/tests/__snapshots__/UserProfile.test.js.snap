@@ -34,7 +34,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="Default-Avatar.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/Default-Avatar.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/Default-Avatar.png"
           />
         </li>
         <li
@@ -46,7 +46,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="ninja.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/ninja.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/ninja.png"
           />
         </li>
         <li
@@ -58,7 +58,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="pikachu.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/pikachu.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/pikachu.png"
           />
         </li>
         <li
@@ -70,7 +70,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="soldier76.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/soldier76.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/soldier76.png"
           />
         </li>
         <li
@@ -82,7 +82,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="Cactuar.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/Cactuar.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/Cactuar.png"
           />
         </li>
         <li
@@ -94,7 +94,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="axe.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/axe.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/axe.png"
           />
         </li>
         <li
@@ -106,7 +106,7 @@ exports[`UserProfile component renders the UI as expected 1`] = `
           <img
             alt="TJICON.png"
             className="user-profile__avatar-image"
-            src="http://localhost:8000/images/user-icons/TJICON.png"
+            src="https://limitless-brushlands-45977.herokuapp.com/images/user-icons/TJICON.png"
           />
         </li>
       </ul>
