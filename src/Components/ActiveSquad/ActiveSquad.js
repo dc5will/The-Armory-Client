@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import Spot from '../Spot/Spot';
 import config from '../../config';
 import './ActiveSquad.css';
 import TokenService from '../../services/token-service';
@@ -51,7 +50,7 @@ export default function ActiveSquad(props) {
     return party.spots
       .map((spot, index) => {
         if (spot.filled) {
-          return <li className="active-squad__checkbox-container">
+          return <li key={index} className="active-squad__checkbox-container">
             <div className="active-squad__fake-checkbox">
               {generateRoleImages(spot.roles, spot.filled)}
             </div>
@@ -59,6 +58,7 @@ export default function ActiveSquad(props) {
         } else {
           return <li 
             className="active-squad__checkbox-container"
+            key={index}
           >
             <div
               className={index === spotToJoin ? "active-squad__checkbox active-squad__active-checkbox" : "active-squad__checkbox"} 
@@ -124,7 +124,7 @@ export default function ActiveSquad(props) {
       <span className="active-squad__section-header">Owner</span>
       <div className="active-squad__owner">
         <div className="squad__spots-image-container">
-          <img className="squad__avatar-image" src={props.party.owner_id.avatar_url} alt=""/>
+          <img className="squad__avatar-image" src={`${config.IMAGES_ENDPOINT}/user-icons/${props.party.owner_id.avatar_url}`} alt=""/>
         </div>
         <p>{props.party.owner_id.username}</p>
       </div>

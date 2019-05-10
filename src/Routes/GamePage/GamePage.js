@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import config from "../../config";
 import TokenService from "../../services/token-service";
 import GameContext from '../../Contexts/gameContext';
@@ -11,7 +11,6 @@ import './GamePage.css';
 
 import io from 'socket.io-client';
 import Dropdown from "../../Components/Dropdown/Dropdown";
-import useModal from "../../Components/Modal/useModal";
 import Modal from "../../Components/Modal/Modal";
 import ActiveSquad from '../../Components/ActiveSquad/ActiveSquad';
 let socket;
@@ -20,7 +19,7 @@ export default function GamePage(props) {
   const gameContext = useContext(GameContext);
   const [loading, toggleLoading] = useState(true);
   const [activeSquad, setActiveSquad] = useState(undefined);
-  const { isShowing, toggle } = useModal();
+  const squadList = useRef(null);
 
   function getGame() {
     return fetch(`${config.API_ENDPOINT}${props.match.url}`, {
@@ -36,7 +35,8 @@ export default function GamePage(props) {
       )
       .then(game => {
         gameContext.setGame(game);
-      });
+      })
+      .catch(err => console.error(err));
   }
 
   async function populateContext() {
@@ -49,16 +49,17 @@ export default function GamePage(props) {
     }
   }
 
-  useEffect(() => {
-    browserBack()
-  },[])
+  //throws an error - fix later
+  // useEffect(() => {
+  //   browserBack()
+  // },[])
 
-  function browserBack(){
-    window.history.pushState(null, null, '/');
-    window.onpopstate = function () {
-        window.history.go(1);
-    };
-  }
+  // function browserBack(){
+  //   window.history.pushState(null, null, '/');
+  //   window.onpopstate = function () {
+  //       window.history.go(1);
+  //   };
+  // }
 
   useEffect(() => {
     // populate party listing from API
@@ -178,8 +179,6 @@ export default function GamePage(props) {
   }
 
   function handleSquadOnClick(index) {
-    console.log(index);
-    console.log(gameContext.parties[index]);
     setActiveSquad(index);
   }
 
@@ -202,17 +201,19 @@ export default function GamePage(props) {
   }
 
   function generateGamemodeDropdown() {
-    return <Dropdown
-      name="gamemode"
-      className='gamemode-dropdown'
-      active={gameContext.gamemodeFilter}
-      gameId={gameContext.id}
-      onChange={e => gameContext.setGamemodeFilter(e.value)}
-      onButtonClick={e => gameContext.setGamemodeFilter(0)}
-      placeholder='All'
-      startValue={gameContext.gamemodeFilter}
-      options={gameContext.gamemodes}
-    />
+    return <div className="squad-list__top-dropdown-container">
+      <Dropdown
+        name="gamemode"
+        className='gamemode-dropdown'
+        active={gameContext.gamemodeFilter}
+        gameId={gameContext.id}
+        onChange={e => gameContext.setGamemodeFilter(e.value)}
+        onButtonClick={e => gameContext.setGamemodeFilter(0)}
+        placeholder='All'
+        startValue={gameContext.gamemodeFilter}
+        options={gameContext.gamemodes}
+      />
+    </div>
   }
 
   if (loading) {
@@ -226,6 +227,26 @@ export default function GamePage(props) {
         <div className="squads-list__top">
           <div className="squad-list__top-gamemode-buttons">
             {generateGamemodeDropdown()}
+            <button 
+              className="show-squad-details-button green-button" 
+              type="button" aria-label="show options" 
+              onClick={() => {
+                //hacky... change this later! Also works poorly with resizing while menu is open.
+                let classList = document.getElementById('game-info').classList;
+                classList.toggle('display__game-info');
+                if (classList.contains('display__game-info') && document.documentElement.clientWidth < 1267) {
+                  if (document.documentElement.clientWidth < 883) {
+                    squadList.current.setAttribute('style', 'margin-top: 586px;');
+                  } else {
+                    squadList.current.setAttribute('style', 'margin-top: 120px;');
+                  }
+                } else {
+                  squadList.current.setAttribute('style', 'margin-top: 20px;');
+                }
+              }}
+            >
+              <i className="fas fa-bars"/>
+            </button>
           </div>
           <ul className="squads-list__top-titles">
             <li className="squads-list__top-titles__info">Squad Info</li>
@@ -241,7 +262,7 @@ export default function GamePage(props) {
               </div>
             )
           : (
-              <ul className="squad-list">
+              <ul className="squad-list" ref={squadList}>
                 {generateParties()}
               </ul>
             )}

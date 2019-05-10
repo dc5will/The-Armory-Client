@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import SplashPage from './Components/SplashPage';
+import SplashPage from './Routes/SplashPage/SplashPage';
 import Dashboard from './Routes/Dashboard';
 import PublicOnlyRoute from './Routes/PublicOnlyRoute'
 import PrivateRoute from './Routes/PrivateRoute';

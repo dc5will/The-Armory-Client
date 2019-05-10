@@ -61,3 +61,7 @@ body{
 input {
   font-family: Rajdhani, sans-serif;
 }
+
+.invalid-form-input {
+  border: 1px solid #dd576d !important;
+}

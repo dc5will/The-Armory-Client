@@ -23,7 +23,7 @@
 }
 
 .game-search__fake-tab {
-  background-color: #6e9c25;
+  background-color: #5a801f;
 }
 
 .game-search__tab:hover {
@@ -44,11 +44,11 @@
 }
 
 .filterGames:hover{
-  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  background-image: linear-gradient(#5a801f, #5a801f 67%, #406406);
 }
 
 .filterGames:focus{
-  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  background-image: linear-gradient(#5a801f, #5a801f 67%, #406406);
   outline: none;
 }
 
@@ -92,7 +92,7 @@ outline: none;
   font-size: 16px;
   height: 30px;
   border-radius:  0 5px 5px 0;
-  background-image: linear-gradient(#6e9c25, #6e9c25 67%, #507e07);
+  background-image: linear-gradient(#5a801f, #5a801f 67%, #406406);
   z-index: 1;
   color:#ffffff;
 }

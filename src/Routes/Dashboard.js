@@ -89,6 +89,7 @@ export default function Dashboard(props) {
           <label className="input-with-icon">
             <i className="fas fa-search game-search__relative-fieldset-icon"></i>
             <input
+              aria-label="title-search-input"
               id="title-search-input"
               type="text"
               name="search"

@@ -11,7 +11,7 @@ export default function Game(props) {
       <div className='game-img'>
         <img src={`${config.IMAGES_ENDPOINT}/${data.id}/Main-Image.png`} alt="Game Cover" />
       </div>
-        <h3>{data.title}</h3>
+        <h2 className="game-title">{data.title}</h2>
       </Link>
       <p>{data.party_count} {data.party_count !== 1 ? 'Squads' : 'Squad'}</p>
       <div className="game-tags-container">

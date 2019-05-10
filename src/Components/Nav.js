@@ -44,16 +44,16 @@ export default function Nav(props) {
 
   function generateNavBar(user){
     return(
-        <div className='nav-content-container'>
-          <img className='avatar-nav-main' src={`${config.IMAGES_ENDPOINT}/user-icons/${user.avatar_url}`} alt='avatar profile pic' onClick={e => toggle()}></img>
-          <h2>{user.username}</h2>
-          <Modal
-            isShowing={isShowing}
-            hide={toggle}
-            content={<UserProfile update={updatePage} toggle={toggle} />}
-          />
-          <button className='nav-button green-button-flat' onClick={onLogout}>Logout</button>
-        </div>
+      <div className='nav-content-container'>
+        {user.avatar_url && <img className='avatar-nav-main' src={`${config.IMAGES_ENDPOINT}/user-icons/${user.avatar_url}`} alt='avatar profile pic' onClick={e => toggle()}/>}
+        <h2>{user.username}</h2>
+        <Modal
+          isShowing={isShowing}
+          hide={toggle}
+          content={<UserProfile update={updatePage} toggle={toggle}/>}
+        />
+        <button className='nav-button green-button-flat' onClick={onLogout}>Logout</button>
+      </div>
     )
   }
 
@@ -62,9 +62,9 @@ export default function Nav(props) {
       <div className='nav-container'>
         {generateNavBar(userContext.user)}
       </div>
-      <div className='nav-icon-bar'>
+      <h1 className='nav-icon-bar'>
         <img className='logo' src={`${config.IMAGES_ENDPOINT}/logo.png`} alt='Squad Armory Logo' onClick={e => props.history.push('/')}/>
-      </div>
+      </h1>
     </div>
   );
 }

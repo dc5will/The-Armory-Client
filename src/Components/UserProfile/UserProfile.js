@@ -67,7 +67,8 @@ export default function UserProfile(props) {
     })
       .then(res =>
         !res.ok ? setError(res.error) : props.update() && props.toggle()
-      );
+      )
+      .then(props.toggle);
   }
 
   function authorizeChanges(e) {
@@ -82,19 +83,49 @@ export default function UserProfile(props) {
   }
 
   function generateUserIconImages() {
-    const imageNames = ['Default-Avatar', 'ninja', 'pikachu', 'soldier76', 'Cactuar', 'axe', 'TJICON'];
-    return imageNames.map(name => (
-      <li>
-        <img
-          src={`${config.IMAGES_ENDPOINT}/user-icons/${name}.png`}
-          alt={name}
-          className="avatars"
-          aria-label="checkbox"
-          tabIndex="0"
-          onClick={e => setAvatar_url(e.target.src)}
-        />
-      </li>
-    ));
+    const imageNames = ['Default-Avatar.png', 'ninja.png', 'pikachu.png', 'soldier76.png', 'Cactuar.png', 'axe.png', 'TJICON.png'];
+    
+    return imageNames.map((name, i) => {
+      if (context.user.avatar_url === name) {
+        return (
+          <li 
+            key={i}
+            className="user-profile__avatar-fake-checkbox"
+          >
+            <div className="user-profile__avatar-icon-container">
+              <img
+                className="user-profile__avatar-fake-image"
+                src={`${config.IMAGES_ENDPOINT}/user-icons/${name}`}
+                alt={name}
+              />
+              <i className="squad__spots-filled fas fa-check"/>
+            </div>
+          </li>
+        )
+      } else {
+        return (
+          <li
+            aria-label="checkbox"
+            tabIndex="0"
+            onClick={e => {
+              if (avatar_url === name) {
+                setAvatar_url('');
+              } else {
+                setAvatar_url(name);
+              }
+            }}
+            className="user-profile__avatar-container"
+            key={i}
+          >
+            <img
+              src={`${config.IMAGES_ENDPOINT}/user-icons/${name}`}
+              alt={name}
+              className={avatar_url === name ? "user-profile__avatar-image user-profile__avatar-image-active" : "user-profile__avatar-image"}
+            />
+          </li>
+        )
+      }
+    });
   }
 
   return (
@@ -103,61 +134,67 @@ export default function UserProfile(props) {
       <form className="profile-form" onSubmit={e => authorizeChanges(e)}>
         <p>{error}</p>
 
-        <ul className="input-field">
-          <p>Choose a new avatar:</p>
-          {generateUserIconImages()}
-        </ul>
+        <fieldset className="create-squad__fieldset">
+          <legend>Choose a new avatar:</legend>
+          <ul className="user-profile__input-field">
+            {generateUserIconImages()}
+          </ul>
+        </fieldset>
 
-        <div className="input-field">
-          <label htmlFor="profile-email-input">Email: </label>
+        <fieldset className="create-squad__fieldset">
+          <legend>Enter a new email:</legend>
           <input
-            id="profile-email-input"
+            aria-label="profile-email-input"
             type="email"
             placeholder={curr.email}
+            className="create-squad__name-input"
             value={email}
             onChange={e => setEmail(e.target.value)}
           />
-        </div>
+        </fieldset>
 
-        <div className="input-field">
-          <label htmlFor="profile-password-input">New Password: </label>
+        <fieldset className="flex-fieldset-column create-squad__fieldset">
+          <legend>Enter a new password:</legend>
+
           <input
-            id="profile-password-input"
+            aria-label="profile-new-password-input"
             type="password"
-            placeholder="change password"
+            placeholder="New password..."
+            className="create-squad__name-input"
             value={newPass}
             onChange={e => setNewPass(e.target.value)}
           />
-        </div>
 
-        <div className="input-field">
-          <label htmlFor="profile-password-input">
-            Confirm New Password:{" "}
-          </label>
           <input
-            id="profile-password-input"
+            aria-label="profile-new-c-password-input"
             type="password"
-            placeholder="change password"
+            placeholder="Confirm new password..."
+            className="create-squad__name-input"
             value={confirmPass}
             onChange={e => setConfirmPass(e.target.value)}
           />
-        </div>
-
-        <div className="input-field">
-          <label htmlFor="profile-password-input">Current Password: </label>
+        </fieldset>
+       <fieldset className="flex-fieldset-column create-squad__fieldset">
+          <legend>Confirm your password:</legend>
           <input
-            id="profile-password-input"
+            aria-label="profile-password-input"
             type="password"
-            placeholder="current password"
+            placeholder="Current password..."
+            className="create-squad__name-input"
             required
             value={currentPass}
             onChange={e => setCurrentPass(e.target.value)}
           />
-        </div>
+        </fieldset>
 
-        <button type="submit" className="submit-button">
-          Update Profile
-        </button>
+        <div className="modal-button-holder create-squad__button-container">
+          <button type="submit" className="user-profile__submit-button green-button">
+            Update Profile
+          </button>
+          <button type="button" aria-label="cancel" className="user-profile__cancel-button grey-button" onClick={props.toggle}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );

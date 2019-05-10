@@ -10,6 +10,10 @@
   box-shadow: 0 5px 13px 0 #00000080;
 }
 
+.modal-wrapper:focus {
+  outline: none;
+}
+
 .modal-header {
   background-image: linear-gradient(#363740, #2c2e34);
   margin: 0 -20px 10px;
@@ -39,4 +43,18 @@
   font-size: 18px !important;
   width: 30px;
   height: 30px;
+}
+
+@media screen and (max-width: 900px) {
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    border: none;
+    border-radius: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }
