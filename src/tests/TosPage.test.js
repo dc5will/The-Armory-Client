@@ -1,5 +1,5 @@
 import React from 'react';
-import TosPage from '../Components/TosPage';
+import TosPage from '../Components/ToSPage/TosPage';
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";

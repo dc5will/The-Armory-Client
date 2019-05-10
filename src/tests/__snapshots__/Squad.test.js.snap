@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Party component renders the UI as expected 1`] = `
+exports[`Squad component renders the UI as expected 1`] = `
 <li
   aria-label="Open Squad Details"
   className="squad-container"
+  onClick={[Function]}
   tabIndex="0"
 >
   <div
@@ -72,7 +73,7 @@ exports[`Party component renders the UI as expected 1`] = `
       >
         Quick Play
       </span>
-      This is a description of test party.
+      This is a description of test Squad.
     </p>
   </div>
   <div

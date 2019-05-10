@@ -16,7 +16,7 @@ describe.only('LoginForm component', () => {
     ReactDOM.unmountComponentAtNode(div);
   })
 
-  it('renders login with valid email and password', () => {
+  it('renders login input with email and password', () => {
     const testEmail = 'testUser';
     const testPass = 'Password1234!'
     const wrapper = shallow(<LoginForm />);

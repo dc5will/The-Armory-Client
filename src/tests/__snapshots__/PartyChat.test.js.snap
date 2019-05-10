@@ -1,26 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PartyChat component renders the UI as expected 1`] = `
-<div>
-  <ul
-    className="chat-log-container"
-  />
-  <form
-    className="chat-form"
-    onSubmit={[Function]}
+<div
+  className="chat-main-container"
+>
+  <div
+    className="chat-bar"
   >
-    <input
-      className="chat-input"
-      onChange={[Function]}
-      type="text"
-      value=""
+    <ul
+      className="chat-log-container"
     />
-    <button
-      className="chat-submit-button"
-      type="submit"
+    <form
+      className="chat-form"
+      onSubmit={[Function]}
     >
-      Send
-    </button>
-  </form>
+      <input
+        className="chat-input"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <button
+        className="chat-submit-button"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
+  </div>
 </div>
 `;

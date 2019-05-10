@@ -6,9 +6,12 @@ exports[`Error component renders default form 1`] = `
 >
   <p />
   <button
+    onClick={[Function]}
     type="button"
   >
-    X
+    <i
+      className="fas fa-times"
+    />
   </button>
 </div>
 `;
@@ -21,9 +24,12 @@ exports[`Error component renders the UI as expected 1`] = `
     Test Error message
   </p>
   <button
+    onClick={[Function]}
     type="button"
   >
-    X
+    <i
+      className="fas fa-times"
+    />
   </button>
 </div>
 `;

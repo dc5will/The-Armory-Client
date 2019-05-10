@@ -1,5 +1,5 @@
 import React from "react";
-import Party from "../Components/Party/Party";
+import Squad from "../Components/Squad/Squad";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
@@ -9,7 +9,7 @@ const props = {
   game_id: "aa0e8ce9-1a71-42e7-804d-6838556fa6ed",
   title: "Test Title",
   owner_id: 1,
-  description: "This is a description of test party.",
+  description: "This is a description of test Squad.",
   require_app: true,
   gamemode: {
       name: "Quick Play",
@@ -51,17 +51,17 @@ const props = {
   ]
 };
 
-describe("Party component", () => {
-  // console.log(props.party)
+describe("Squad component", () => {
+  // console.log(props.Squad)
   it("renders without crashing", () => {
-    shallow(<Party party={props} />);
+    shallow(<Squad party={props} />);
   });
 
   it("renders the UI as expected", () => {
     const tree = renderer
       .create(
         <MemoryRouter>
-          <Party party={props} />
+          <Squad party={props} />
         </MemoryRouter>
       )
       .toJSON();
