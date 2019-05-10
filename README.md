@@ -23,16 +23,16 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Create React App](https://github.com/facebook/create-react-app)
 - [React](https://github.com/facebook/react)
 
-[Socket.io](https://socket.io)
+- [Socket.io](https://socket.io)
 
-[Node](https://github.com/nodejs/node)
-[Express](https://github.com/expressjs/express)
-[Nodemailer](https://nodemailer.com)
-[Supertest](https://www.npmjs.com/package/supertest)
-[Mocha](https://mochajs.org/)
-[Chai](https://www.chaijs.com/)
+- [Node](https://github.com/nodejs/node)
+- [Express](https://github.com/expressjs/express)
+- [Nodemailer](https://nodemailer.com)
+- [Supertest](https://www.npmjs.com/package/supertest)
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)
 
-[Server repository](https://github.com/thinkful-ei-armadillo/The-Armory-Server/)
+- [Server repository](https://github.com/thinkful-ei-armadillo/The-Armory-Server/)
 
 ## API
 
