@@ -99,7 +99,6 @@ export default function ActiveSquad(props) {
         }
       })
       .catch(err => {
-        console.log(err);
         gameContext.setError(err);
       });
   }
