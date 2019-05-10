@@ -13,6 +13,7 @@ export default function PartyChat(props) {
     return (
       <form className="chat-form" onSubmit={e => handleSubmit(e)}>
         <input
+          aria-label="chat-input"
           className="chat-input"
           type="text"
           value={message}

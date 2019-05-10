@@ -49,6 +49,7 @@ export default function GamePage(props) {
     }
   }
 
+<<<<<<< HEAD
   //throws an error - fix later
   // useEffect(() => {
   //   browserBack()
@@ -60,6 +61,8 @@ export default function GamePage(props) {
   //       window.history.go(1);
   //   };
   // }
+=======
+>>>>>>> 3caed0b29fecf95a02ac410b0ec113ab8f5aa951
 
   useEffect(() => {
     // populate party listing from API
