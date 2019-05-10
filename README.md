@@ -1,4 +1,8 @@
-<p align="center"><h2>Squad Armory</h2> An app for gamers to find friends to play with in their favorite online multiplayer game.</p>
+<p align="center">
+    <h2>Squad Armory</h2> 
+    <span>An app for gamers to find friends to play with in their favorite online multiplayer game.</span>
+    <a href="https://squad-armory.now.sh">Live Version</a>
+    </p>
 
 ![Desktop page](./public/README-images/Desktop.png)
 ![Squad list](./public/README-images/SquadList.png)
@@ -39,6 +43,7 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Supertest](https://www.npmjs.com/package/supertest)
 - [Mocha](https://mochajs.org/)
 - [Chai](https://www.chaijs.com/)
+- [Enzyme](https://airbnb.io/enzyme/)
 
 - [Server repository](https://github.com/thinkful-ei-armadillo/The-Armory-Server/)
 
