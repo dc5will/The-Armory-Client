@@ -63,6 +63,6 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 ## Team
 
 - Project Manager Andrew Bituin
-- Product Manage Alex Reich
+- Product Manager Alex Reich
 - Design Lead Jake Derhalli
 - Testing Lead William Wong
