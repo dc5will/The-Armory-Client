@@ -1,5 +1,5 @@
 
-Squad Armory: An app for gamers to find friends to play with in their favorite online multiplayer game.
+<p align="center">Squad Armory: An app for gamers to find friends to play with in their favorite online multiplayer game.</p>
 
 ![Desktop page](./public/README-images/Desktop.png)
 ![Squad list](./public/README-images/SquadList.png)
