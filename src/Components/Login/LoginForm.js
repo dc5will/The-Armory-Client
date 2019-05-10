@@ -16,7 +16,7 @@ export default function LoginForm(props) {
         props.onLoginSuccess();
       })
       .catch (error =>
-      setError(error)
+      setError(error.error)
       )
   };
 
@@ -25,6 +25,7 @@ export default function LoginForm(props) {
     <form className="login-form login-reg-form" onSubmit={e => handleLogin(e)}>
       <h2 className="registration-header">Log in</h2>
       <div className="login-form__inputs-container registration-input-container">
+        <div className='login-error'>{error}</div>
         <label htmlFor="email-input">Email or Username
           <input
             required
@@ -33,7 +34,7 @@ export default function LoginForm(props) {
             id="email-input"
             placeholder="example@email.com..."
             onChange={e => setEmail(e.target.value)}
-          />
+            />
          </label>
         <label htmlFor="password-input">Password
           <input
@@ -43,7 +44,7 @@ export default function LoginForm(props) {
             id="password-input"
             placeholder="password..."
             onChange={e => setPassword(e.target.value)}
-          />
+            />
          </label>
       </div>
       <button type="submit" className="green-button login-reg-form__submit-button">
