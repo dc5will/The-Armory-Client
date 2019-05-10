@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Game component renders the UI as expected 1`] = `
+<div
+  className="active-squad-container"
+>
+  <h2
+    className="modal-header"
+  >
+    Admin
+  </h2>
+  <span
+    className="active-squad__section-header"
+  >
+    Details
+  </span>
+  <div
+    className="active-squad__details"
+  >
+    <div
+      className="squad__gamemode-image-container"
+    >
+      <img
+        alt=""
+        className="squad__gamemode-image"
+        src="http://localhost:8000/images/[object Object]/Gamemode-Quickplay.png"
+      />
+    </div>
+    <div
+      className="active-squad__details-text-container"
+    >
+      <span
+        className="small-detail"
+      >
+        Quick Play
+      </span>
+      <span
+        className="small-detail"
+      >
+        Silver
+      </span>
+      <span
+        className="small-detail"
+      >
+        Bronze
+      </span>
+      <p>
+        This is a description of this party.
+      </p>
+    </div>
+  </div>
+  <span
+    className="active-squad__section-header"
+  >
+    Owner
+  </span>
+  <div
+    className="active-squad__owner"
+  >
+    <div
+      className="squad__spots-image-container"
+    >
+      <img
+        alt=""
+        className="squad__avatar-image"
+      />
+    </div>
+    <p />
+  </div>
+  <span
+    className="active-squad__section-header"
+  >
+    Select a spot...
+  </span>
+  <form
+    className="active-squad__spots"
+    onSubmit={[Function]}
+  >
+    <ul
+      className="active-squad__spots-list"
+    >
+      <li
+        className="active-squad__checkbox-container"
+      >
+        <div
+          className="active-squad__fake-checkbox"
+        >
+          <img
+            alt=""
+            className="active-squad__spots-first-half"
+            src="http://localhost:8000/images/[object Object]/Icon-Genji.png"
+          />
+          <img
+            alt=""
+            className="active-squad__spots-second-half"
+            src="http://localhost:8000/images/[object Object]/Icon-Support.png"
+          />
+          <i
+            className="squad__spots-filled fas fa-check"
+          />
+        </div>
+      </li>
+    </ul>
+    <div
+      className="create-squad__button-container"
+    >
+      <button
+        className="green-button active-squad__submit-button"
+        disabled={true}
+        type="submit"
+      >
+        Join Squad
+      </button>
+      <button
+        aria-label="cancel"
+        className="grey-button active-squad__cancel-button"
+        type="button"
+      >
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
+`;

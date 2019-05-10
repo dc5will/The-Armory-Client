@@ -52,7 +52,6 @@ const props = {
 };
 
 describe("Squad component", () => {
-  // console.log(props.Squad)
   it("renders without crashing", () => {
     shallow(<Squad party={props} />);
   });

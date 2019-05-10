@@ -3,7 +3,6 @@ import Game from "../Components/Game";
 import { MemoryRouter } from "react-router-dom";
 import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
-// import { render } from 'react-testing-library';
 
 const data = {
   id: "aa0e8ce9-1a71-42e7-804d-6838556fa6ed",
@@ -14,7 +13,6 @@ const data = {
 };
 
 describe("Game component", () => {
-  // const game = shallow(<Game props={data} />);
   it("renders without crashing", () => {
     shallow(<Game props={data} />);
   });

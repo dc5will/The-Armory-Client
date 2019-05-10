@@ -3,7 +3,6 @@ import FilterPartiesForm from '../Components/FilterPartiesForm/FilterPartiesForm
 import ReactDOM from 'react-dom';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from "react-test-renderer";
-import { shallow } from "enzyme";
 
 describe('FilterPartiesForm component', () => {
 
