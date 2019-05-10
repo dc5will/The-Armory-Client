@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PartyPage component renders the UI as expected 1`] = `
+<div
+  className="party-page-container"
+>
+  <div
+    className="display-party-info"
+  >
+    Loading
+    <button
+      className="expand-party-info"
+      onClick={[Function]}
+    >
+      ˄
+    </button>
+  </div>
+  <div
+    className="chat-main-container"
+  >
+    <div
+      className="chat-bar"
+    >
+      <ul
+        className="chat-log-container"
+      />
+      <form
+        className="chat-form"
+        onSubmit={[Function]}
+      >
+        <input
+          aria-label="chat-input"
+          className="chat-input"
+          onChange={[Function]}
+          type="text"
+          value=""
+        />
+        <button
+          className="chat-submit-button"
+          type="submit"
+        >
+          Send
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;

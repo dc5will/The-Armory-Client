@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PartyContext from '../../Contexts/partyContext';
 import TokenService from '../../services/token-service';
+import config from '../../config';
 
 export default function PartyChat(props) {
   const [message, setMessage] = useState('');
@@ -123,7 +124,7 @@ export default function PartyChat(props) {
       return (
         <>
           <div className="avatar-msg-ctr">
-            <img className="avatar-msg" src={message.avatar_url} alt="avatar" />
+            <img className="avatar-msg" src={`${config.IMAGES_ENDPOINT}/user-icons/${message.avatar_url}`} alt="avatar" />
           </div>
           <section className="msg-txt-ctr">
             <div className="msg-hdr">

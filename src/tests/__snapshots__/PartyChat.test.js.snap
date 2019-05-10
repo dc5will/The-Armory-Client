@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PartyChat component renders the UI as expected 1`] = `
+<div
+  className="chat-main-container"
+>
+  <div
+    className="chat-bar"
+  >
+    <ul
+      className="chat-log-container"
+    />
+    <form
+      className="chat-form"
+      onSubmit={[Function]}
+    >
+      <input
+        aria-label="chat-input"
+        className="chat-input"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+      <button
+        className="chat-submit-button"
+        type="submit"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+`;

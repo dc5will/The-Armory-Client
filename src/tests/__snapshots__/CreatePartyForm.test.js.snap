@@ -1,0 +1,231 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePartyForm component renders the UI as expected 1`] = `
+<form
+  className="create-party-form"
+  onSubmit={[Function]}
+>
+  <h2
+    className="modal-header"
+  >
+    Create Party
+  </h2>
+  <fieldset
+    className="create-squad__fieldset"
+  >
+    <legend>
+      Details
+    </legend>
+    <input
+      aria-label="Party Name"
+      className="create-squad__name-input"
+      onChange={[Function]}
+      placeholder="Enter a title..."
+      required={true}
+      type="text"
+      value=""
+    />
+    <textarea
+      aria-label="Description"
+      className="create-squad__description-input"
+      maxLength="140"
+      onChange={[Function]}
+      placeholder="Enter a description... (limit 140char)"
+      type="text"
+      value=""
+    />
+  </fieldset>
+  <div
+    className="create-squad__half-fieldset-container"
+  >
+    <fieldset
+      className="create-squad__fieldset create-squad__half-fieldset"
+    >
+      <legend>
+        Requirements
+      </legend>
+      <div
+        className="dropdown"
+      >
+        <div
+          className="css-1pcexqc-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="css-0 r-dropdown__control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="css-1hwfws3 r-dropdown__value-container"
+            >
+              <div
+                className="css-151xaom-placeholder r-dropdown__placeholder"
+              >
+                Select...
+              </div>
+              <input
+                className="css-gj7qu5-dummyInput"
+                disabled={false}
+                id="react-select-4-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="css-1wy0on6 r-dropdown__indicators"
+            >
+              <span
+                className="css-bgvzuu-indicatorSeparator r-dropdown__indicator-separator"
+              />
+              <div
+                aria-hidden="true"
+                className="css-16pqwjk-indicatorContainer r-dropdown__indicator r-dropdown__dropdown-indicator"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="css-19bqh2r"
+                  focusable="false"
+                  height={20}
+                  viewBox="0 0 20 20"
+                  width={20}
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="inactive-dropdown"
+      />
+    </fieldset>
+    <fieldset
+      className="create-squad__fieldset create-squad__half-fieldset"
+    >
+      <legend>
+        Gamemode
+      </legend>
+      <div
+        className="dropdown"
+      >
+        <div
+          className="css-1pcexqc-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="css-0 r-dropdown__control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="css-1hwfws3 r-dropdown__value-container"
+            >
+              <div
+                className="css-151xaom-placeholder r-dropdown__placeholder"
+              >
+                Select...
+              </div>
+              <input
+                className="css-gj7qu5-dummyInput"
+                disabled={false}
+                id="react-select-5-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="css-1wy0on6 r-dropdown__indicators"
+            >
+              <span
+                className="css-bgvzuu-indicatorSeparator r-dropdown__indicator-separator"
+              />
+              <div
+                aria-hidden="true"
+                className="css-16pqwjk-indicatorContainer r-dropdown__indicator r-dropdown__dropdown-indicator"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="css-19bqh2r"
+                  focusable="false"
+                  height={20}
+                  viewBox="0 0 20 20"
+                  width={20}
+                >
+                  <path
+                    d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <fieldset
+    className="create-squad__fieldset"
+  >
+    <legend>
+      Spots
+    </legend>
+    <ul
+      className="spot-container"
+    >
+      <li
+        className="spot-input__owner spot-input__image-container"
+      >
+        <i
+          className="spot-input__spot-empty fas fa-users"
+        />
+        <i
+          className="spot-input__spots-filled fas fa-check"
+        />
+      </li>
+    </ul>
+  </fieldset>
+  <div
+    className="modal-button-holder create-squad__button-container"
+  >
+    <div
+      className="create-squad__button-subcontainer"
+    >
+      <button
+        className="create-party-button green-button"
+        onClick={[Function]}
+        type="submit"
+      >
+        Create Party
+      </button>
+      <button
+        className="create-party-reset-button grey-button"
+        onClick={[Function]}
+        type="reset"
+      >
+        Reset
+      </button>
+    </div>
+    <button
+      aria-label="cancel"
+      className="create-party-cancel-button grey-button"
+    >
+      Cancel
+    </button>
+  </div>
+</form>
+`;
