@@ -47,6 +47,9 @@ export default function LoginForm(props) {
             />
          </label>
       </div>
+      <div className="registration-form__tos-details">
+        <p>You can log in with the following dummy details: demo@email.com | Demo1234!</p>
+      </div>
       <button type="submit" className="green-button login-reg-form__submit-button">
         Log in
       </button>
