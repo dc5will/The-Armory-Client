@@ -45,6 +45,13 @@ exports[`LoginForm component renders the UI as expected 1`] = `
       />
     </label>
   </div>
+  <div
+    className="registration-form__tos-details"
+  >
+    <p>
+      You can log in with the following dummy details: demo@email.com | Demo1234!
+    </p>
+  </div>
   <button
     className="green-button login-reg-form__submit-button"
     type="submit"
