@@ -1,5 +1,11 @@
+
 # Squad Armory
-An app for gamers to find friends to play with in their favorite online multiplayer game.
+<p align="center">
+  <img src="https://github.com/dc5will/The-Armory-Client/blob/master/public/README-images/squadArmoryLogo.png?raw=true"/><br/>
+  An app for gamers to find friends to play with in their favorite online multiplayer game. <br/>
+  <a href="https://squad-armory.now.sh/" target="_blank">Live Version</a>
+</p>
+
 
 ![Desktop page](./public/README-images/Desktop.png)
 ![Squad list](./public/README-images/SquadList.png)
@@ -29,7 +35,7 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Socket.io-client](https://socket.io/docs/client-api/)
 - [Enzyme](https://airbnb.io/enzyme/)
 
-### Server
+### Server [Repo](https://github.com/dc5will/The-Armory-Server)
 - [Node](https://github.com/nodejs/node)
 - [NPM](https://www.npmjs.com/)
 - [Express.js](https://github.com/expressjs/express)
@@ -40,6 +46,8 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Mocha](https://mochajs.org/)
 - [Chai](https://www.chaijs.com/)
 - [Supertest](https://www.npmjs.com/package/supertest)
+
+
 
 ## API
 ```
