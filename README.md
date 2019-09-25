@@ -35,7 +35,7 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Socket.io-client](https://socket.io/docs/client-api/)
 - [Enzyme](https://airbnb.io/enzyme/)
 
-### Server [Repo](https://github.com/dc5will/The-Armory-Server)
+### Server 
 - [Node](https://github.com/nodejs/node)
 - [NPM](https://www.npmjs.com/)
 - [Express.js](https://github.com/expressjs/express)
@@ -47,7 +47,7 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Chai](https://www.chaijs.com/)
 - [Supertest](https://www.npmjs.com/package/supertest)
 
-
+[Server Repo](https://github.com/dc5will/The-Armory-Server)
 
 ## API
 ```
