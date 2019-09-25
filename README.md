@@ -1,9 +1,5 @@
-<p align="center">
-    <h2>Squad Armory</h2> 
-    <span>An app for gamers to find friends to play with in their favorite online multiplayer game.</span>
-    <br/>
-    <a href="https://squad-armory.now.sh">Live Version</a>
-    </p>
+# Squad Armory
+An app for gamers to find friends to play with in their favorite online multiplayer game.
 
 ![Desktop page](./public/README-images/Desktop.png)
 ![Squad list](./public/README-images/SquadList.png)
@@ -14,42 +10,38 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 
 ## Features
 
-**Join a squad**: Users can find squads that match their gaming preferences and join available spots
-
-
-**Create a squad**: Users can create a squad with as much specificity as they want when looking for squadmates
-
-
-**Chat with squadmates**: Everyone in a squad can chat with each other in real time
-
-
+- [X] **Join A Squad**: Users can find squads that match their gaming preferences and join available spots
+- [X] **Create A Squad**: Users can create a squad with as much specificity as they want when looking for squadmates
+- [X] **Chat with squadmates**: Everyone in a squad can chat with each other in real time
 
 ## Upcoming Features
 
-**Voice chat**: Users can opt in to use voice chat upon joining a squad
-
-
-**Private squads**: Creators of squads can require applications for potential new squadmates
+- [ ] **Voice chat**: Users can opt in to use voice chat upon joining a squad
+- [ ] **Private squads**: Creators of squads can require applications for potential new squadmates
 
 ## Tech Stack
 
+### Client
 - [Create React App](https://github.com/facebook/create-react-app)
 - [React](https://github.com/facebook/react)
-
-- [Socket.io](https://socket.io)
-
-- [Node](https://github.com/nodejs/node)
-- [Express](https://github.com/expressjs/express)
-- [Nodemailer](https://nodemailer.com)
-- [Supertest](https://www.npmjs.com/package/supertest)
-- [Mocha](https://mochajs.org/)
-- [Chai](https://www.chaijs.com/)
+- [React Context](https://reactjs.org/docs/context.html)
+- [React Hooks](https://reactjs.org/docs/hooks-intro.html)
+- [Socket.io-client](https://socket.io/docs/client-api/)
 - [Enzyme](https://airbnb.io/enzyme/)
 
-- [Server repository](https://github.com/thinkful-ei-armadillo/The-Armory-Server/)
+### Server
+- [Node](https://github.com/nodejs/node)
+- [NPM](https://www.npmjs.com/)
+- [Express.js](https://github.com/expressjs/express)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Knex.js](https://knexjs.org/)
+- [Socket.io](https://socket.io/docs/)
+- [Nodemailer](https://nodemailer.com)
+- [Mocha](https://mochajs.org/)
+- [Chai](https://www.chaijs.com/)
+- [Supertest](https://www.npmjs.com/package/supertest)
 
 ## API
-
 ```
 /api
 .
@@ -78,7 +70,8 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 
 ## Team
 
-- Project Manager Andrew Bituin
-- Product Manager Alex Reich
-- Design Lead Jake Derhalli
-- Testing Lead William Wong
+- Project Manager - [Andrew Bituin](https://github.com/andrewbituin)
+- Product Manager - [Alex Reich](https://github.com/VarReach)
+- Design Lead - [Jake Derhalli](https://github.com/JuiceboxJones)
+- Testing Lead - [William Wong](https://github.com/dc5will)
+
