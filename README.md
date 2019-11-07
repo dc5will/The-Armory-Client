@@ -25,15 +25,15 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [ ] **Voice chat**: Users can opt in to use voice chat upon joining a squad
 - [ ] **Private squads**: Creators of squads can require applications for potential new squadmates
 
-## Tech Stack
+## Technology Stack
 
 ### Client
-- [Create React App](https://github.com/facebook/create-react-app)
 - [React](https://github.com/facebook/react)
 - [React Context](https://reactjs.org/docs/context.html)
 - [React Hooks](https://reactjs.org/docs/hooks-intro.html)
 - [Socket.io-client](https://socket.io/docs/client-api/)
-- [Enzyme](https://airbnb.io/enzyme/)
+- [Jest](https://jestjs.io/) - Testing
+- [Enzyme](https://airbnb.io/enzyme/) - Testing
 
 ### Server 
 - [Node](https://github.com/nodejs/node)
@@ -43,11 +43,12 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - [Knex.js](https://knexjs.org/)
 - [Socket.io](https://socket.io/docs/)
 - [Nodemailer](https://nodemailer.com)
-- [Mocha](https://mochajs.org/)
-- [Chai](https://www.chaijs.com/)
-- [Supertest](https://www.npmjs.com/package/supertest)
+- [Mocha](https://mochajs.org/) - Testing
+- [Chai](https://www.chaijs.com/) - Testing
+- [Supertest](https://www.npmjs.com/package/supertest) - Testing
 
 [Server Repo](https://github.com/dc5will/The-Armory-Server)
+[Deployed Heroku API](https://limitless-brushlands-45977.herokuapp.com/api)
 
 ## API
 ```
@@ -83,3 +84,13 @@ Finding friends to play online video games with is hard. Sometimes life gets in 
 - Design Lead - [Jake Derhalli](https://github.com/JuiceboxJones)
 - Testing Lead - [William Wong](https://github.com/dc5will)
 
+## Getting Started
+
+- `git clone git@github.com:dc5will/The-Armory-Client.git`
+- install dependencies: `npm install`
+- `npm start`
+
+## Testing
+
+- `npm test`
+- `npm run test:coverage`
